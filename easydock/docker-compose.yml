@@ -2,7 +2,7 @@ version: '3.1'
 
 services:
   php-fpm:
-    container_name: easydocke_php-fpm${UNIQID}
+    container_name: easydock_php-fpm${UNIQID}
     restart: always
     build:
       context: ./php-fpm

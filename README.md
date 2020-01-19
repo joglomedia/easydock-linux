@@ -1,5 +1,5 @@
 # Easydock
-Dockerize your PHP or npm apps in one click ;)
+Dockerize your PHP apps in one click ;)
 
 ## Documentation
 

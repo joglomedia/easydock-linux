@@ -17,7 +17,7 @@ $ docker-compose up
 - If you need you can customize /easydock/.env parameters and re-run the project
 
 ## Laravel integration
-- Download EasyDock
+- Download Easydock
 - Extract package and copy easydock folder (not public folder) into your Laravel project root
 - Run these commands in your terminal from your Laravel project root:
 ```

@@ -16,6 +16,16 @@ $ docker-compose up
 - In you need MySql DB use access data written in /easydock/.env file
 - If you need you can customize /easydock/.env parameters and re-run the project
 
+## Laravel integration
+- Download EasyDock
+- Extract package and copy easydock folder (not public folder) into your Laravel project root
+- Run these commands in your terminal from your Laravel project root:
+```
+$ cd easydock
+$ docker-compose up
+```
+- Visit http://localhost
+
 ## Features
 Easydock comes with ngnix, PHP (last stable version) and MySql 5.7
 

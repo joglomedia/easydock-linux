@@ -30,10 +30,8 @@ services:
     restart: always
     image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: "easydock"
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASS}
       MYSQL_DATABASE: ${MYSQL_DB_NAME}
-      MYSQL_USER: ${MYSQL_DB_USER}
-      MYSQL_PASSWORD: ${MYSQL_DB_PASS}
     ports:
       - "${MYSQL_PORT}:3306"
     volumes:

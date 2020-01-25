@@ -33,7 +33,10 @@ Easydock comes with ngnix, PHP (last stable version) and MySql 5.7
 Docker, Docker Compose, (GIT)
 
 ## Useful Docker CLI basic and simple commands
-"docker-compose up", "docker-compose down" and "docker system prune -a"
+- docker-compose up"
+- docker-compose down
+- docker system prune -a
+- docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -aq)
 
 ## Contributing
 Thank you for considering contributing to this project!

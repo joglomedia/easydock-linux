@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Easydock</title>
+        <title>easydock :)</title>
         <link rel="stylesheet" href="https://allyoucan.cloud/cdn/fontawesome/5.11.2/css/all.css">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
         <style>
@@ -65,13 +65,13 @@
         <div class="flex-center position-ref full-height">
             <div class="content">
                 <div class="title">
-                    <b>Easydock</b>
+                    <b>easydock :)</b>
                 </div>
                 <div class="subtitle m-b-md">
-                   <span class="mini"><i class="fab fa-docker"></i> Docker LEMP integration script</span>
+                   <span class="mini"><i class="fab fa-docker"></i> Docker LEMP easy integration</span>
                 </div>
                 <div class="links">
-                    <a href="https://github.com/andreapollastri/easydock">By Andrea Pollastri</a>
+                    <a href="https://github.com/andreapollastri/easydock">DOCUMENTATION</a>
                 </div>
             </div>
         </div>

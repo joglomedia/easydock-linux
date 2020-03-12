@@ -8,26 +8,31 @@ To use it:
 - Run these commands in your terminal:
 ```
 $ git clone https://github.com/andreapollastri/easydock
-$ cd easydock/easydock
-$ docker-compose up
-```
-- Visit http://localhost
-- Push your web files into /public (as required by Laravel, ReactJS, ...)
-- In you need MySql DB use access data written in /easydock/.env file
-- If you need you can customize /easydock/.env parameters and re-run the project
-
-## Laravel integration
-- Download Easydock
-- Extract package and copy easydock folder (not public folder) into your Laravel project root
-- Run these commands in your terminal from your Laravel project root:
-```
 $ cd easydock
-$ docker-compose up
+$ docker-compose up -d
 ```
-- Visit http://localhost
+- Visit http://127.0.0.1
+
+- Push your files into /public
+(You can also integrate easydock into Laravel or other PHP framework root)
+
+- Configure your application DB connection configuration
+(username: root / password: secret / db: dockerdb / host: mysql)
+
+- If you need you can "SSH" into your Docker with:
+```
+docker-compose exec app COMAND
+
+//eg. in Laravel: docker-compose exec app php artisan migrate
+```
+
+- To stop you docker istance:
+```
+$ docker-compose down
+```
 
 ## Features
-Easydock comes with ngnix, PHP (last stable version) and MySql 5.7
+Easydock comes with ngnix, PHP 7.2, MySql 5.7, phpmyadmin and Composer
 
 ## Requirements
 Docker, Docker Compose, (GIT)
@@ -42,7 +47,7 @@ Docker, Docker Compose, (GIT)
 Thank you for considering contributing to this project!
 
 ## Security Vulnerabilities
-If you discover a security vulnerability within Easydock, please send an e-mail to Andrea Pollastri via mail@andreapollastri.net. All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within Easydock, please send an e-mail to Andrea Pollastri via andrea@pollastri.dev. All security vulnerabilities will be promptly addressed.
 
 ## Licence
 Easydock is open-source software licensed under the MIT license.

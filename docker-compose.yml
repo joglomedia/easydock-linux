@@ -1,0 +1,78 @@
+version: '3'
+services:
+
+  #APP
+  app:
+    build:
+      context: .
+      dockerfile: ./easydock/Dockerfile
+    image: php
+    container_name: app
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./easydock/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - app-network
+
+  #NGINX
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www
+      - ./easydock/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - app-network
+
+  #MYSQL
+  mysql:
+    image: mysql:5.7.29
+    container_name: mysql
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: dockerdb
+      MYSQL_ROOT_PASSWORD: secret
+      SERVICE_NAME: mysql
+    volumes:
+      - mysqldata:/var/lib/mysql/
+      - ./easydock/mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - app-network
+
+  #PHPMYADMIN
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    ports:
+      - '8080:80'
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: secret
+    networks:
+      - app-network
+
+#NETWORKS
+networks:
+  app-network:
+    driver: bridge
+
+#VOLUMES
+volumes:
+  mysqldata:
+    driver: local

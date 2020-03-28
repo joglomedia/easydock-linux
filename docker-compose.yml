@@ -28,7 +28,7 @@ services:
       - app
     tty: true
     ports:
-      - ${APP_PORT}:80
+      - ${HOST_PORT}:80
     volumes:
       - ${APP_SRC}:/var/www/
       - ./docker/nginx/conf.d/:/etc/nginx/conf.d/

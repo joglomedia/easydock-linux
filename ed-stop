@@ -1,6 +1,11 @@
 #!/bin/bash
 clear
-echo "Wait... \n"
-docker-compose down
-clear
-echo "easydock has been stopped ;) \n"
+    read -p "Are you shure to stop easydock? (Y/n)" -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    clear
+    echo "Wait... \n"
+    docker-compose down
+    clear
+    echo "easydock has been stopped ;) \n"
+fi

@@ -18,7 +18,6 @@ RUN apt-get update && \
     libmcrypt-dev \
     less \
     nano \
-    vim \
     cron \
     git \
     unzip \

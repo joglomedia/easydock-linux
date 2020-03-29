@@ -1,6 +1,11 @@
 #!/bin/bash
 clear
-echo "Wait... \n"
-docker-compose up -d --force-recreate
-clear
-echo "easydock has been started... visit http://localhost ;) \n"
+FILE=./.env
+if test -f "$FILE"; then
+    echo "Wait... \n"
+    docker-compose up -d --force-recreate
+    clear
+    echo "easydock has been started... visit http://localhost ;) \n"
+else
+    echo "easydock .env file not found. Run 'sh ed-init' ;) \n"
+fi

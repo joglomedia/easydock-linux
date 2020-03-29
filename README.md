@@ -1,4 +1,4 @@
-# Easydock
+# easydock ;)
 Dockerize your PHP apps in one click ;)
 
 ## Documentation
@@ -9,47 +9,53 @@ To use it:
 ```
 $ git clone https://github.com/andreapollastri/easydock
 $ cd easydock
-$ docker-compose up -d
+$ sh ed-init
 ```
-- Visit http://127.0.0.1
 
-- Push your files into /public
-(You can also integrate easydock into Laravel or other PHP framework root)
+- Configure your .env file (if you need)
+(default configuration - PHP 7.4, MySql 8)
+
+- Push your files into /application folder
 
 - Configure your application DB connection configuration
-(username: root / password: secret / db: dockerdb / host: mysql)
+(default configuration - username: root / password: secret / db: dockerdb / host: mysql)
 
-- If you need you can "SSH" into your Docker with:
+- To start your Docker istance:
 ```
-docker-compose exec app COMAND
+$ sh ed-start
+```
+- Visit http://localhost ;)
 
-//eg. in Laravel: docker-compose exec app php artisan migrate
+- To "SSH" into your Docker istance:
+```
+$ sh ed-conn
 ```
 
-- To stop you docker istance:
+- To stop you Docker istance:
 ```
-$ docker-compose down
+$ sh ed-stop
+```
+
+- You can hard reset your Docker istance running:
+```
+$ sh ed-reset
 ```
 
 ## Features
-Easydock comes with ngnix, PHP 7.2, MySql 5.7, phpmyadmin and Composer
+Easydock comes with ngnix, PHP, MySql, phpmyadmin, MailHog, node, npm, supervisor and Composer
+
+> PHP 7.2, PHP 7.3, PHP 7.4, MySql 5.7, MySql 8, node 13, npm 6 versions support
 
 ## Requirements
-Docker, Docker Compose, (GIT)
+Docker, Docker Compose, (git)
 
-## Useful Docker CLI basic and simple commands
-- docker-compose up
-- docker-compose down
-- docker system prune -a
-- docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -aq)
+## Security Vulnerabilities and Bugs
+If you discover a security vulnerability or any bug within easydock, please send an e-mail to Andrea Pollastri via andrea@pollastri.dev. All security vulnerabilities and bugs will be promptly addressed.
 
 ## Contributing
 Thank you for considering contributing to this project!
 
-## Security Vulnerabilities
-If you discover a security vulnerability within Easydock, please send an e-mail to Andrea Pollastri via andrea@pollastri.dev. All security vulnerabilities will be promptly addressed.
-
 ## Licence
 Easydock is open-source software licensed under the MIT license.
 
-### Enjoy Easydock :)
+### Enjoy easydock ;)

@@ -36,13 +36,13 @@ $ sh ed-conn
 $ sh ed-stop
 ```
 
-- You can hard reset your Docker istance running:
+- You can hard reset your Docker istance running (All application and database data will be removed):
 ```
 $ sh ed-reset
 ```
 
 ## Features
-Easydock comes with ngnix, PHP, MySql, phpmyadmin, MailHog, node, npm, supervisor and Composer
+Easydock comes with ngnix, PHP, MySql, phpmyadmin, MailHog, node, npmand Composer
 
 > PHP 7.2, PHP 7.3, PHP 7.4, MySql 5.7, MySql 8, node 13, npm 6 versions support
 

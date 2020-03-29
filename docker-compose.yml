@@ -47,13 +47,16 @@ services:
     container_name: ${APP_SID}-mysql
     restart: always
     tty: true
-    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci', '--default-authentication-plugin=mysql_native_password', '--innodb-use-native-aio=0']
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci','--default-authentication-plugin=mysql_native_password']
+    expose:
+      - "3306"
     ports:
       - ${DB_PORT}:3306
     environment:
+      SERVICE_NAME: mysql
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_ROOT_PASSWORD: ${DB_PASS}
-      SERVICE_NAME: mysql
+      MYSQL_INITDB_SKIP_TZINFO: 1
     volumes:
       - ./docker/mysql/data:/var/lib/mysql/
       - ./docker/mysql/my.cnf:/etc/mysql/my.cnf

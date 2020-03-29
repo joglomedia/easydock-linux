@@ -1,0 +1,10 @@
+#!/bin/bash
+docker-compose down
+rm -rf easydock/mysql/data
+mkdir easydock/mysql/data
+cp easydock/utils/datagitignore easydock/mysql/data/.gitignore
+unlink easydock/nginx/conf.d/app.conf
+cp easydock/utils/appconf easydock/nginx/conf.d/app.conf
+unlink .env
+cp .env.example .env
+docker-compose build --no-cache --pull 

@@ -1,2 +1,5 @@
 #!/bin/bash
+clear
+echo "Wait... \n"
+sleep 1s
 docker-compose exec app /bin/bash

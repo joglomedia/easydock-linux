@@ -64,11 +64,6 @@ RUN useradd -u 1000 -ms /bin/bash -g www www
 # User permissions
 RUN chown -R www:www /var/www
 
-# Supervisor
-RUN groupadd supervisor
-RUN usermod -a -G supervisor www
-RUN apt-get install -y supervisor
-
 # Change current user to www
 USER www
 

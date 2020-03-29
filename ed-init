@@ -1,3 +1,10 @@
 #!/bin/bash
+clear
+echo "Welcome in easydock ;) \n"
+sleep 1s
+echo "Wait... \n"
+sleep 1s
 cp .env.example .env
 docker-compose build --no-cache --pull
+clear
+echo "easydock is ready! ;) \n"

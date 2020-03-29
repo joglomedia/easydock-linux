@@ -1,14 +1,21 @@
 #!/bin/bash
-docker-compose down
-rm -rf application
-mkdir application
-mkdir application/public
-cp easydock/utils/ed/.welcome application/public/index.php
-rm -rf easydock/mysql/data
-mkdir easydock/mysql/data
-cp easydock/utils/ed/.datagitignore easydock/mysql/data/.gitignore
-unlink easydock/nginx/conf.d/app.conf
-cp easydock/utils/ed/.appconf easydock/nginx/conf.d/app.conf
-unlink .env
-cp .env.example .env
-docker-compose build --no-cache --pull
+read -p "All application and database data will be removed... Are you shure to do it? (Y/n)" -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    docker-compose down -v
+    rm -rf application
+    mkdir application
+    mkdir application/public
+    cp easydock/utils/ed/.welcome application/public/index.php
+    rm -rf easydock/mysql/data
+    mkdir easydock/mysql/data
+    cp easydock/utils/ed/.datagitignore easydock/mysql/data/.gitignore
+    unlink easydock/nginx/conf.d/app.conf
+    cp easydock/utils/ed/.appconf easydock/nginx/conf.d/app.conf
+    unlink .env
+    cp .env.example .env
+    docker-compose build --no-cache --pull
+fi
+echo '\n'
+clear
+echo "easydock has been reset ;) \n"

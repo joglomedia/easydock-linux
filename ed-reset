@@ -1,6 +1,7 @@
 #!/bin/bash
 docker-compose down
 rm -rf application
+mkdir application
 mkdir application/public
 cp easydock/utils/ed/.welcome application/public/index.php
 rm -rf easydock/mysql/data

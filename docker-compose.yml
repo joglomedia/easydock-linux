@@ -49,7 +49,6 @@ services:
     command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci','--default-authentication-plugin=mysql_native_password']
     volumes:
       - ./docker/mysql/data:/var/lib/mysql/
-      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
 
   #MEMCACHED
   memcached:

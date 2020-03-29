@@ -1,7 +1,7 @@
 # easydock ;)
 Dockerize your PHP apps in one click ;)
 
-![easydock](https://github.com/andreapollastri/easydock/blob/master/ed.png?raw=true =250x250)
+<img width="250" alt="easydock" src="https://github.com/andreapollastri/easydock/blob/master/ed.png?raw=true">
 
 ![GitHub stars](https://img.shields.io/github/stars/andreapollastri/easydock?style=social)
 ![GitHub watchers](https://img.shields.io/github/watchers/andreapollastri/easydock?style=social)

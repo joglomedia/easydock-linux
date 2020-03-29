@@ -1,7 +1,5 @@
 <p align="center">
 <img width="275" alt="easydock" src="https://github.com/andreapollastri/easydock/blob/master/ed.png?raw=true">
-![GitHub stars](https://img.shields.io/github/stars/andreapollastri/easydock?style=social)
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/andreapollastri/easydock?label=version)
 </p>
 
 # easydock ;)

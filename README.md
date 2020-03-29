@@ -15,8 +15,6 @@ To use it:
 
 - Run these commands in your terminal:
 ```
-$ git clone https://github.com/andreapollastri/easydock
-$ cd easydock
 $ sh ed-init
 ```
 

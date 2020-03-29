@@ -3,4 +3,4 @@ clear
 echo "Wait... \n"
 docker-compose down
 clear
-echo "Docker has been stopped ;) \n"
+echo "easydock has been stopped ;) \n"

@@ -3,4 +3,4 @@ clear
 echo "Wait... \n"
 docker-compose up -d --force-recreate
 clear
-echo "Docker has been started... visit http://localhost ;) \n"
+echo "easydock has been started... visit http://localhost ;) \n"

@@ -1,11 +1,14 @@
 #!/bin/bash
 clear
 FILE=./.env
+APP_PORT=$(grep APP_PORT .env | cut -d '=' -f2)
+PMA_PORT=$(grep PMA_PORT .env | cut -d '=' -f2)
+MH_PORT=$(grep MH_PORT .env | cut -d '=' -f2)
 if test -f "$FILE"; then
     echo "Wait... \n"
     docker-compose up -d --force-recreate
     clear
-    echo "easydock has been started... visit http://localhost ;) \n"
+    echo "easydock has been started... visit http://localhost:$APP_PORT ;) \n"
 else
     echo "easydock .env file not found. Run 'sh ed-init' ;) \n"
 fi

@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-read -p "All application and database data will be removed... Are you shure to do it? (Y/n)" -n 1 -r
+read -r -p "All application and database data will be removed... Are you shure to do it? (Y/n): " -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     clear
@@ -17,7 +17,7 @@ then
     unlink .env
     cp .env.example .env
     docker-compose build --no-cache --pull
+    clear
+    echo "easydock has been reset ;) \n"
 fi
 echo '\n'
-clear
-echo "easydock has been reset ;) \n"

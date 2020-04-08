@@ -6,8 +6,6 @@ if test -f "$FILE"; then
 else
     echo "Welcome in easydock ;) \n"
     sleep 1s
-    chmod -R 775 easydock
-    chmod -R 775 application
     echo "Wait... \n"
     sleep 1s
     cp .env.example .env

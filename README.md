@@ -49,6 +49,11 @@ $ sh ed-stop
 $ sh ed-info
 ```
 
+- If you have any permissions issue, you can try to force it with:
+```
+$ sh ed-owner
+```
+
 - You can hard reset your Docker istance running (All application and database data will be removed):
 ```
 $ sh ed-reset

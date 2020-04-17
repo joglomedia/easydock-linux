@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-read -r -p "All application and database data will be removed... Are you shure to do it? (Y/n): " -n 1 -r
+read -r -p "All application and database data will be removed... Are you sure to do it? (Y/n): " -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     clear

@@ -44,6 +44,11 @@ $ sh ed-conn
 $ sh ed-stop
 ```
 
+- Everytime you change PHP version into .env file you have to run:
+```
+$ sh ed-build
+```
+
 - You can get application info using:
 ```
 $ sh ed-info

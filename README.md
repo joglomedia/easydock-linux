@@ -17,22 +17,23 @@ To use it:
 $ sh ed-init
 ```
 
-- Configure your .env file (if you need)
-(default configuration - PHP 7.4, MySql 8)
+- Configure your .env file (if you need) (default - PHP7.4, MySql8)
+
+- Everytime you change PHP version into .env file you have to run:
+```
+$ sh ed-build
+```
 
 - Push your files into /application folder
 
-- Configure your application DB connection configuration
-(default configuration - username: root / password: secret / db: dockerdb / host: mysql)
+- Config your app DB conn (default - user: root / pass: secret / db: dockerdb / host: mysql)
 
-- Configure your application SMTP connection confituration
-(hostname: mailhog / port: 1025 / no username and password are required)
+- Config your app SMTP conn (default - host: mailhog / port: 1025 / no user or pass are required)
 
 - To start your Docker istance:
 ```
 $ sh ed-start
 ```
-- Visit http://localhost ;)
 
 - To "SSH" into your Docker istance:
 ```
@@ -42,11 +43,6 @@ $ sh ed-conn
 - To stop you Docker istance:
 ```
 $ sh ed-stop
-```
-
-- Everytime you change PHP version into .env file you have to run:
-```
-$ sh ed-build
 ```
 
 - You can get application info using:
@@ -65,18 +61,18 @@ $ sh ed-reset
 ```
 
 ## Features
-Easydock comes with ngnix, PHP, MySql, phpmyadmin, MailHog, node, npm, Git and Composer
-
+Easydock comes with ngnix, PHP, MySql, phpmyadmin, MailHog, node.js, npm, Git and Composer
 > PHP 7.2, PHP 7.3, PHP 7.4, MySql 5.7, MySql 8, node 13, npm 6 versions support
 
 ## Requirements
-Docker, Docker Compose, (git)
+Docker, Docker Compose, Linux based shell, (git)
 
 ## Links
-- https://www.docker.com/products/docker-desktop
+- Docker Desktop https://www.docker.com/products/docker-desktop
+- Windows WLS https://docs.microsoft.com/en-us/windows/wsl/install-win10
 
 ## Security Vulnerabilities and Bugs
-If you discover a security vulnerability or any bug within easydock, please send an e-mail to Andrea Pollastri via andrea@pollastri.dev. All security vulnerabilities and bugs will be promptly addressed.
+If you discover a security vulnerability or any bug within easydock, please send an e-mail to andrea@pollastri.dev. All security vulnerabilities and bugs will be promptly addressed.
 
 ## Contributing
 Thank you for considering contributing to this project!

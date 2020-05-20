@@ -26,7 +26,7 @@ $ sh ed-build
 
 - Push your files into /application folder
 
-- Config your app DB conn (default - user: root / pass: secret / db: dockerdb / host: mysql)
+- Config your app DB conn (default - user: root / pass: secret / db: dockerdb / host: mysql - host: redis for Redis)
 
 - Config your app SMTP conn (default - host: mailhog / port: 1025 / no user or pass are required)
 
@@ -61,7 +61,7 @@ $ sh ed-reset
 ```
 
 ## Features
-Easydock comes with ngnix, PHP, MySql, phpmyadmin, MailHog, node.js, npm, Git and Composer
+Easydock comes with ngnix, PHP, MySql, Redis, phpmyadmin, MailHog, node.js, npm, Git and Composer
 > PHP 7.2, PHP 7.3, PHP 7.4, MySql 5.7, MySql 8, node 13, npm 6 versions support
 
 ## Requirements

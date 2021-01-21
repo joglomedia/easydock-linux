@@ -8,6 +8,12 @@ Dockerize your PHP apps in one click ;)
 ![GitHub stars](https://img.shields.io/github/stars/andreapollastri/easydock?style=social)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/andreapollastri/easydock?label=version)
 
+# Coming soon...
+- PHP 8 Support
+- New installation logic (as Composer vendor)
+- CS / PHPunit / PHPstan / xDebug preconfiguration
+- New CLI interface
+
 ## Documentation
 
 To use it:

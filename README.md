@@ -9,7 +9,7 @@ Dockerize your PHP apps ;)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/andreapollastri/easydock?label=version)
 
 ## Features
-Easydock comes with ngnix, PHP, MySql, Redis, phpmyadmin, MailHog, node.js, npm, Git, Composer, Supervisord and Cron
+Easydock comes with ngnix, PHP, MySql, Redis, phpmyadmin, MailHog, node.js, npm and Composer!
 > PHP 5.x, 7.x, 8.x, MySql 5.7, MySql 8, node 14, npm 6 versions support
 
 ## Requirements
@@ -65,6 +65,8 @@ $ sh ed info
 ```
 $ sh ed reset
 ```
+
+- You can config PHP and ngnix into /easydock/configs directory.
 
 ## Security Vulnerabilities and Bugs
 If you discover a security vulnerability or any bug within easydock, please send an e-mail to andrea@pollastri.dev. All security vulnerabilities and bugs will be promptly addressed.

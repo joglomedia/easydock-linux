@@ -241,7 +241,7 @@ ed_resetlight() {
         cp easydock/utils/ed/.appconf easydock/nginx/conf.d/app.conf
         clear
         ed_logo
-        echo "${bgpurple}${white} easydock ;) has been resetted! ${reset}"
+        echo "${bgpurple}${white} easydock ;) has been reset! ${reset}"
     fi
     echo ${br}
 }
@@ -268,7 +268,7 @@ ed_resetfull() {
         unlink .env
         clear
         ed_logo
-        echo "${bgpurple}${white} easydock ;) has been resetted! ${reset}"
+        echo "${bgpurple}${white} easydock ;) has been reset! ${reset}"
     fi
     echo ${br}
 }

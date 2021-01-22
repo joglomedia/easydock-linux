@@ -57,7 +57,7 @@ $ sh ed reset
 
 ## Features
 Easydock comes with ngnix, PHP, MySql, Redis, phpmyadmin, MailHog, node.js, npm, Git and Composer
-> PHP 7.4, PHP 8.0, MySql 5.7, MySql 8, node 14, npm 6 versions support
+> PHP 5.x, 7.x, 8.x, MySql 5.7, MySql 8, node 14, npm 6 versions support
 
 ## Requirements
 Docker, Docker Compose, OSx, (Git)

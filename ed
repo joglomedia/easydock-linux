@@ -101,14 +101,14 @@ ed_notfound() {
 
 ed_isthisportfree() {
     port="$1"
-    check = $(lsof -i tcp:$port)
+    check=$(lsof -i tcp:$port)
     #check1=$(egrep -w $port'/(tcp|udp)' /etc/services)
     #check2=$(netstat -na | grep $port)
     #check="$check1$check2"
-    if [ -n "$check" ]; then
-        return 1
-    else
+    if [ -z "$check" ]; then
         return 0
+    else
+        return 1
     fi
 }
 

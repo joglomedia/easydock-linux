@@ -28,7 +28,7 @@ bgblack=$(tput setab 0)
 bgwhite=$(tput setab 7)
 bgred=$(tput setab 1)
 bggreen=$(tput setab 2)
-bgyellow=$(tput setab 4)
+bgyellow=$(tput setab 3)
 bgblue=$(tput setab 4)
 bgpurple=$(tput setab 5)
 
@@ -61,12 +61,18 @@ if [ $1 == "env" ]; then
     clear
     ed_logo
     echo "${blue}Wait...${br}${reset}"
-    cp $ed_env.example $ed_env
-    sed -i -e 's/APP_SID=easydock/APP_SID=easydock'$(((RANDOM%1000000000)+1))'/g' .env
-    unlink $ed_env-e
     clear
     ed_logo
-    echo "${bgpurple}${white} easydock is ready! All you have to do is compile your ${bold}.env${reset}${bgpurple}${white} file and run ${bold}sh ed setup${reset}${bgpurple}${white} ;) ${br}${reset}"
+    if test -f "$ed_env"; then
+        echo "${bgyellow}${black}${bold} >>> WARNING! ${reset} an .env file is located in your workspace. Delete it if you want regenerate it within this command. ${reset}${br}"
+    else
+        cp $ed_env.example $ed_env
+        sed -i -e 's/APP_SID=easydock/APP_SID=easydock'$(((RANDOM%1000000000)+1))'/g' .env
+        unlink $ed_env-e
+        clear
+        ed_logo
+        echo "${bgpurple}${white} easydock is ready! All you have to do is compile your ${bold}.env${reset}${bgpurple}${white} file and run ${bold}sh ed setup${reset}${bgpurple}${white} ;) ${br}${reset}"
+    fi
     exit
 fi
 
@@ -116,7 +122,7 @@ ed_isthisportfree() {
 
 ed_unavailableport() {
     port=$1
-    echo "${bgwhite}${red}${bold} >>> ERROR! ${reset} Port: ${bgred}${white}${bold} $port ${reset} is used or is reserved. Try another port. ${reset}${br}"
+    echo "${bgwhite}${red}${bold} >>> ERROR! ${reset} Port: ${bgred}${white}${bold} $port ${reset} is used. Try another port. ${reset}${br}"
     exit
 }
 

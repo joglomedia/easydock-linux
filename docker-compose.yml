@@ -16,8 +16,10 @@ services:
     working_dir: /var/www
     volumes:
       - ${APP_SRC}:/var/www/:cached
-      - ./easydock/php/local.ini:/usr/local/etc/php/conf.d/local.ini
-      - ./easydock/php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
+      - ./easydock/configs/php/php.ini:/usr/local/etc/php/conf.d/local.ini
+      - ./easydock/configs/php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
+      - ./easydock/configs/linux/cron.sh:/usr/local/etc/php/conf.d/cron.sh
+      - ./easydock/configs/linux/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
 
   #NGINX
   nginx:
@@ -29,7 +31,7 @@ services:
       - ${APP_PORT}:80
     volumes:
       - ${APP_SRC}:/var/www/
-      - ./easydock/nginx/conf.d/:/etc/nginx/conf.d/
+      - ./easydock/configs/nginx/:/etc/nginx/conf.d/
 
   #MYSQL
   mysql:

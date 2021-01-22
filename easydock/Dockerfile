@@ -21,7 +21,6 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
 RUN docker-php-ext-install opcache
-RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli || true
 RUN docker-php-ext-install pdo_mysql && docker-php-ext-enable pdo_mysql || true
 RUN docker-php-ext-install mbstring && docker-php-ext-enable mbstring || true
 RUN docker-php-ext-install zip && docker-php-ext-enable zip || true
@@ -44,6 +43,12 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt-get install -y nodejs
 
+# Supervisord
+RUN apt-get install -y supervisor
+
+# Cronjob
+RUN crontab -l | { cat; echo "* * * * * sh /usr/local/etc/php/conf.d/cron.sh"; } | crontab -
+
 # Add user
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
@@ -56,4 +61,4 @@ USER www
 
 # Expose port 9000
 EXPOSE 9000
-CMD ["php-fpm"]
+CMD ["php-fpm","/usr/bin/supervisord","crond"]

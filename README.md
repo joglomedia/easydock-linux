@@ -8,26 +8,20 @@ Dockerize your PHP apps in one click ;)
 ![GitHub stars](https://img.shields.io/github/stars/andreapollastri/easydock?style=social)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/andreapollastri/easydock?label=version)
 
-# Coming soon...
-- PHP 8 Support
-- New installation logic (as Composer vendor)
-- CS / PHPunit / PHPstan / xDebug preconfiguration
-- New CLI interface
-
 ## Documentation
 
 To use it:
 
 - Run these commands in your terminal:
 ```
-$ sh ed-init
+$ sh ed env
 ```
 
 - Configure your .env file (if you need) (default - PHP7.4, MySql8)
 
 - Everytime you change PHP version into .env file you have to run:
 ```
-$ sh ed-build
+$ sh ed setup
 ```
 
 - Push your files into /application folder
@@ -38,44 +32,38 @@ $ sh ed-build
 
 - To start your Docker istance:
 ```
-$ sh ed-start
+$ sh ed up
 ```
 
 - To "SSH" into your Docker istance:
 ```
-$ sh ed-conn
+$ sh ed conn
 ```
 
 - To stop you Docker istance:
 ```
-$ sh ed-stop
+$ sh ed down
 ```
 
 - You can get application info using:
 ```
-$ sh ed-info
-```
-
-- If you have any permissions issue, you can try to force it with:
-```
-$ sh ed-owner
+$ sh ed info
 ```
 
 - You can hard reset your Docker istance running (All application and database data will be removed):
 ```
-$ sh ed-reset
+$ sh ed reset
 ```
 
 ## Features
 Easydock comes with ngnix, PHP, MySql, Redis, phpmyadmin, MailHog, node.js, npm, Git and Composer
-> PHP 7.2, PHP 7.3, PHP 7.4, MySql 5.7, MySql 8, node 13, npm 6 versions support
+> PHP 7.4, PHP 8.0, MySql 5.7, MySql 8, node 14, npm 6 versions support
 
 ## Requirements
-Docker, Docker Compose, Linux based shell, (git)
+Docker, Docker Compose, OSx, (Git)
 
 ## Links
 - Docker Desktop https://www.docker.com/products/docker-desktop
-- Windows WLS https://docs.microsoft.com/en-us/windows/wsl/install-win10
 
 ## Security Vulnerabilities and Bugs
 If you discover a security vulnerability or any bug within easydock, please send an e-mail to andrea@pollastri.dev. All security vulnerabilities and bugs will be promptly addressed.

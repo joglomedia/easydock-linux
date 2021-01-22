@@ -1,5 +1,0 @@
-#!/bin/bash
-clear
-docker-compose build --no-cache --pull
-clear
-echo "easydock is ready to start ;) \n"

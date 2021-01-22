@@ -1,5 +1,0 @@
-#!/bin/bash
-clear
-chmod -R 777 easydock
-chmod -R 777 application
-echo "Permissions issue fixed ;) \n"

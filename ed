@@ -105,10 +105,10 @@ ed_isthisportfree() {
     #check1=$(egrep -w $port'/(tcp|udp)' /etc/services)
     #check2=$(netstat -na | grep $port)
     #check="$check1$check2"
-    if [ -z "$check" ]; then
-        return 0
-    else
+    if [ -n "$check" ]; then
         return 1
+    else
+        return 0
     fi
 }
 
@@ -334,7 +334,7 @@ ed_setup() {
     ed_logo
     echo "${bgblue}${white} Pulling Docker images ${reset}${br}"
     docker-compose build --no-cache --pull
-    #clear
+    clear
     ed_logo
     echo "${bgpurple}${white} easydock ;) is ready! Run ${bgwhite}${black} sh ed up ${reset}"
 }

@@ -62,6 +62,8 @@ if [ $1 == "env" ]; then
     ed_logo
     echo "${blue}Wait...${br}${reset}"
     cp $ed_env.example $ed_env
+    sed -i -e 's/APP_SID=easydock/APP_SID=easydock'$(((RANDOM%1000000000)+1))'/g' .env
+    unlink $ed_env-e
     clear
     ed_logo
     echo "${bgpurple}${white} easydock is ready! All you have to do is compile your ${bold}.env${reset}${bgpurple}${white} file and run ${bold}sh ed setup${reset}${bgpurple}${white} ;) ${br}${reset}"
@@ -101,7 +103,7 @@ ed_notfound() {
 
 ed_isthisportfree() {
     port="$1"
-    check = $(lsof -i tcp:$port)
+    check=$(lsof -i tcp:$port)
     #check1=$(egrep -w $port'/(tcp|udp)' /etc/services)
     #check2=$(netstat -na | grep $port)
     #check="$check1$check2"
@@ -334,7 +336,7 @@ ed_setup() {
     ed_logo
     echo "${bgblue}${white} Pulling Docker images ${reset}${br}"
     docker-compose build --no-cache --pull
-    #clear
+    clear
     ed_logo
     echo "${bgpurple}${white} easydock ;) is ready! Run ${bgwhite}${black} sh ed up ${reset}"
 }

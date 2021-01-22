@@ -21,7 +21,6 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
 RUN docker-php-ext-install opcache
-RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli || true
 RUN docker-php-ext-install pdo_mysql && docker-php-ext-enable pdo_mysql || true
 RUN docker-php-ext-install mbstring && docker-php-ext-enable mbstring || true
 RUN docker-php-ext-install zip && docker-php-ext-enable zip || true
@@ -30,7 +29,6 @@ RUN docker-php-ext-install xml && docker-php-ext-enable xml || true
 RUN docker-php-ext-install gd && docker-php-ext-enable gd || true
 RUN docker-php-ext-install bcmatch && docker-php-ext-enable bcmatch || true
 RUN docker-php-ext-install ctype && docker-php-ext-enable ctype || true
-RUN docker-php-ext-install intl && docker-php-ext-enable intl || true
 RUN docker-php-ext-install curl && docker-php-ext-enable curl || true
 RUN docker-php-ext-install common || true
 RUN apt-get update && apt-get install -y libmagickwand-dev --no-install-recommends && rm -rf /var/lib/apt/lists/* || true

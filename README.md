@@ -3,14 +3,25 @@
 </p>
 
 # easydock ;)
-Dockerize your PHP apps in one click ;)
+Dockerize your PHP apps ;)
 
 ![GitHub stars](https://img.shields.io/github/stars/andreapollastri/easydock?style=social)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/andreapollastri/easydock?label=version)
 
-## Documentation
+## Features
+Easydock comes with ngnix, PHP, MySql, Redis, phpmyadmin, MailHog, node.js, npm and Composer!
+> PHP 5.x, 7.x, 8.x, MySql 5.7, MySql 8, node 14, npm 6 versions support
 
+## Requirements
+Docker Desktop on Mac OSx El Capitan or newer
+
+## Documentation
 To use it:
+
+- Download it:
+```
+$ git clone https://github.com/andreapollastri/easydock.git
+```
 
 - Run these commands in your terminal:
 ```
@@ -50,20 +61,12 @@ $ sh ed down
 $ sh ed info
 ```
 
-- You can hard reset your Docker istance running (All application and database data will be removed):
+- You can reset your Docker istance running:
 ```
 $ sh ed reset
 ```
 
-## Features
-Easydock comes with ngnix, PHP, MySql, Redis, phpmyadmin, MailHog, node.js, npm, Git and Composer
-> PHP 5.x, 7.x, 8.x, MySql 5.7, MySql 8, node 14, npm 6 versions support
-
-## Requirements
-Docker, Docker Compose, OSx, (Git)
-
-## Links
-- Docker Desktop https://www.docker.com/products/docker-desktop
+- You can config PHP and ngnix into /easydock/configs directory.
 
 ## Security Vulnerabilities and Bugs
 If you discover a security vulnerability or any bug within easydock, please send an e-mail to andrea@pollastri.dev. All security vulnerabilities and bugs will be promptly addressed.

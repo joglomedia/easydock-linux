@@ -9,7 +9,7 @@ Dockerize your PHP apps ;)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/andreapollastri/easydock?label=version)
 
 ## Features
-Easydock comes with ngnix, PHP, MySql, Redis, phpmyadmin, MailHog, node.js, npm and Composer!
+Easydock comes with nginx, PHP, MySql, Redis, phpmyadmin, MailHog, node.js, npm and Composer!
 > PHP 5.x, 7.x, 8.x, MySql 5.7, MySql 8, node 14, npm 6 versions support
 
 ## Requirements
@@ -30,7 +30,7 @@ $ sh ed env
 
 - Configure your .env file (if you need) (default - PHP7.4, MySql8)
 
-- Everytime you change PHP version into .env file you have to run:
+- Run these commands in your terminal:
 ```
 $ sh ed setup
 ```
@@ -66,7 +66,14 @@ $ sh ed info
 $ sh ed reset
 ```
 
-- You can config PHP and ngnix into /easydock/configs directory.
+- You can config PHP and nginx into /easydock/configs folder.
+
+- Everytime you change PHP version into .env file you have to run:
+```
+$ sh ed reset light
+$ sh ed setup
+```
+(Database data will be removed)
 
 ## Security Vulnerabilities and Bugs
 If you discover a security vulnerability or any bug within easydock, please send an e-mail to andrea@pollastri.dev. All security vulnerabilities and bugs will be promptly addressed.

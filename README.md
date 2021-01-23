@@ -3,39 +3,36 @@
 </p>
 
 # easydock ;)
-Dockerize your PHP apps ;)
+Docker LEMP easy integration
 
 ![GitHub stars](https://img.shields.io/github/stars/andreapollastri/easydock?style=social)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/andreapollastri/easydock?label=version)
 
 ## Features
-Easydock comes with nginx, PHP, MySql, Redis, phpmyadmin, MailHog, node.js, npm and Composer!
-> PHP 5.x, 7.x, 8.x, MySql 5.7, MySql 8, node 14, npm 6 versions support
+Easydock comes with nginx, PHP, MySql, Redis, phpmyadmin, MailHog, node.js, npm Git and Composer!
+> PHP-FPM 5.x, 7.x and 8.x, MySql 5.7 and 8, node 14 and npm 6 versions support.
 
 ## Requirements
 Docker Desktop on Mac OSx El Capitan or newer
 
 ## Documentation
-To use it:
 
 - Download it:
 ```
 $ git clone https://github.com/andreapollastri/easydock.git
 ```
 
-- Run these commands in your terminal:
+- Open your easydock path and run:
 ```
 $ sh ed env
 ```
 
-- Configure your .env file (if you need) (default - PHP7.4, MySql8)
-
-- Run these commands in your terminal:
+- Configure your .env file (if you need), than run:
 ```
 $ sh ed setup
 ```
 
-- Push your files into /application folder
+- Push your files into /application
 
 - Config your app DB conn (default - user: root / pass: secret / db: dockerdb / host: mysql - host: redis for Redis)
 
@@ -51,7 +48,7 @@ $ sh ed up
 $ sh ed conn
 ```
 
-- To stop you Docker istance:
+- To stop your Docker istance:
 ```
 $ sh ed down
 ```
@@ -66,7 +63,7 @@ $ sh ed info
 $ sh ed reset
 ```
 
-- You can config PHP and nginx into /easydock/configs folder.
+- You can config PHP and nginx into /easydock/configs.
 
 - Everytime you change PHP version into .env file you have to run:
 ```

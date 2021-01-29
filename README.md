@@ -1,5 +1,5 @@
 <p align="center">
-<img width="275" alt="easydock" src="https://github.com/andreapollastri/easydock/blob/master/easydock/utils/ed.png?raw=true">
+<img width="275" alt="easydock" src="https://github.com/andreapollastri/easydock/blob/master/src/ed.png?raw=true">
 </p>
 
 # easydock ;)
@@ -13,30 +13,29 @@ Easydock comes with nginx, PHP, MySql, Redis, phpmyadmin, MailHog, node.js, npm 
 > PHP-FPM 5.x, 7.x and 8.x, MySql 5.7 and 8, node 14 and npm 6 versions support.
 
 ## Requirements
-Docker Desktop on Mac OSx El Capitan or newer
+Docker Desktop and Composer on Mac OSx El Capitan or newer
 
 ## Documentation
-
-- Download it:
+- Open your PHP application
 ```
-$ git clone https://github.com/andreapollastri/easydock.git
-```
-
-- Open your easydock path and run:
-```
-$ sh ed env
+$ cd /path/to/your-php-application
 ```
 
-- Configure your .env file (if you need), than run:
+- Install easydock via Composer
+```
+$ composer require andreapollastri/easydock
+```
+
+- Configure your .env.ed file (if you need) and run:
 ```
 $ sh ed setup
 ```
 
-- Push your files into /application
-
 - Config your app DB conn (default - user: root / pass: secret / db: dockerdb / host: mysql - host: redis for Redis)
 
 - Config your app SMTP conn (default - host: mailhog / port: 1025 / no user or pass are required)
+
+- Default nginx config will expose your project /public folder
 
 - To start your Docker istance:
 ```
@@ -63,11 +62,9 @@ $ sh ed info
 $ sh ed reset
 ```
 
-- You can config PHP and nginx into /easydock/configs.
-
-- Everytime you change PHP version into .env file you have to run:
+- Everytime you change PHP version into .env.ed file you have to run:
 ```
-$ sh ed reset light
+$ sh ed reset
 $ sh ed setup
 ```
 (Database data will be removed)

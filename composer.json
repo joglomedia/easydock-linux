@@ -1,0 +1,16 @@
+{
+    "name": "andreapollastri/easydock",
+    "type": "project",
+    "description": "Docker LEMP easy integration",
+    "keywords": [
+        "docker",
+        "lemp",
+        "php"
+    ],
+    "license": "MIT",
+    "scripts": {
+        "post-root-package-install": [
+            "./vendor/easydock/src/.script export"
+        ]
+    }
+}

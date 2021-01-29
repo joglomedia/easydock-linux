@@ -6,14 +6,9 @@
 #################################################
 
 ############################################################ COMMON VARS
-
 menu=$1
 action=$2
-
-ed_env=./.env
-
 reset=$(tput sgr0)
-
 br="\n"
 bold=$(tput bold)
 underline=$(tput smul)
@@ -33,7 +28,6 @@ bgblue=$(tput setab 4)
 bgpurple=$(tput setab 5)
 
 ############################################################ LOGO
-
 ed_logo() {
     echo "${yellow}${bold}"
     echo "******************************************************"
@@ -49,9 +43,31 @@ ed_logo() {
 }
 
 ############################################################ DOCKER CHECK
-
 if !docker info >/dev/null 2>&1; then
     echo "${bgwhite}${red}${bold} >>> ERROR! ${reset} To run easydock ; you have to install Docker and Docker Composer.${1}Find out more on: https://www.docker.com/products/docker-desktop ${reset}${br}"
+    exit
+fi
+
+############################################################ VENDOR EXPORT
+if [ $1 == "export" ]; then
+    clear
+    ed_logo
+    echo "${blue}Wait...${br}${reset}"
+    clear
+    ed_logo
+    unlink ./.env.easydock
+    cp ./vendor/easydock/script/.edenv ./.env.easydock
+    unlink ./docker-compose.yml
+    cp ./vendor/easydock/src/.compose ./docker-compose.yml
+    unlink ./ed
+    cp ./vendor/easydock/src/.script ./ed
+
+    sed -i -e 's/APP_SID=easydock/APP_SID=easydock'$(((RANDOM%1000000000)+1))'/g' .env.easydock
+    unlink ./.env.easydock-e
+    clear
+    ed_logo
+    echo "${bgpurple}${white} easydock is ready! All you have to do is compile your ${bold}.env.easydock${reset}${bgpurple}${white} file and run ${bold}sh ed setup${reset}${bgpurple}${white} ;) ${br}${reset}"
+    fi
     exit
 fi
 
@@ -63,20 +79,20 @@ if [ $1 == "env" ]; then
     echo "${blue}Wait...${br}${reset}"
     clear
     ed_logo
-    if test -f "$ed_env"; then
+    if test -f "./.env.easydock"; then
         echo "${bgyellow}${black}${bold} >>> WARNING! ${reset} an .env file is located in your workspace. Delete it if you want regenerate it within this command. ${reset}${br}"
     else
-        cp $ed_env.example $ed_env
-        sed -i -e 's/APP_SID=easydock/APP_SID=easydock'$(((RANDOM%1000000000)+1))'/g' .env
-        unlink $ed_env-e
+        cp ./vendor/easydock/script/.edenv ./.env.easydock
+        sed -i -e 's/APP_SID=easydock/APP_SID=easydock'$(((RANDOM%1000000000)+1))'/g' .env.easydock
+        unlink ./.env.easydock-e
         clear
         ed_logo
-        echo "${bgpurple}${white} easydock is ready! All you have to do is compile your ${bold}.env${reset}${bgpurple}${white} file and run ${bold}sh ed setup${reset}${bgpurple}${white} ;) ${br}${reset}"
+        echo "${bgpurple}${white} Your ${bold}.env.easydock${reset}${bgpurple}${white} has been created ;) ${br}${reset}"
     fi
     exit
 fi
 
-if test -f "$ed_env"; then
+if test -f "./.env.easydock"; then
     clear
     ed_logo
 else
@@ -86,17 +102,17 @@ else
     exit
 fi
 
-ed_portapp=$(grep APP_PORT .env | cut -d '=' -f2)
-ed_portdb=$(grep DB_PORT .env | cut -d '=' -f2)
-ed_portpma=$(grep PMA_PORT .env | cut -d '=' -f2)
-ed_portmh=$(grep MH_PORT .env | cut -d '=' -f2)
-ed_portrds=$(grep RDS_PORT .env | cut -d '=' -f2)
-ed_appsid=$(grep APP_SID .env | cut -d '=' -f2)
-ed_appsrc=$(grep APP_SRC .env | cut -d '=' -f2)
-ed_phpver=$(grep PHP_V .env | cut -d '=' -f2)
-ed_dbver=$(grep DB_VERS .env | cut -d '=' -f2)
-ed_dbname=$(grep DB_NAME .env | cut -d '=' -f2)
-ed_dbpass=$(grep DB_PASS .env | cut -d '=' -f2)
+ed_portapp=$(grep APP_PORT ./.env.easydock | cut -d '=' -f2)
+ed_portdb=$(grep DB_PORT ./.env.easydock | cut -d '=' -f2)
+ed_portpma=$(grep PMA_PORT ./.env.easydock | cut -d '=' -f2)
+ed_portmh=$(grep MH_PORT ./.env.easydock | cut -d '=' -f2)
+ed_portrds=$(grep RDS_PORT ./.env.easydock | cut -d '=' -f2)
+ed_appsid=$(grep APP_SID ./.env.easydock | cut -d '=' -f2)
+ed_appsrc=$(grep APP_SRC ./.env.easydock | cut -d '=' -f2)
+ed_phpver=$(grep PHP_V ./.env.easydock | cut -d '=' -f2)
+ed_dbver=$(grep DB_VERS ./.env.easydock | cut -d '=' -f2)
+ed_dbname=$(grep DB_NAME ./.env.easydock | cut -d '=' -f2)
+ed_dbpass=$(grep DB_PASS ./.env.easydock | cut -d '=' -f2)
 
 ############################################################ COMMON FUNCTIONS
 
@@ -110,9 +126,6 @@ ed_notfound() {
 ed_isthisportfree() {
     port="$1"
     check=$(lsof -i tcp:$port)
-    #check1=$(egrep -w $port'/(tcp|udp)' /etc/services)
-    #check2=$(netstat -na | grep $port)
-    #check="$check1$check2"
     if [ -z "$check" ]; then
         return 0
     else
@@ -216,88 +229,29 @@ ed_info() {
     echo "Mail Hog                   http://localhost:$ed_portmh ${br}"
 }
 
-ed_resetdefault() {
-    echo "${bgpurple}${white}${bold} easydock ;) Reset Options List ${reset}${br}${br}"
-    echo "${bgwhite}${black} sh ed reset light ${reset}"
-    echo "Useful to reset easydock ; container (DBs will be removed, project files will remain).${br}"
-    echo "${bgwhite}${black} sh ed reset full ${reset}"
-    echo "Useful to reset easydock ; container and project (DBs and project files will be removed).${br}"
-}
-
-ed_resetlight() {
-    read -r -p "Are you sure to reset easydock (light command will reset container, configs and database)? (Y/n): " -n 1 -r
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        echo "${br}${br}${blue}Wait...${br}${reset}"
-        clear
-        ed_logo
-        docker-compose down -v
-        docker-compose rm
-        clear
-        ed_logo
-        rm -rf easydock/mysql/data
-        mkdir easydock/mysql/data
-        cp easydock/utils/ed/.datagitignore easydock/mysql/data/.gitignore
-        unlink easydock/configs/nginx/app.conf
-        cp easydock/utils/ed/.appconf easydock/configs/nginx/app.conf
-        unlink easydock/configs/php/php.ini
-        cp easydock/utils/ed/.phpini easydock/configs/php/php.ini
-        unlink easydock/configs/php/opcache.ini
-        cp easydock/utils/ed/.opcache easydock/configs/php/opcache.ini
-        clear
-        ed_logo
-        echo "${bgpurple}${white} easydock ;) has been reset! ${reset}"
-    fi
-    echo ${br}
-}
-
-ed_resetfull() {
-    read -r -p "Are you sure to reset easydock (full command will reset container, configs, env, database and application files)? (Y/n): " -n 1 -r
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        echo "${br}${br}${blue}Wait...${br}${reset}"
-        clear
-        ed_logo
-        docker-compose down -v
-        docker-compose rm
-        clear
-        ed_logo
-        rm -rf application
-        mkdir application
-        mkdir application/public
-        cp easydock/utils/ed/.welcome application/public/index.php
-        rm -rf easydock/mysql/data
-        mkdir easydock/mysql/data
-        cp easydock/utils/ed/.datagitignore easydock/mysql/data/.gitignore
-        unlink easydock/configs/nginx/app.conf
-        cp easydock/utils/ed/.appconf easydock/configs/nginx/app.conf
-        unlink easydock/configs/php/php.ini
-        cp easydock/utils/ed/.phpini easydock/configs/php/php.ini
-        unlink easydock/configs/php/opcache.ini
-        cp easydock/utils/ed/.opcache easydock/configs/php/opcache.ini
-        unlink .env
-        clear
-        ed_logo
-        echo "${bgpurple}${white} easydock ;) has been reset! ${reset}"
-    fi
-    echo ${br}
-}
-
 ed_reset() {
-    while [ -n "$action" ]; do
-        case $action in
-        light)
-            shift
-            ed_resetlight
-            exit
-            ;;
-        full)
-            shift
-            ed_resetfull
-            exit
-            ;;
-        esac
-        shift
-    done
-    ed_resetdefault
+    read -r -p "Are you sure to reset easydock (this command will reset container, configs and database)? (Y/n): " -n 1 -r
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        echo "${br}${br}${blue}Wait...${br}${reset}"
+        clear
+        ed_logo
+        docker-compose down -v
+        docker-compose rm
+        clear
+        ed_logo
+        rm -rf ./vendor/easydock/mysql/data/*
+        cp ./vendor/easydock/src/.datagitignore ./vendor/easydock/mysql/data/.gitignore
+        unlink ./vendor/easydock/configs/nginx/app.conf
+        cp ./vendor/easydock/src/.appconf ./vendor/easydock/configs/nginx/app.conf
+        unlink ./vendor/easydock/configs/php/php.ini
+        cp ./vendor/easydock/src/.phpini ./vendor/easydock/configs/php/php.ini
+        unlink ./vendor/easydock/configs/php/opcache.ini
+        cp ./vendor/easydock/src/.opcache ./vendor/easydock/configs/php/opcache.ini
+        clear
+        ed_logo
+        echo "${bgpurple}${white} easydock ;) has been reset! ${reset}"
+    fi
+    echo ${br}
 }
 
 ed_up() {

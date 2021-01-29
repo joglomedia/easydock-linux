@@ -61,13 +61,11 @@ if [ $1 == "export" ]; then
     cp ./vendor/easydock/src/.compose ./docker-compose.yml
     unlink ./ed
     cp ./vendor/easydock/src/.script ./ed
-
     sed -i -e 's/APP_SID=easydock/APP_SID=easydock'$(((RANDOM%1000000000)+1))'/g' .env.ed
     unlink ./.env.ed-e
     clear
     ed_logo
     echo "${bgpurple}${white} easydock is ready! All you have to do is compile your ${bold}.env.ed${reset}${bgpurple}${white} file and run ${bold}sh ed setup${reset}${bgpurple}${white} ;) ${br}${reset}"
-    fi
     exit
 fi
 
@@ -98,7 +96,7 @@ if test -f "./.env.ed"; then
 else
     clear
     ed_logo
-    echo "${bgwhite}${red}${bold} >>> ERROR! ${reset} File ${bgred}${white}${bold} .env ${reset} is missing. Run ${bgred}${white}${bold} sh ed env ${reset} to generate it. ${reset}${br}"
+    echo "${bgwhite}${red}${bold} >>> ERROR! ${reset} File ${bgred}${white}${bold} .env.ed ${reset} is missing. Run ${bgred}${white}${bold} sh ed env ${reset} to generate it. ${reset}${br}"
     exit
 fi
 

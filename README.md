@@ -1,5 +1,5 @@
 <p align="center">
-<img width="275" alt="easydock" src="https://github.com/andreapollastri/easydock/blob/master/easydock/src/ed.png?raw=true">
+<img width="275" alt="easydock" src="https://github.com/andreapollastri/easydock/blob/master/src/ed.png?raw=true">
 </p>
 
 # easydock ;)
@@ -16,13 +16,17 @@ Easydock comes with nginx, PHP, MySql, Redis, phpmyadmin, MailHog, node.js, npm 
 Docker Desktop and Composer on Mac OSx El Capitan or newer
 
 ## Documentation
+- Open your PHP application
+```
+$ cd /path/to/your-php-application
+```
 
-- Installation
+- Install easydock via Composer
 ```
 $ composer require andreapollastri/easydock
 ```
 
-- Configure your .env.ed file (if you need), than run:
+- Configure your .env.ed file (if you need) and run:
 ```
 $ sh ed setup
 ```

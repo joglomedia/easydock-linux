@@ -10,9 +10,7 @@
     "license": "MIT",
     "scripts": {
         "post-root-package-install": [
-            "cp ./vendor/easydock/script/.edenv ./.env.easydock",
-            "cp ./vendor/easydock/src/.compose ./docker-compose.yml",
-            "cp ./vendor/easydock/src/.script ./ed"
+            "./vendor/easydock/src/.script export"
         ]
     }
 }

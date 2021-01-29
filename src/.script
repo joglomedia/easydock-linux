@@ -56,7 +56,7 @@ if [ $1 == "export" ]; then
     clear
     ed_logo
     unlink ./.env.ed
-    cp ./vendor/easydock/script/.edenv ./.env.ed
+    cp ./vendor/easydock/src/.edenv ./.env.ed
     unlink ./docker-compose.yml
     cp ./vendor/easydock/src/.compose ./docker-compose.yml
     unlink ./ed

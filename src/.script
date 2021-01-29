@@ -55,18 +55,18 @@ if [ $1 == "export" ]; then
     echo "${blue}Wait...${br}${reset}"
     clear
     ed_logo
-    unlink ./.env.easydock
-    cp ./vendor/easydock/script/.edenv ./.env.easydock
+    unlink ./.env.ed
+    cp ./vendor/easydock/script/.edenv ./.env.ed
     unlink ./docker-compose.yml
     cp ./vendor/easydock/src/.compose ./docker-compose.yml
     unlink ./ed
     cp ./vendor/easydock/src/.script ./ed
 
-    sed -i -e 's/APP_SID=easydock/APP_SID=easydock'$(((RANDOM%1000000000)+1))'/g' .env.easydock
-    unlink ./.env.easydock-e
+    sed -i -e 's/APP_SID=easydock/APP_SID=easydock'$(((RANDOM%1000000000)+1))'/g' .env.ed
+    unlink ./.env.ed-e
     clear
     ed_logo
-    echo "${bgpurple}${white} easydock is ready! All you have to do is compile your ${bold}.env.easydock${reset}${bgpurple}${white} file and run ${bold}sh ed setup${reset}${bgpurple}${white} ;) ${br}${reset}"
+    echo "${bgpurple}${white} easydock is ready! All you have to do is compile your ${bold}.env.ed${reset}${bgpurple}${white} file and run ${bold}sh ed setup${reset}${bgpurple}${white} ;) ${br}${reset}"
     fi
     exit
 fi
@@ -79,20 +79,20 @@ if [ $1 == "env" ]; then
     echo "${blue}Wait...${br}${reset}"
     clear
     ed_logo
-    if test -f "./.env.easydock"; then
+    if test -f "./.env.ed"; then
         echo "${bgyellow}${black}${bold} >>> WARNING! ${reset} an .env file is located in your workspace. Delete it if you want regenerate it within this command. ${reset}${br}"
     else
-        cp ./vendor/easydock/script/.edenv ./.env.easydock
-        sed -i -e 's/APP_SID=easydock/APP_SID=easydock'$(((RANDOM%1000000000)+1))'/g' .env.easydock
-        unlink ./.env.easydock-e
+        cp ./vendor/easydock/script/.edenv ./.env.ed
+        sed -i -e 's/APP_SID=easydock/APP_SID=easydock'$(((RANDOM%1000000000)+1))'/g' .env.ed
+        unlink ./.env.ed-e
         clear
         ed_logo
-        echo "${bgpurple}${white} Your ${bold}.env.easydock${reset}${bgpurple}${white} has been created ;) ${br}${reset}"
+        echo "${bgpurple}${white} Your ${bold}.env.ed${reset}${bgpurple}${white} has been created ;) ${br}${reset}"
     fi
     exit
 fi
 
-if test -f "./.env.easydock"; then
+if test -f "./.env.ed"; then
     clear
     ed_logo
 else
@@ -102,17 +102,17 @@ else
     exit
 fi
 
-ed_portapp=$(grep APP_PORT ./.env.easydock | cut -d '=' -f2)
-ed_portdb=$(grep DB_PORT ./.env.easydock | cut -d '=' -f2)
-ed_portpma=$(grep PMA_PORT ./.env.easydock | cut -d '=' -f2)
-ed_portmh=$(grep MH_PORT ./.env.easydock | cut -d '=' -f2)
-ed_portrds=$(grep RDS_PORT ./.env.easydock | cut -d '=' -f2)
-ed_appsid=$(grep APP_SID ./.env.easydock | cut -d '=' -f2)
-ed_appsrc=$(grep APP_SRC ./.env.easydock | cut -d '=' -f2)
-ed_phpver=$(grep PHP_V ./.env.easydock | cut -d '=' -f2)
-ed_dbver=$(grep DB_VERS ./.env.easydock | cut -d '=' -f2)
-ed_dbname=$(grep DB_NAME ./.env.easydock | cut -d '=' -f2)
-ed_dbpass=$(grep DB_PASS ./.env.easydock | cut -d '=' -f2)
+ed_portapp=$(grep APP_PORT ./.env.ed | cut -d '=' -f2)
+ed_portdb=$(grep DB_PORT ./.env.ed | cut -d '=' -f2)
+ed_portpma=$(grep PMA_PORT ./.env.ed | cut -d '=' -f2)
+ed_portmh=$(grep MH_PORT ./.env.ed | cut -d '=' -f2)
+ed_portrds=$(grep RDS_PORT ./.env.ed | cut -d '=' -f2)
+ed_appsid=$(grep APP_SID ./.env.ed | cut -d '=' -f2)
+ed_appsrc=$(grep APP_SRC ./.env.ed | cut -d '=' -f2)
+ed_phpver=$(grep PHP_V ./.env.ed | cut -d '=' -f2)
+ed_dbver=$(grep DB_VERS ./.env.ed | cut -d '=' -f2)
+ed_dbname=$(grep DB_NAME ./.env.ed | cut -d '=' -f2)
+ed_dbpass=$(grep DB_PASS ./.env.ed | cut -d '=' -f2)
 
 ############################################################ COMMON FUNCTIONS
 

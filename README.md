@@ -31,6 +31,8 @@ $ sh ed setup
 
 - Config your app SMTP conn (default - host: mailhog / port: 1025 / no user or pass are required)
 
+- Default nginx config will expose your project /public folder
+
 - To start your Docker istance:
 ```
 $ sh ed up

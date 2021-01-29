@@ -2,7 +2,7 @@
 APP_SID=easydock
 
 # APPLICATION SOURCE FOLDER
-APP_SRC=./application
+APP_SRC=./
 
 # APP PORT
 APP_PORT=80

@@ -199,12 +199,21 @@ ed_help() {
     echo "Useful to get easydock ; configuration information.${br}${br}"
 }
 
+
 ed_info() {
     echo "${bgpurple}${white}${bold} easydock ;) System Information ${reset}${br}"
     echo "NAME: $ed_appsid"
     echo "PATH: $ed_appsrc"
-    echo "DOCUMENT ROOT: /var/www/$ed_nginxmode"
-    if [ $ed_nginxmode == "build" ]; then
+    if [ $ed_nginx == "build" ]; then
+        echo "DOCUMENT ROOT: /var/www/build"
+    fi
+    if [ $ed_nginx == "public" ]; then
+        echo "DOCUMENT ROOT: /var/www/public"
+    fi
+    if [ $ed_nginx == "root" ]; then
+        echo "DOCUMENT ROOT: /var/www"
+    fi
+    if [ $ed_nginx == "build" ]; then
         echo "CATCH ALL FILE: index.html"
     else
         echo "CATCH ALL FILE: index.php"
@@ -235,7 +244,7 @@ ed_info() {
 }
 
 ed_reset() {
-    read -r -p "Are you sure to reset easydock (this command will reset container, configs and database)? (Y/n): " -n 1 -r
+    read -r -p "Are you sure to reset easydock (this command will reset container and database)? (Y/n): " -n 1 -r
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo "${br}${br}${blue}Wait...${br}${reset}"
         clear
@@ -244,8 +253,8 @@ ed_reset() {
         docker-compose --env-file ./.env.ed rm
         clear
         ed_logo
-        rm -rf ./vendor/andreapollastri/easydock/mysql/data/*
-        cp ./vendor/andreapollastri/easydock/src/common/.datagitignore ./vendor/andreapollastri/easydock/mysql/data/.gitignore
+        rm -rf ./easydock/mysql/data/*
+        cp ./easydock/src/common/.datagitignore ./easydock/mysql/data/.gitignore
         ed_logo
         echo "${bgpurple}${white} easydock ;) has been reset! ${reset}"
     fi

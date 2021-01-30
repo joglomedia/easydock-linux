@@ -31,7 +31,7 @@ PMA_PORT=8080
 MH_PORT=8081
 
 # NGINX MODE
-NGINX_MODE=public
+NGINX_MODE=root
 # root - index.php "catch all" and ./ as Document Root (use it for Codigniter, WP, ...)
 # public - index.php "catch all" and ./public as Document Root (use it for Laravel, Symfony, ...)
 # build - index.html "catch all" and ./build as Document Root (use it for Vue, React, ...)

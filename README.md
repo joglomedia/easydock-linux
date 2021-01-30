@@ -27,7 +27,7 @@ $ sh ./vendor/andreapollastri/easydock/src/composer/.script export
 - Integrate easydock in your PHP app as standalone script
 ```
 $ git clone https://github.com/andreapollastri/easydock.git
-$ sh ./vendor/andreapollastri/easydock/src/standalone/.script export
+$ sh ./easydock/src/standalone/.script export
 ```
 - Configure your application path into .env.ed file
 

@@ -75,7 +75,7 @@ $ sh ed setup
 (Database data will be removed)
 
 ## Security Vulnerabilities and Bugs
-If you discover a security vulnerability or any bug within easydock, please send an e-mail to andrea@pollastri.dev. All security vulnerabilities and bugs will be promptly addressed.
+If you discover any security vulnerability or any bug within easydock, please open an issue.
 
 ## Contributing
 Thank you for considering contributing to this project!

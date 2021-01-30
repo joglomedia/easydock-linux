@@ -13,25 +13,26 @@ Easydock comes with nginx, PHP, MySql, Redis, phpmyadmin, MailHog, node.js, npm 
 > PHP-FPM 5.x, 7.x and 8.x, MySql 5.7 and 8, node 14 and npm 6 versions support.
 
 ## Requirements
-Docker Desktop and Composer on Mac OSx El Capitan or newer
+Docker Desktop and Composer or Git on Mac OSx El Capitan or newer
 
-## Documentation
-- Open your PHP application
+## Composer Installation
+- Integrate easydock in your PHP app via Composer
 ```
 $ cd /path/to/your-php-application
-```
-
-- Install easydock via Composer
-```
 $ composer require andreapollastri/easydock
+$ sh ./vendor/andreapollastri/easydock/src/composer/.script export
 ```
 
-- Export easydock files
+## Standalone Installation
+- Integrate easydock in your PHP app as standalone script
 ```
-$ sh ./vendor/andreapollastri/easydock/src/.script export
+$ git clone https://github.com/andreapollastri/easydock.git
+$ sh ./vendor/andreapollastri/easydock/src/standalone/.script export
 ```
+- Configure your application path into .env.ed file
 
-- Configure your .env.ed file (if you need) and run:
+## Getting started 
+- After installation, if you need, configure your .env.ed file and run:
 ```
 $ sh ed setup
 ```

@@ -56,11 +56,11 @@ if [ $1 == "export" ]; then
     clear
     ed_logo
     unlink ./.env.ed
-    cp ./easydock/src/composer/.edenv ./.env.ed
+    cp ./easydock/src/stanalone/.edenv ./.env.ed
     unlink ./docker-compose.yml
-    cp ./easydock/src/composer/.compose ./docker-compose.yml
+    cp ./easydock/src/stanalone/.compose ./docker-compose.yml
     unlink ./ed
-    cp ./easydock/src/composer/.script ./ed
+    cp ./easydock/src/stanalone/.script ./ed
     sed -i -e 's/APP_SID=easydock/APP_SID=easydock'$(((RANDOM%1000000000)+1))'/g' .env.ed
     unlink ./.env.ed-e
     clear
@@ -80,7 +80,7 @@ if [ $1 == "env" ]; then
     if test -f "./.env.ed"; then
         echo "${bgyellow}${black}${bold} >>> WARNING! ${reset} an .env.ed file is located in your workspace. Delete it if you want regenerate it within this command. ${reset}${br}"
     else
-        cp ./easydock/src/composer/.edenv ./.env.ed
+        cp ./easydock/src/stanalone/.edenv ./.env.ed
         sed -i -e 's/APP_SID=easydock/APP_SID=easydock'$(((RANDOM%1000000000)+1))'/g' .env.ed
         unlink ./.env.ed-e
         clear

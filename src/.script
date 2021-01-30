@@ -56,11 +56,11 @@ if [ $1 == "export" ]; then
     clear
     ed_logo
     unlink ./.env.ed
-    cp ./vendor/easydock/src/.edenv ./.env.ed
+    cp ./vendor/andreapollastri/easydock/src/.edenv ./.env.ed
     unlink ./docker-compose.yml
-    cp ./vendor/easydock/src/.compose ./docker-compose.yml
+    cp ./vendor/andreapollastri/easydock/src/.compose ./docker-compose.yml
     unlink ./ed
-    cp ./vendor/easydock/src/.script ./ed
+    cp ./vendor/andreapollastri/easydock/src/.script ./ed
     sed -i -e 's/APP_SID=easydock/APP_SID=easydock'$(((RANDOM%1000000000)+1))'/g' .env.ed
     unlink ./.env.ed-e
     clear
@@ -80,7 +80,7 @@ if [ $1 == "env" ]; then
     if test -f "./.env.ed"; then
         echo "${bgyellow}${black}${bold} >>> WARNING! ${reset} an .env.ed file is located in your workspace. Delete it if you want regenerate it within this command. ${reset}${br}"
     else
-        cp ./vendor/easydock/script/.edenv ./.env.ed
+        cp ./vendor/andreapollastri/easydock/script/.edenv ./.env.ed
         sed -i -e 's/APP_SID=easydock/APP_SID=easydock'$(((RANDOM%1000000000)+1))'/g' .env.ed
         unlink ./.env.ed-e
         clear
@@ -237,14 +237,14 @@ ed_reset() {
         docker-compose --env-file ./.env.ed rm
         clear
         ed_logo
-        rm -rf ./vendor/easydock/mysql/data/*
-        cp ./vendor/easydock/src/.datagitignore ./vendor/easydock/mysql/data/.gitignore
-        unlink ./vendor/easydock/configs/nginx/app.conf
-        cp ./vendor/easydock/src/.appconf ./vendor/easydock/configs/nginx/app.conf
-        unlink ./vendor/easydock/configs/php/php.ini
-        cp ./vendor/easydock/src/.phpini ./vendor/easydock/configs/php/php.ini
-        unlink ./vendor/easydock/configs/php/opcache.ini
-        cp ./vendor/easydock/src/.opcache ./vendor/easydock/configs/php/opcache.ini
+        rm -rf ./vendor/andreapollastri/easydock/mysql/data/*
+        cp ./vendor/andreapollastri/easydock/src/.datagitignore ./vendor/andreapollastri/easydock/mysql/data/.gitignore
+        unlink ./vendor/andreapollastri/easydock/configs/nginx/app.conf
+        cp ./vendor/andreapollastri/easydock/src/.appconf ./vendor/andreapollastri/easydock/configs/nginx/app.conf
+        unlink ./vendor/andreapollastri/easydock/configs/php/php.ini
+        cp ./vendor/andreapollastri/easydock/src/.phpini ./vendor/andreapollastri/easydock/configs/php/php.ini
+        unlink ./vendor/andreapollastri/easydock/configs/php/opcache.ini
+        cp ./vendor/andreapollastri/easydock/src/.opcache ./vendor/andreapollastri/easydock/configs/php/opcache.ini
         clear
         ed_logo
         echo "${bgpurple}${white} easydock ;) has been reset! ${reset}"

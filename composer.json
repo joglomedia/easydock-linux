@@ -7,10 +7,5 @@
         "lemp",
         "php"
     ],
-    "license": "MIT",
-    "scripts": {
-        "post-root-package-install": [
-            "./vendor/easydock/src/.script export"
-        ]
-    }
+    "license": "MIT"
 }

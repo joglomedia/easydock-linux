@@ -26,6 +26,11 @@ $ cd /path/to/your-php-application
 $ composer require andreapollastri/easydock
 ```
 
+- Export easydock files
+```
+$ sh ./vendor/andreapollastri/easydock/src/.script export
+```
+
 - Configure your .env.ed file (if you need) and run:
 ```
 $ sh ed setup

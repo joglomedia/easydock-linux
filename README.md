@@ -1,5 +1,5 @@
 <p align="center">
-<img width="275" alt="easydock" src="https://github.com/andreapollastri/easydock/blob/master/src/ed.png?raw=true">
+<img width="275" alt="easydock" src="https://github.com/andreapollastri/easydock/blob/master/src/common/ed.png?raw=true">
 </p>
 
 # easydock ;)

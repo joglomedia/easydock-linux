@@ -10,7 +10,21 @@ WORKDIR /var/www
 # Install dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends curl \
+    less \
+    nano \
+    vim \
+    cron \
+    git \
+    zip \
+    unzip \
     supervisor \
+    sqlite3 \
+    python2 \
+    gnupg \ 
+    gosu \ 
+    ca-certificates \ 
+    libcap2-bin \
+    libpng-dev \
     libmemcached-dev \
     libz-dev \
     libjpeg-dev \
@@ -18,12 +32,6 @@ RUN apt-get update && \
     libwebp-dev \
     libssl-dev \
     libmcrypt-dev \
-    less \
-    nano \
-    vim \
-    cron \
-    git \
-    unzip \
     libzip-dev \
     libfreetype6-dev \
     libjpeg62-turbo-dev

@@ -15,7 +15,7 @@ Easydock comes with:
 
 - nginx
 - PHP (PHP-FPM 5.x, 7.x and 8.x)
-- MySql (MySql 5.7 and 8)
+- MySql (latest version of mariadb)
 - Redis
 - phpmyadmin
 - MailHog
@@ -26,7 +26,7 @@ Easydock comes with:
 
 ## Requirements
 
-Docker Desktop and Composer or Git on Mac OSx El Capitan or newer
+Docker Desktop and Composer or Git on Mac OSx El Capitan or newer (M1 compatible)
 
 ## Composer Installation
 

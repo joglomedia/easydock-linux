@@ -6,7 +6,7 @@ APP_PORT=80
 
 # PHP VERSION 
 PHP_V=8.0
-# available values: 7.4 and 8.0
+# available values: 5.6, 7.1, 7.2, 7.3, 7.4 and 8.0
 
 # MYSQL DB NAME
 DB_NAME=dockerdb

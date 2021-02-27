@@ -41,21 +41,8 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN setcap "cap_net_bind_service=+ep" /usr/bin/php${PHP_V}
-
 # Add user
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
-RUN groupadd --force -g $WWWGROUP www
-RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u 1337 www
 
-
-EXPOSE 8000
-
-RUN usermod -u $WWWUSER www
-RUN /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
-RUN usermod -u $WWWUSER www
-RUN mkdir /.composer
-RUN  -R ugo+rw /.composer
-RUN  gosu $WWWUSER "$@"
-RUN /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
+EXPOSE 9000

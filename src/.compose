@@ -19,6 +19,7 @@ services:
       - ./vendor/andreapollastri/easydock/configs/php/php.ini:/usr/local/etc/php/conf.d/local.ini
       - ./vendor/andreapollastri/easydock/configs/php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
       - ./vendor/andreapollastri/easydock/configs/supervisor/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
+    command: ['/usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf']
 
   #NGINX
   nginx:

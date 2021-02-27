@@ -223,11 +223,7 @@ ed_info() {
     else
         echo "HOST: http://localhost:$ed_portapp"
     fi
-    if [ $ed_dbver == "5" ]; then
-        echo "VERS: php:$ed_phpver / mysql:5.7 ${br}"
-    else
-        echo "VERS: php:$ed_phpver / mysql:8 ${br}"
-    fi
+    echo "STACK: php:$ed_phpver / mariadb ${br}"
     echo "${bold}MYSQL${reset}"
     echo "HOST: mysql:3306 (int) / 127.0.0.1:$ed_portdb (ext)"
     echo "NAME: $ed_dbname"

@@ -18,6 +18,7 @@ services:
       - ${APP_SRC}:/var/www/:cached
       - ./easydock/configs/php/php.ini:/usr/local/etc/php/conf.d/local.ini
       - ./easydock/configs/php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
+      - ./vendor/andreapollastri/easydock/configs/supervisor/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
 
   #NGINX
   nginx:
@@ -33,7 +34,7 @@ services:
 
   #MYSQL
   mysql:
-    image: mysql:${DB_VERS}
+    image: mariadb:latest
     container_name: ${APP_SID}-mysql
     restart: always
     tty: true

@@ -28,22 +28,14 @@ Easydock comes with:
 
 Docker Desktop and Composer or Git on Mac OSx El Capitan or newer (M1 compatible)
 
-## Composer Installation
+## Installation
 
 - Integrate easydock in your PHP app via Composer
 
 ```
 $ cd /path/to/your-php-application
 $ composer require andreapollastri/easydock
-$ sh ./vendor/andreapollastri/easydock/src/composer/.script export
-```
-
-## Standalone Installation
-
-- Integrate easydock in your PHP app as standalone script
-```
-$ git clone https://github.com/andreapollastri/easydock.git
-$ sh ./easydock/src/standalone/.script export
+$ sh ./vendor/andreapollastri/easydock/src/.script export
 ```
 
 - Configure your application path into `.env.ed` file

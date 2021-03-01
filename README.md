@@ -4,7 +4,7 @@
 
 # easydock ;)
 
-Docker LEMP easy integration (Made for Laravel)
+Docker LEMP easy integration
 
 ![GitHub stars](https://img.shields.io/github/stars/andreapollastri/easydock?style=social)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/andreapollastri/easydock?label=version)

@@ -1,5 +1,6 @@
 #Dockerfile Args
 ARG PHP_V
+ARG LARAVEL_WORKER
 
 # PHP version
 FROM php:${PHP_V}-fpm
@@ -96,4 +97,6 @@ CMD ["php-fpm"]
 
 RUN supervisorctl reread
 RUN supervisorctl update
-RUN supervisorctl start laravel-worker:*
+RUN if [[${LARAVEL_WORKER}=1] ; then \
+    supervisorctl start laravel-worker:* \
+fi

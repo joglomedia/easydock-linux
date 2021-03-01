@@ -1,5 +1,5 @@
 <p align="center">
-<img width="275" alt="easydock" src="https://github.com/andreapollastri/easydock/blob/master/src/common/ed.png?raw=true">
+<img width="275" alt="easydock" src="https://github.com/andreapollastri/easydock/blob/master/ed.png?raw=true">
 </p>
 
 # easydock ;)
@@ -38,11 +38,11 @@ $ composer require andreapollastri/easydock
 $ sh ./vendor/andreapollastri/easydock/src/.script export
 ```
 
-- Configure your application path into `.env.ed` file
+- Configure your application path into `.env.docker` file
 
 ## Getting started
 
-- After installation, if you need, configure your `.env.ed` file and run:
+- After installation, if you need, configure your `.env.docker` file and run:
 
 ```
 $ sh ed setup
@@ -96,7 +96,7 @@ $ sh ed info
 $ sh ed reset
 ```
 
-- Everytime you change PHP version into `.env.ed` file you have to run:
+- Everytime you change PHP version into `.env.docker` file you have to run:
 
 ```
 $ sh ed reset

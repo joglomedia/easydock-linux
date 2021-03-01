@@ -92,14 +92,9 @@ RUN chown -R www:www /var/www
 # Change current user to www
 USER www
 
+#Supervisor
+RUN supervisorctl start laravel-worker:*
+
 # Expose port 9000
 EXPOSE 9000
 CMD ["php-fpm"]
-
-#Supervisor
-RUN supervisorctl start
-RUN supervisorctl reread
-RUN supervisorctl update
-RUN if [[${LARAVEL_WORKER}=1] ; then \
-    supervisorctl start laravel-worker:* \
-fi

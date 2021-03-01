@@ -1,5 +1,6 @@
 #Dockerfile Args
 ARG PHP_V
+ARG LARAVEL_WORKER
 
 # PHP version
 FROM php:${PHP_V}-fpm
@@ -17,6 +18,7 @@ RUN apt-get update && \
     libwebp-dev \
     libssl-dev \
     libmcrypt-dev \
+    python2 \
     less \
     nano \
     vim \
@@ -76,7 +78,7 @@ RUN docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --wi
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install node & npm
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_15.x | bash -
 RUN apt-get install -y nodejs
 
 # Add user

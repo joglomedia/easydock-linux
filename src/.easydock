@@ -2,7 +2,7 @@
 
 #################################################
 # easydock ;)                                   #
-# https://github.com/andreapollastri/easydock/  #
+# https://github.com/andreapollastri/vendor/andreapollastri/easydock/  #
 #################################################
 
 ############################################################ COMMON VARS
@@ -55,17 +55,17 @@ if [ $1 == "export" ]; then
     echo "${blue}Wait...${br}${reset}"
     clear
     ed_logo
-    unlink ./.env.ed
-    cp ./vendor/andreapollastri/easydock/src/composer/.edenv ./.env.ed
+    unlink ./.env.easydock
+    cp ./vendor/andreapollastri/easydock/src/.env.easydock ./.env.easydock
     unlink ./docker-compose.yml
-    cp ./vendor/andreapollastri/easydock/src/composer/.compose ./docker-compose.yml
+    cp ./vendor/andreapollastri/easydock/src/docker-compose.yml ./docker-compose.yml
     unlink ./ed
-    cp ./vendor/andreapollastri/easydock/src/composer/.script ./ed
-    sed -i -e 's/APP_SID=easydock/APP_SID=easydock'$(((RANDOM%1000000000)+1))'/g' .env.ed
-    unlink ./.env.ed-e
+    cp ./vendor/andreapollastri/easydock/src/.easydock ./ed
+    sed -i -e 's/APP_SID=easydock/APP_SID=easydock'$(((RANDOM%1000000000)+1))'/g' .env.easydock
+    unlink ./.env.easydock-e
     clear
     ed_logo
-    echo "${bgpurple}${white} easydock is ready! All you have to do is compile your ${bold}.env.ed${reset}${bgpurple}${white} file and run ${bold}sh ed setup${reset}${bgpurple}${white} ;) ${br}${reset}"
+    echo "${bgpurple}${white} easydock is ready! All you have to do is compile your ${bold}.env.easydock${reset}${bgpurple}${white} file and run ${bold}sh ed setup${reset}${bgpurple}${white} ;) ${br}${reset}"
     exit
 fi
 
@@ -77,41 +77,41 @@ if [ $1 == "env" ]; then
     echo "${blue}Wait...${br}${reset}"
     clear
     ed_logo
-    if test -f "./.env.ed"; then
-        echo "${bgyellow}${black}${bold} >>> WARNING! ${reset} an .env.ed file is located in your workspace. Delete it if you want regenerate it within this command. ${reset}${br}"
+    if test -f "./.env.easydock"; then
+        echo "${bgyellow}${black}${bold} >>> WARNING! ${reset} an .env.easydock file is located in your workspace. Delete it if you want regenerate it within this command. ${reset}${br}"
     else
-        cp ./vendor/andreapollastri/easydock/src/composer/.edenv ./.env.ed
-        sed -i -e 's/APP_SID=easydock/APP_SID=easydock'$(((RANDOM%1000000000)+1))'/g' .env.ed
-        unlink ./.env.ed-e
+        cp ./vendor/andreapollastri/easydock/src/.env.easydock ./.env.easydock
+        sed -i -e 's/APP_SID=easydock/APP_SID=easydock'$(((RANDOM%1000000000)+1))'/g' .env.easydock
+        unlink ./.env.easydock-e
         clear
         ed_logo
-        echo "${bgpurple}${white} Your ${bold}.env.ed${reset}${bgpurple}${white} has been created ;) ${br}${reset}"
+        echo "${bgpurple}${white} Your ${bold}.env.easydock${reset}${bgpurple}${white} has been created ;) ${br}${reset}"
     fi
     exit
 fi
 
-if test -f "./.env.ed"; then
+if test -f "./.env.easydock"; then
     clear
     ed_logo
 else
     clear
     ed_logo
-    echo "${bgwhite}${red}${bold} >>> ERROR! ${reset} File ${bgred}${white}${bold} .env.ed ${reset} is missing. Run ${bgred}${white}${bold} sh ed env ${reset} to generate it. ${reset}${br}"
+    echo "${bgwhite}${red}${bold} >>> ERROR! ${reset} File ${bgred}${white}${bold} .env.easydock ${reset} is missing. Run ${bgred}${white}${bold} sh ed env ${reset} to generate it. ${reset}${br}"
     exit
 fi
 
-ed_portapp=$(grep APP_PORT ./.env.ed | cut -d '=' -f2)
-ed_portdb=$(grep DB_PORT ./.env.ed | cut -d '=' -f2)
-ed_portpma=$(grep PMA_PORT ./.env.ed | cut -d '=' -f2)
-ed_portmh=$(grep MH_PORT ./.env.ed | cut -d '=' -f2)
-ed_portrds=$(grep RDS_PORT ./.env.ed | cut -d '=' -f2)
-ed_appsid=$(grep APP_SID ./.env.ed | cut -d '=' -f2)
-ed_appsrc=$(grep APP_SRC ./.env.ed | cut -d '=' -f2)
-ed_phpver=$(grep PHP_V ./.env.ed | cut -d '=' -f2)
-ed_dbver=$(grep DB_VERS ./.env.ed | cut -d '=' -f2)
-ed_dbname=$(grep DB_NAME ./.env.ed | cut -d '=' -f2)
-ed_dbpass=$(grep DB_PASS ./.env.ed | cut -d '=' -f2)
-ed_nginx=$(grep NGINX_MODE ./.env.ed | cut -d '=' -f2)
+ed_portapp=$(grep APP_PORT ./.env.easydock | cut -d '=' -f2)
+ed_portdb=$(grep DB_PORT ./.env.easydock | cut -d '=' -f2)
+ed_portpma=$(grep PMA_PORT ./.env.easydock | cut -d '=' -f2)
+ed_portmh=$(grep MH_PORT ./.env.easydock | cut -d '=' -f2)
+ed_portrds=$(grep RDS_PORT ./.env.easydock | cut -d '=' -f2)
+ed_appsid=$(grep APP_SID ./.env.easydock | cut -d '=' -f2)
+ed_appsrc=$(grep APP_SRC ./.env.easydock | cut -d '=' -f2)
+ed_phpver=$(grep PHP_V ./.env.easydock | cut -d '=' -f2)
+ed_dbver=$(grep DB_VERS ./.env.easydock | cut -d '=' -f2)
+ed_dbname=$(grep DB_NAME ./.env.easydock | cut -d '=' -f2)
+ed_dbpass=$(grep DB_PASS ./.env.easydock | cut -d '=' -f2)
+ed_nginx=$(grep NGINX_MODE ./.env.easydock | cut -d '=' -f2)
 
 ############################################################ COMMON FUNCTIONS
 
@@ -204,30 +204,14 @@ ed_info() {
     echo "${bgpurple}${white}${bold} easydock ;) System Information ${reset}${br}"
     echo "NAME: $ed_appsid"
     echo "PATH: $ed_appsrc"
-    if [ $ed_nginx == "build" ]; then
-        echo "DOCUMENT ROOT: /var/www/build"
-    fi
-    if [ $ed_nginx == "public" ]; then
-        echo "DOCUMENT ROOT: /var/www/public"
-    fi
-    if [ $ed_nginx == "root" ]; then
-        echo "DOCUMENT ROOT: /var/www"
-    fi
-    if [ $ed_nginx == "build" ]; then
-        echo "CATCH ALL FILE: index.html"
-    else
-        echo "CATCH ALL FILE: index.php"
-    fi
+    echo "DOCUMENT ROOT: /var/www/public"
+    echo "CATCH ALL FILE: index.php"
     if [ $ed_portapp == "80" ]; then
         echo "HOST: http://localhost"
     else
         echo "HOST: http://localhost:$ed_portapp"
     fi
-    if [ $ed_dbver == "5" ]; then
-        echo "VERS: php:$ed_phpver / mysql:5.7 ${br}"
-    else
-        echo "VERS: php:$ed_phpver / mysql:8 ${br}"
-    fi
+    echo "STACK: php:$ed_phpver / mariadb ${br}"
     echo "${bold}MYSQL${reset}"
     echo "HOST: mysql:3306 (int) / 127.0.0.1:$ed_portdb (ext)"
     echo "NAME: $ed_dbname"
@@ -249,12 +233,12 @@ ed_reset() {
         echo "${br}${br}${blue}Wait...${br}${reset}"
         clear
         ed_logo
-        docker-compose --env-file ./.env.ed down -v
-        docker-compose --env-file ./.env.ed rm
+        docker-compose --env-file ./.env.easydock down -v
+        docker-compose --env-file ./.env.easydock rm
         clear
         ed_logo
-        rm -rf ./easydock/mysql/data/*
-        cp ./easydock/src/common/.datagitignore ./easydock/mysql/data/.gitignore
+        rm -rf ./vendor/andreapollastri/easydock/data/*
+        cp ./vendor/andreapollastri/easydock/src/.gitignore.dist ./vendor/andreapollastri/easydock/data/.gitignore
         ed_logo
         echo "${bgpurple}${white} easydock ;) has been reset! ${reset}"
     fi
@@ -265,13 +249,13 @@ ed_up() {
     echo "${blue}Wait...${br}${reset}"
     sleep 1s
     clear
-    docker-compose --env-file ./.env.ed down
+    docker-compose --env-file ./.env.easydock down
     clear
     ed_logo
     ed_portscheck
     clear
     ed_logo
-    docker-compose --env-file ./.env.ed up -d --force-recreate
+    docker-compose --env-file ./.env.easydock up -d --force-recreate
     clear
     ed_logo
     if [ $ed_portapp == "80" ]; then
@@ -285,7 +269,7 @@ ed_down() {
     read -r -p "Are you sure to stop easydock? (Y/n): " -n 1 -r
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo "${br}${br}${blue}Wait...${br}${reset}"
-        docker-compose --env-file ./.env.ed down
+        docker-compose --env-file ./.env.easydock down
         clear
         ed_logo
         echo "${bgpurple}${white} easydock ;) has been stopped! ${reset}"
@@ -300,7 +284,7 @@ ed_conn() {
     ed_logo
     echo "${bgblue}${white} Container CLI ${reset}${br}"
     echo "Run ${bgwhite}${black} exit ${reset} to return on your device CLI.${br}"
-    docker-compose --env-file ./.env.ed exec app /bin/bash
+    docker-compose --env-file ./.env.easydock exec app /bin/bash
 }
 
 ed_setup() {
@@ -310,7 +294,7 @@ ed_setup() {
     clear
     ed_logo
     echo "${bgblue}${white} Pulling Docker images ${reset}${br}"
-    docker-compose --env-file ./.env.ed build --no-cache --pull
+    docker-compose --env-file ./.env.easydock build --no-cache --pull
     clear
     ed_logo
     echo "${bgpurple}${white} easydock ;) is ready! Run ${bgwhite}${black} sh ed up ${reset}"

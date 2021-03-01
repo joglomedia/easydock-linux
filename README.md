@@ -1,5 +1,5 @@
 <p align="center">
-<img width="275" alt="easydock" src="https://github.com/andreapollastri/easydock/blob/master/src/common/ed.png?raw=true">
+<img width="275" alt="easydock" src="https://github.com/andreapollastri/easydock/blob/master/ed.png?raw=true">
 </p>
 
 # easydock ;)
@@ -15,42 +15,34 @@ Easydock comes with:
 
 - nginx
 - PHP (PHP-FPM 5.x, 7.x and 8.x)
-- MySql (MySql 5.7 and 8)
+- MySql (latest version of mariadb)
 - Redis
 - phpmyadmin
 - MailHog
-- node.js 14
-- npm 6
+- node.js
+- npm
 - Git
 - Composer
 
 ## Requirements
 
-Docker Desktop and Composer or Git on Mac OSx El Capitan or newer
+Docker Desktop and Composer on Mac OSx El Capitan or newer (M1 compatible)
 
-## Composer Installation
+## Installation
 
 - Integrate easydock in your PHP app via Composer
 
 ```
 $ cd /path/to/your-php-application
 $ composer require andreapollastri/easydock
-$ sh ./vendor/andreapollastri/easydock/src/composer/.script export
+$ sh ./vendor/andreapollastri/easydock/src/.easydock export
 ```
 
-## Standalone Installation
-
-- Integrate easydock in your PHP app as standalone script
-```
-$ git clone https://github.com/andreapollastri/easydock.git
-$ sh ./easydock/src/standalone/.script export
-```
-
-- Configure your application path into `.env.ed` file
+- Configure your application path into `.env.docker` file
 
 ## Getting started
 
-- After installation, if you need, configure your `.env.ed` file and run:
+- After installation, if you need, configure your `.env.docker` file and run:
 
 ```
 $ sh ed setup
@@ -72,7 +64,7 @@ host: mailhog
 port: 1025
 ```
 
-- Default nginx config will expose your project `/public` folder
+- Nginx config will expose your project `/public` folder
 
 - To start your Docker istance:
 
@@ -104,7 +96,7 @@ $ sh ed info
 $ sh ed reset
 ```
 
-- Everytime you change PHP version into `.env.ed` file you have to run:
+- Everytime you change PHP version into `.env.docker` file you have to run:
 
 ```
 $ sh ed reset

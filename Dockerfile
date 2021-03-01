@@ -96,6 +96,8 @@ USER www
 EXPOSE 9000
 CMD ["php-fpm"]
 
+#Supervisor
+RUN supervisorctl start
 RUN supervisorctl reread
 RUN supervisorctl update
 RUN if [[${LARAVEL_WORKER}=1] ; then \

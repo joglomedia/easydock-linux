@@ -19,15 +19,14 @@ Easydock comes with:
 - Redis
 - phpmyadmin
 - MailHog
-- node.js 14
-- npm 6
+- node.js
+- npm
 - Git
 - Composer
-- Supervisor
 
 ## Requirements
 
-Docker Desktop and Composer or Git on Mac OSx El Capitan or newer (M1 compatible)
+Docker Desktop and Composer on Mac OSx El Capitan or newer (M1 compatible)
 
 ## Installation
 

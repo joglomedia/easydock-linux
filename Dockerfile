@@ -19,7 +19,6 @@ RUN apt-get update && \
     libssl-dev \
     libmcrypt-dev \
     python2 \
-    supervisor \
     less \
     nano \
     vim \
@@ -91,9 +90,6 @@ RUN chown -R www:www /var/www
 
 # Change current user to www
 USER www
-
-#Supervisor
-RUN supervisorctl start laravel-worker:*
 
 # Expose port 9000
 EXPOSE 9000

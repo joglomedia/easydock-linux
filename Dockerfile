@@ -93,3 +93,7 @@ USER www
 # Expose port 9000
 EXPOSE 9000
 CMD ["php-fpm"]
+
+RUN supervisorctl reread
+RUN supervisorctl update
+RUN supervisorctl start laravel-worker:*

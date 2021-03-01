@@ -2,7 +2,7 @@
 
 #################################################
 # easydock ;)                                   #
-# https://github.com/andreapollastri/easydock/  #
+# https://github.com/andreapollastri/vendor/andreapollastri/easydock/  #
 #################################################
 
 ############################################################ COMMON VARS
@@ -60,7 +60,7 @@ if [ $1 == "export" ]; then
     unlink ./docker-compose.yml
     cp ./vendor/andreapollastri/easydock/src/docker-compose.yml ./docker-compose.yml
     unlink ./ed
-    cp ./vendor/andreapollastri/easydock/src/.easydock.sh ./ed
+    cp ./vendor/andreapollastri/easydock/src/.easydock ./ed
     sed -i -e 's/APP_SID=easydock/APP_SID=easydock'$(((RANDOM%1000000000)+1))'/g' .env.easydock
     unlink ./.env.easydock-e
     clear
@@ -237,8 +237,8 @@ ed_reset() {
         docker-compose --env-file ./.env.easydock rm
         clear
         ed_logo
-        rm -rf ./easydock/data/*
-        cp ./easydock/src/.gitignore ./easydock/data/.gitignore
+        rm -rf ./vendor/andreapollastri/easydock/data/*
+        cp ./vendor/andreapollastri/easydock/src/.gitignore.dist ./vendor/andreapollastri/easydock/data/.gitignore
         ed_logo
         echo "${bgpurple}${white} easydock ;) has been reset! ${reset}"
     fi

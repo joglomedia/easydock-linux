@@ -4,7 +4,7 @@
 
 # easydock ;)
 
-Docker LEMP easy integration
+Docker LEMP easy integration (Made for Laravel)
 
 ![GitHub stars](https://img.shields.io/github/stars/andreapollastri/easydock?style=social)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/andreapollastri/easydock?label=version)
@@ -23,6 +23,7 @@ Easydock comes with:
 - npm 6
 - Git
 - Composer
+- Supervisor
 
 ## Requirements
 
@@ -35,7 +36,7 @@ Docker Desktop and Composer or Git on Mac OSx El Capitan or newer (M1 compatible
 ```
 $ cd /path/to/your-php-application
 $ composer require andreapollastri/easydock
-$ sh ./vendor/andreapollastri/easydock/src/.script export
+$ sh ./vendor/andreapollastri/easydock/src/.easydock export
 ```
 
 - Configure your application path into `.env.docker` file
@@ -64,7 +65,7 @@ host: mailhog
 port: 1025
 ```
 
-- Default nginx config will expose your project `/public` folder
+- Nginx config will expose your project `/public` folder
 
 - To start your Docker istance:
 

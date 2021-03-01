@@ -18,6 +18,8 @@ RUN apt-get update && \
     libwebp-dev \
     libssl-dev \
     libmcrypt-dev \
+    python2 \
+    supervisor \
     less \
     nano \
     vim \
@@ -26,8 +28,7 @@ RUN apt-get update && \
     unzip \
     libzip-dev \
     libfreetype6-dev \
-    libjpeg62-turbo-dev \ 
-    supervisor
+    libjpeg62-turbo-dev
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*

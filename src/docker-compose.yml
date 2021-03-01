@@ -19,7 +19,6 @@ services:
       - ./:/var/www/:cached
       - ./vendor/andreapollastri/easydock/config/php/php.ini:/usr/local/etc/php/conf.d/local.ini
       - ./vendor/andreapollastri/easydock/config/php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
-      - ./vendor/andreapollastri/easydock/config/supervisor:/etc/supervisor/conf.d
 
   #NGINX
   nginx:

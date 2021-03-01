@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################
-# easydock ;)                                   #
-# https://github.com/andreapollastri/vendor/andreapollastri/easydock/  #
+# Easydock                                      #
+# https://github.com/andreapollastri/easydock/  #
 #################################################
 
 ############################################################ COMMON VARS
@@ -44,7 +44,7 @@ ed_logo() {
 
 ############################################################ DOCKER CHECK
 if !docker info >/dev/null 2>&1; then
-    echo "${bgwhite}${red}${bold} >>> ERROR! ${reset} To run easydock ; you have to install Docker and Docker Composer.${1}Find out more on: https://www.docker.com/products/docker-desktop ${reset}${br}"
+    echo "${bgwhite}${red}${bold} >>> ERROR! ${reset} To run easydock you have to install Docker and Docker Composer.${1}Find out more on: https://www.docker.com/products/docker-desktop ${reset}${br}"
     exit
 fi
 
@@ -65,7 +65,7 @@ if [ $1 == "export" ]; then
     unlink ./.env.easydock-e
     clear
     ed_logo
-    echo "${bgpurple}${white} easydock is ready! All you have to do is compile your ${bold}.env.easydock${reset}${bgpurple}${white} file and run ${bold}sh ed setup${reset}${bgpurple}${white} ;) ${br}${reset}"
+    echo "${bgpurple}${white} easydock is ready! All you have to do is compile your ${bold}.env.easydock${reset}${bgpurple}${white} file and run ${bold}sh ed setup${reset}${bgpurple}${white} ${br}${reset}"
     exit
 fi
 
@@ -85,7 +85,7 @@ if [ $1 == "env" ]; then
         unlink ./.env.easydock-e
         clear
         ed_logo
-        echo "${bgpurple}${white} Your ${bold}.env.easydock${reset}${bgpurple}${white} has been created ;) ${br}${reset}"
+        echo "${bgpurple}${white} Your ${bold}.env.easydock${reset}${bgpurple}${white} has been created ${br}${reset}"
     fi
     exit
 fi
@@ -184,24 +184,24 @@ ed_portscheck() {
 ############################################################ CLI FUNCTIONS
 
 ed_help() {
-    echo "${bgpurple}${white}${bold} easydock ;) Options List ${reset}${br}${br}"
+    echo "${bgpurple}${white}${bold} easydock Options List ${reset}${br}${br}"
     echo "${bgwhite}${black} sh ed setup ${reset}"
-    echo "Useful to bootstrap and init easydock ; system.${br}"
+    echo "Useful to bootstrap and init easydock system.${br}"
     echo "${bgwhite}${black} sh ed up ${reset}"
-    echo "Useful to start easydock ; system.${br}"
+    echo "Useful to start easydock system.${br}"
     echo "${bgwhite}${black} sh ed down ${reset}"
-    echo "Useful to stop easydock ; system.${br}"
+    echo "Useful to stop easydock system.${br}"
     echo "${bgwhite}${black} sh ed conn ${reset}"
-    echo "Useful to SSH into easydock ; system.${br}"
+    echo "Useful to SSH into easydock system.${br}"
     echo "${bgwhite}${black} sh ed reset ${reset}"
-    echo "Useful to reset easydock ; system.${br}"
+    echo "Useful to reset easydock system.${br}"
     echo "${bgwhite}${black} sh ed info ${reset}"
-    echo "Useful to get easydock ; configuration information.${br}${br}"
+    echo "Useful to get easydock configuration information.${br}${br}"
 }
 
 
 ed_info() {
-    echo "${bgpurple}${white}${bold} easydock ;) System Information ${reset}${br}"
+    echo "${bgpurple}${white}${bold} easydock System Information ${reset}${br}"
     echo "NAME: $ed_appsid"
     echo "PATH: $ed_appsrc"
     echo "DOCUMENT ROOT: /var/www/public"
@@ -240,7 +240,7 @@ ed_reset() {
         rm -rf ./vendor/andreapollastri/easydock/data/*
         cp ./vendor/andreapollastri/easydock/src/.gitignore.dist ./vendor/andreapollastri/easydock/data/.gitignore
         ed_logo
-        echo "${bgpurple}${white} easydock ;) has been reset! ${reset}"
+        echo "${bgpurple}${white} easydock has been reset! ${reset}"
     fi
     echo ${br}
 }
@@ -259,9 +259,9 @@ ed_up() {
     clear
     ed_logo
     if [ $ed_portapp == "80" ]; then
-        echo "${bgpurple}${white} easydock has been started... visit ${bold}${underline}http://localhost${reset}${bgpurple}${white} ;) ${reset}${br}"
+        echo "${bgpurple}${white} easydock has been started... visit ${bold}${underline}http://localhost${reset}${bgpurple}${white} ${reset}${br}"
     else
-        echo "${bgpurple}${white} easydock has been started... visit ${bold}${underline}http://localhost:$ed_portapp${reset}${bgpurple}${white} ;) ${reset}${br}"
+        echo "${bgpurple}${white} easydock has been started... visit ${bold}${underline}http://localhost:$ed_portapp${reset}${bgpurple}${white} ${reset}${br}"
     fi
 }
 
@@ -272,7 +272,7 @@ ed_down() {
         docker-compose --env-file ./.env.easydock down
         clear
         ed_logo
-        echo "${bgpurple}${white} easydock ;) has been stopped! ${reset}"
+        echo "${bgpurple}${white} easydock has been stopped! ${reset}"
     fi
     echo ${br}
 }
@@ -297,7 +297,7 @@ ed_setup() {
     docker-compose --env-file ./.env.easydock build --no-cache --pull
     clear
     ed_logo
-    echo "${bgpurple}${white} easydock ;) is ready! Run ${bgwhite}${black} sh ed up ${reset}"
+    echo "${bgpurple}${white} easydock is ready! Run ${bgwhite}${black} sh ed up ${reset}"
 }
 
 ############################################################ CLI MENU

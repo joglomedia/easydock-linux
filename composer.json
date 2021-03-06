@@ -1,11 +1,20 @@
 {
-    "name": "andreapollastri/easydock",
+    "name": "joglomedia/easydock-linux",
     "type": "project",
-    "description": "Docker LEMP easy integration",
-    "keywords": [
-        "docker",
-        "lemp",
-        "php"
+    "description": "A fork of EasyDock to work in Linux.",
+    "keywords": ["docker", "lemp", "lnmp", "nginx", "php", "ubuntu", "debian"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrea Pollastri",
+            "email": "andrea@pollastri.dev"
+        },
+        {
+            "name": "Edi Septriyanto",
+            "email": "me@masedi.net"
+        }
     ],
-    "license": "MIT"
+    "bin": [
+        "src/easydock"
+    ]
 }

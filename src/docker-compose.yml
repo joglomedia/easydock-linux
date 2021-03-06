@@ -5,7 +5,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: ./vendor/andreapollastri/easydock/Dockerfile
+      dockerfile: ./vendor/joglomedia/easydock-linux/src/Dockerfile
       args:
         - PHP_V=${PHP_V}
         - LARAVEL_WORKER=${LARAVEL_WORKER}
@@ -17,8 +17,8 @@ services:
     working_dir: /var/www
     volumes:
       - ./:/var/www/:cached
-      - ./vendor/andreapollastri/easydock/config/php/php.ini:/usr/local/etc/php/conf.d/local.ini
-      - ./vendor/andreapollastri/easydock/config/php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
+      - ./vendor/joglomedia/easydock-linux/config/php/php.ini:/usr/local/etc/php/conf.d/local.ini
+      - ./vendor/joglomedia/easydock-linux/config/php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
 
   #NGINX
   nginx:
@@ -30,7 +30,7 @@ services:
       - ${APP_PORT}:80
     volumes:
       - ./:/var/www/
-      - ./vendor/andreapollastri/easydock/config/nginx/:/etc/nginx/conf.d/
+      - ./vendor/joglomedia/easydock-linux/config/nginx/:/etc/nginx/conf.d/
 
   #MYSQL
   mysql:
@@ -45,7 +45,7 @@ services:
       MYSQL_ROOT_PASSWORD: ${DB_PASS}
     command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci','--default-authentication-plugin=mysql_native_password']
     volumes:
-      - ./vendor/andreapollastri/easydock/data:/var/lib/mysql/
+      - ./vendor/joglomedia/easydock-linux/data:/var/lib/mysql/
 
   #REDIS
   redis:

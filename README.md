@@ -1,6 +1,8 @@
 # easydock for Linux ;)
 
-![alt text](ed.png){ width=275px }
+<p align="center">
+<img width="275px" alt="easydock" src="https://github.com/andreapollastri/easydock/blob/master/ed.png?raw=true">
+</p>
 
 A fork of EasyDock to work in Linux. Dockerize your PHP apps ;)
 

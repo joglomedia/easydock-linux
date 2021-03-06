@@ -105,7 +105,7 @@ function ed_export() {
     #unlink ./.env.easydock-e
     clear
     ed_logo
-    echo -e "${bgpurple}${white} easydock is ready! All you have to do is compile your ${bold}.env.easydock${reset}${bgpurple}${white} file and run ${bold}sh ed setup${reset}${bgpurple}${white} ${br}${reset}"
+    echo -e "${bgpurple}${white} easydock is ready! All you have to do is compile your ${bold}.env.easydock${reset}${bgpurple}${white} file and run ${bold}bash easydock setup${reset}${bgpurple}${white} ${br}${reset}"
 }
 
 ############################################################ ENV FILE MANAGER
@@ -133,7 +133,7 @@ function ed_notfound() {
     command="$1"
     clear
     ed_logo
-    echo -e "${bgwhite}${red}${bold} >>> ERROR! ${reset} Command ${bgred}${white}${bold} sh ed $command ${reset} is not a valid option. Run ${bgred}${white}${bold} sh ed help ${reset} to obtain a list of valid options. ${reset}${br}"
+    echo -e "${bgwhite}${red}${bold} >>> ERROR! ${reset} Command ${bgred}${white}${bold} bash easydock $command ${reset} is not a valid option. Run ${bgred}${white}${bold} bash easydock help ${reset} to obtain a list of valid options. ${reset}${br}"
 }
 
 function ed_isthisportfree() {
@@ -199,17 +199,17 @@ function ed_portscheck() {
 
 function ed_help() {
     echo -e "${bgpurple}${white}${bold} easydock Options List ${reset}${br}${br}"
-    echo "${bgwhite}${black} sh ed setup ${reset}"
+    echo "${bgwhite}${black} bash easydock setup ${reset}"
     echo -e "Useful to bootstrap and init easydock system.${br}"
-    echo "${bgwhite}${black} sh ed up ${reset}"
+    echo "${bgwhite}${black} bash easydock up ${reset}"
     echo -e "Useful to start easydock system.${br}"
-    echo "${bgwhite}${black} sh ed down ${reset}"
+    echo "${bgwhite}${black} bash easydock down ${reset}"
     echo -e "Useful to stop easydock system.${br}"
-    echo "${bgwhite}${black} sh ed conn ${reset}"
+    echo "${bgwhite}${black} bash easydock conn ${reset}"
     echo -e "Useful to SSH into easydock system.${br}"
-    echo "${bgwhite}${black} sh ed reset ${reset}"
+    echo "${bgwhite}${black} bash easydock reset ${reset}"
     echo -e "Useful to reset easydock system.${br}"
-    echo "${bgwhite}${black} sh ed info ${reset}"
+    echo "${bgwhite}${black} bash easydock info ${reset}"
     echo -e "Useful to get easydock configuration information.${br}${br}"
 }
 
@@ -314,7 +314,7 @@ function ed_setup() {
     docker-compose --env-file ./.env.easydock build --no-cache --pull
     clear
     ed_logo
-    echo "${bgpurple}${white} easydock is ready! Run ${bgwhite}${black} sh ed up ${reset}"
+    echo "${bgpurple}${white} easydock is ready! Run ${bgwhite}${black} bash easydock up ${reset}"
 }
 
 ############################################################ CLI MENU
@@ -388,7 +388,7 @@ function ed_init() {
     else
         clear
         ed_logo
-        echo -e "${bgwhite}${red}${bold} >>> ERROR! ${reset} File ${bgred}${white}${bold} .env.easydock ${reset} is missing. Run ${bgred}${white}${bold} sh ed env ${reset} to generate it. ${reset}${br}"
+        echo -e "${bgwhite}${red}${bold} >>> ERROR! ${reset} File ${bgred}${white}${bold} .env.easydock ${reset} is missing. Run ${bgred}${white}${bold} bash easydock env ${reset} to generate it. ${reset}${br}"
         exit
     fi
 

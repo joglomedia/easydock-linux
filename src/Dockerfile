@@ -1,4 +1,4 @@
-#Dockerfile Args
+# Dockerfile Args
 ARG PHP_V
 ARG LARAVEL_WORKER
 
@@ -10,7 +10,9 @@ WORKDIR /var/www
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends curl \
+    apt-get install -y --no-install-recommends apt-utils \
+    curl \
+    libcurl4-openssl-dev \
     libmemcached-dev \
     libz-dev \
     libjpeg-dev \

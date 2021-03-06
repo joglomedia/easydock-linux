@@ -1,6 +1,6 @@
 # easydock for Linux ;)
 
-![alt text](https://github.com/andreapollastri/easydock/blob/master/ed.png?raw=true)
+![alt text](ed.png?raw=true =275x)
 
 A fork of EasyDock to work in Linux. Dockerize your PHP apps ;)
 

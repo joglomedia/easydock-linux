@@ -1,4 +1,4 @@
-# easydock for Linux ;)
+# EasyDock for Linux ;)
 
 ![EasyDock for Linux](ed_275px.png)
 

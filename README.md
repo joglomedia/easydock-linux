@@ -36,8 +36,8 @@ Docker and Docker Compose on Linux Distro
 
 ```bash
 cd /path/to/your-php-application
-composer require andreapollastri/easydock
-sh ./vendor/andreapollastri/easydock/src/.easydock export
+composer require joglomedia/easydock-linux
+sh ./vendor/joglomedia/easydock-linux/src/.easydock export
 ```
 
 - Configure your application path into `.env.easydock` file

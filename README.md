@@ -2,7 +2,9 @@
 <img width="275" alt="easydock" src="https://github.com/andreapollastri/easydock/blob/master/ed.png?raw=true">
 </p>
 
-# easydock ;)
+# easydock for Linux ;)
+
+A fork of EasyDock to work in Linux. Dockerize your PHP apps ;)
 
 Docker LEMP easy integration
 
@@ -26,7 +28,7 @@ Easydock comes with:
 
 ## Requirements
 
-Docker Desktop and Composer on Mac OSx El Capitan or newer (M1 compatible)
+Docker and Docker Compose on Linux Distro
 
 ## Installation
 
@@ -38,14 +40,14 @@ $ composer require andreapollastri/easydock
 $ sh ./vendor/andreapollastri/easydock/src/.easydock export
 ```
 
-- Configure your application path into `.env.docker` file
+- Configure your application path into `.env.easydock` file
 
 ## Getting started
 
-- After installation, if you need, configure your `.env.docker` file and run:
+- After installation, if you need, configure your `.env.easydock` file and run:
 
 ```
-$ sh ed setup
+$ bash easydock setup
 ```
 
 - Config your app DB connection (default)
@@ -69,38 +71,38 @@ port: 1025
 - To start your Docker istance:
 
 ```
-$ sh ed up
+$ bash easydock up
 ```
 
 - To "SSH" into your Docker istance:
 
 ```
-$ sh ed conn
+$ bash easydock conn
 ```
 
 - To stop your Docker istance:
 
 ```
-$ sh ed down
+$ bash easydock down
 ```
 
 - You can get application info using:
 
 ```
-$ sh ed info
+$ bash easydock info
 ```
 
 - You can reset your Docker istance running:
 
 ```
-$ sh ed reset
+$ bash easydock reset
 ```
 
-- Everytime you change PHP version into `.env.docker` file you have to run:
+- Everytime you change PHP version into `.env.easydock` file you have to run:
 
 ```
-$ sh ed reset
-$ sh ed setup
+$ bash easydock reset
+$ bash easydock setup
 ```
 
 **NB: Database data will be removed**

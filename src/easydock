@@ -4,7 +4,7 @@ set -e
 
 #################################################
 # Easydock                                      #
-# https://github.com/andreapollastri/easydock/  #
+# https://github.com/joglomedia/easydock-linux/  #
 #################################################
 
 
@@ -13,19 +13,19 @@ SOURCE="${BASH_SOURCE[0]}"
 # If the current source is a symbolic link, we need to resolve it to an
 # actual directory name. We'll use PHP to do this easier than we can
 # do it in pure Bash. So, we'll call into PHP CLI here to resolve.
-if [[ -L $SOURCE ]]
+if [[ -L ${SOURCE} ]]
 then
-    DIR=$(php -r "echo dirname(realpath('$SOURCE'));")
+    DIR=$(php -r "echo dirname(realpath('${SOURCE}'));")
 else
-    DIR="$( cd "$( dirname "$SOURCE" )" && pwd )"
+    DIR="$( cd "$( dirname "${SOURCE}" )" && pwd )"
 fi
 
 # If we are in the global Composer "bin" directory, we need to bump our
 # current directory up two, so that we will correctly proxy into the
 # EasyDock src which is written in bash. Will use PHP to do it.
-if [[ ! -f "$DIR/src/.easydock" ]]
+if [[ ! -f "${DIR}/src/.easydock" ]]
 then
-    DIR=$(php -r "echo realpath('$DIR/../joglomedia/easydock-linux');")
+    DIR=$(php -r "echo realpath('${DIR}/../joglomedia/easydock-linux');")
 fi
 
 ############################################################ COMMON VARS
@@ -72,9 +72,9 @@ function ed_dependencies() {
     for cmd in "docker" "docker-compose" "certutil"; do
         local str=''
 
-        if ! [[ -x "$(command -v $cmd)" ]]; then
-            printf -v str " - %s\n" "$cmd"
-            local msg+="$str"
+        if ! [[ -x "$(command -v ${cmd})" ]]; then
+            printf -v str " - %s\n" "${cmd}"
+            local msg+="${str}"
         fi
     done
 
@@ -94,13 +94,15 @@ function ed_export() {
     clear
     ed_logo
     unlink ./.env.easydock
-    cp ./vendor/andreapollastri/easydock/src/.env.easydock ./.env.easydock
+    cp "${DIR}/src/.env.easydock" ./.env.easydock
     unlink ./docker-compose.yml
-    cp ./vendor/andreapollastri/easydock/src/docker-compose.yml ./docker-compose.yml
-    unlink ./ed
-    cp ./vendor/andreapollastri/easydock/src/.easydock ./ed
+    cp "${DIR}/src/docker-compose.yml" ./docker-compose.yml
+    #unlink ./ed
+    #cp "${DIR}/src/.easydock" ./ed
     sed -i -e 's/APP_SID=easydock/APP_SID=easydock'$(((RANDOM%1000000000)+1))'/g' .env.easydock
-    unlink ./.env.easydock-e
+    # Update ED src dir
+    sed -i -e "s/ED_DIR=joglomedia\/easydock-linux/ED_DIR=${DIR}/g" .env.easydock
+    #unlink ./.env.easydock-e
     clear
     ed_logo
     echo -e "${bgpurple}${white} easydock is ready! All you have to do is compile your ${bold}.env.easydock${reset}${bgpurple}${white} file and run ${bold}sh ed setup${reset}${bgpurple}${white} ${br}${reset}"
@@ -116,9 +118,9 @@ function ed_env() {
     if test -f "./.env.easydock"; then
         echo -e "${bgyellow}${black}${bold} >>> WARNING! ${reset} an .env.easydock file is located in your workspace. Delete it if you want regenerate it within this command. ${reset}${br}"
     else
-        cp ./vendor/andreapollastri/easydock/src/.env.easydock ./.env.easydock
+        cp "${DIR}/src/.env.easydock" ./.env.easydock
         sed -i -e 's/APP_SID=easydock/APP_SID=easydock'$(((RANDOM%1000000000)+1))'/g' .env.easydock
-        unlink ./.env.easydock-e
+        #unlink ./.env.easydock-e
         clear
         ed_logo
         echo -e "${bgpurple}${white} Your ${bold}.env.easydock${reset}${bgpurple}${white} has been created ${br}${reset}"
@@ -136,7 +138,7 @@ function ed_notfound() {
 
 function ed_isthisportfree() {
     port="$1"
-    check=$(lsof -i tcp:$port)
+    check=$(lsof -i "tcp:${port}")
     if [ -z "$check" ]; then
         return 0
     else
@@ -161,35 +163,35 @@ function ed_checkingport() {
 }
 
 function ed_portscheck() {
-    ed_checkingport "$ed_portapp"
-    if ed_isthisportfree "$ed_portapp"; then
-        ed_availableport "$ed_portapp"
+    ed_checkingport "${ed_portapp}"
+    if ed_isthisportfree "${ed_portapp}"; then
+        ed_availableport "${ed_portapp}"
     else
-        ed_unavailableport "$ed_portapp"
+        ed_unavailableport "${ed_portapp}"
     fi
-    ed_checkingport "$ed_portdb"
-    if ed_isthisportfree "$ed_portdb"; then
-        ed_availableport "$ed_portdb"
+    ed_checkingport "${ed_portdb}"
+    if ed_isthisportfree "${ed_portdb}"; then
+        ed_availableport "${ed_portdb}"
     else
-        ed_unavailableport "$ed_portdb"
+        ed_unavailableport "${ed_portdb}"
     fi
-    ed_checkingport "$ed_portpma"
-    if ed_isthisportfree "$ed_portpma"; then
-        ed_availableport "$ed_portpma"
+    ed_checkingport "${ed_portpma}"
+    if ed_isthisportfree "${ed_portpma}"; then
+        ed_availableport "${ed_portpma}"
     else
-        ed_unavailableport "$ed_portpma"
+        ed_unavailableport "${ed_portpma}"
     fi
-    ed_checkingport "$ed_portmh"
-    if ed_isthisportfree "$ed_portmh"; then
-        ed_availableport "$ed_portmh"
+    ed_checkingport "${ed_portmh}"
+    if ed_isthisportfree "${ed_portmh}"; then
+        ed_availableport "${ed_portmh}"
     else
-        ed_unavailableport "$ed_portmh"
+        ed_unavailableport "${ed_portmh}"
     fi
-    ed_checkingport "$ed_portrds"
-    if ed_isthisportfree "$ed_portrds"; then
-        ed_availableport "$ed_portrds"
+    ed_checkingport "${ed_portrds}"
+    if ed_isthisportfree "${ed_portrds}"; then
+        ed_availableport "${ed_portrds}"
     else
-        ed_unavailableport "$ed_portrds"
+        ed_unavailableport "${ed_portrds}"
     fi
 }
 
@@ -213,29 +215,29 @@ function ed_help() {
 
 function ed_info() {
     echo -e "${bgpurple}${white}${bold} easydock System Information ${reset}${br}"
-    echo "NAME: $ed_appsid"
-    echo "PATH: $ed_appsrc"
+    echo "NAME: ${ed_appsid}"
+    echo "PATH: ${ed_appsrc}"
     echo "DOCUMENT ROOT: /var/www/public"
     echo "CATCH ALL FILE: index.php"
-    if [ $ed_portapp == "80" ]; then
+    if [ "${ed_portapp}" == "80" ]; then
         echo "HOST: http://localhost"
     else
-        echo "HOST: http://localhost:$ed_portapp"
+        echo "HOST: http://localhost:${ed_portapp}"
     fi
-    echo -e "STACK: php:$ed_phpver / mariadb ${br}"
+    echo -e "STACK: php:${ed_phpver} / mariadb ${br}"
     echo "${bold}MYSQL${reset}"
-    echo "HOST: mysql:3306 (int) / 127.0.0.1:$ed_portdb (ext)"
-    echo "NAME: $ed_dbname"
+    echo "HOST: mysql:3306 (int) / 127.0.0.1:${ed_portdb} (ext)"
+    echo "NAME: ${ed_dbname}"
     echo "USER: root"
-    echo -e "PASS: $ed_dbpass ${br}"
+    echo -e "PASS: ${ed_dbpass} ${br}"
     echo "${bold}SMTP${reset}"
     echo "HOST: mailhog"
     echo "PORT: 1025"
     echo "USER: ${underline}not required${reset}"
     echo -e "PASS: ${underline}not required${reset}${br}"
     echo "${bold}SERVICE${reset}"
-    echo "phpmyadmin                 http://localhost:$ed_portpma"
-    echo -e "Mail Hog                   http://localhost:$ed_portmh ${br}"
+    echo "phpmyadmin                 http://localhost:${ed_portpma}"
+    echo -e "Mail Hog                   http://localhost:${ed_portmh} ${br}"
 }
 
 function ed_reset() {
@@ -248,8 +250,8 @@ function ed_reset() {
         docker-compose --env-file ./.env.easydock rm
         clear
         ed_logo
-        rm -rf ./vendor/andreapollastri/easydock/data/*
-        cp ./vendor/andreapollastri/easydock/src/.gitignore.dist ./vendor/andreapollastri/easydock/data/.gitignore
+        rm -rf "${DIR}"/data/*
+        cp "${DIR}/src/.gitignore.dist" "${DIR}/data/.gitignore"
         ed_logo
         echo "${bgpurple}${white} easydock has been reset! ${reset}"
     fi
@@ -269,7 +271,7 @@ function ed_up() {
     docker-compose --env-file ./.env.easydock up -d --force-recreate
     clear
     ed_logo
-    if [ $ed_portapp == "80" ]; then
+    if [ "${ed_portapp}" == "80" ]; then
         echo -e "${bgpurple}${white} easydock has been started... visit ${bold}${underline}http://localhost${reset}${bgpurple}${white} ${reset}${br}"
     else
         echo -e "${bgpurple}${white} easydock has been started... visit ${bold}${underline}http://localhost:$ed_portapp${reset}${bgpurple}${white} ${reset}${br}"
@@ -317,8 +319,8 @@ function ed_setup() {
 
 ############################################################ CLI MENU
 function ed_cli_menu() {
-    while [ -n "$menu" ]; do
-        case $menu in
+    while [ -n "${menu}" ]; do
+        case ${menu} in
         help)
             shift
             ed_help
@@ -336,7 +338,7 @@ function ed_cli_menu() {
             ;;
         reset)
             shift
-            ed_reset $action
+            ed_reset "${action}"
             exit
             ;;
         up)
@@ -371,7 +373,7 @@ function ed_cli_menu() {
             ;;
         *)
             shift
-            ed_notfound $menu
+            ed_notfound "${menu}"
             exit -1
             ;;
         esac

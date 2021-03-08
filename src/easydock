@@ -382,6 +382,17 @@ function ed_stop() {
     fi
 }
 
+function ed_restart() {
+    read -r -p "Are you sure to restart easydock system? (Y/n): " -n 1 -r
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        echo -e "${br}${br}${blue}Wait...${reset}${br}"
+        docker-compose -f ./.easydock/docker-compose.yml --env-file=./.env.easydock restart
+        echo -e "${br}${bgpurple}${white} easydock app has been re-started! ${reset}"
+    else
+        echo -e ${br}
+    fi
+}
+
 function ed_ps() {
     echo -e "${blue}Wait... ${reset}${br}"
     sleep 1s
@@ -392,7 +403,7 @@ function ed_ps() {
 function ed_shell() {
     echo -e "${blue}Wait... ${reset}${br}"
     sleep 1s
-    echo -e "${bgblue}${white} Container CLI ${reset}${br}${br}"
+    echo -e "${bgblue}${white} Container CLI ${reset}${br}"
     echo -e "Run ${bgwhite}${black} exit ${reset} to return on your device CLI.${br}"
     docker-compose -f ./.easydock/docker-compose.yml --env-file=./.env.easydock exec app /bin/bash
 }
@@ -461,6 +472,11 @@ function ed_cli_menu() {
         stop)
             shift
             ed_stop
+            exit
+            ;;
+         restart)
+            shift
+            ed_restart
             exit
             ;;
         ps)

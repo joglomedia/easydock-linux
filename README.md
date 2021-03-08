@@ -6,18 +6,18 @@ A fork of EasyDock to work in Linux. Dockerize your PHP apps ;)
 
 Docker LEMP easy integration
 
-![GitHub stars](https://img.shields.io/github/stars/andreapollastri/easydock?style=social)
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/andreapollastri/easydock?label=version)
+![GitHub stars](https://img.shields.io/github/stars/joglomedia/easydock-linux?style=social)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/joglomedia/easydock-linux?label=version)
 
 ## Features
 
 Easydock comes with:
 
-- nginx
+- Nginx
 - PHP (PHP-FPM 5.x, 7.x and 8.x)
-- MySql (latest version of mariadb)
+- MySQL (latest version of MariaDB)
 - Redis
-- phpmyadmin
+- ~~phpmyadmin~~ Adminer (Lightweight MySQL admin)
 - MailHog
 - node.js
 - npm
@@ -26,19 +26,20 @@ Easydock comes with:
 
 ## Requirements
 
-Docker and Docker Compose on Linux Distro
+Docker and Docker Compose on Linux Distro (Debian, Ubuntu)
 
 ## Installation
 
-- Integrate easydock in your PHP app via Composer
+- Integrate easydock in your PHP app via Composer.
+- You should add your Composer's vendor bin directory to your environment path.
 
 ```bash
 cd /path/to/your-php-application
-composer require joglomedia/easydock-linux
-sh ./vendor/joglomedia/easydock-linux/src/.easydock export
+composer global require joglomedia/easydock-linux
+easydock export
 ```
 
-- Configure your application path into `.env.easydock` file
+- Configure your application path into `.env.easydock` file.
 
 ## Getting started
 

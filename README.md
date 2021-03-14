@@ -46,7 +46,7 @@ easydock init && easydock export
 - After installation, if you need, configure your `.env.easydock` file and run:
 
 ```bash
-bash easydock build
+easydock build
 ```
 
 - Config your app DB connection (default)
@@ -70,49 +70,49 @@ port: 1025
 - To start your Docker istance:
 
 ```bash
-bash easydock up
+easydock up
 ```
 
 - To stop your Docker istance:
 
 ```bash
-bash easydock stop
+easydock stop
 ```
 
 - To restart your Docker istance:
 
 ```bash
-bash easydock restart
+easydock restart
 ```
 
 - To stop and delete your Docker istance:
 
 ```bash
-bash easydock down
+easydock down
 ```
 
 - To "SSH" into your Docker istance:
 
 ```bash
-bash easydock shell
+easydock shell
 ```
 
 - You can get application info using:
 
 ```bash
-bash easydock info
+easydock info
 ```
 
 - You can reset your Docker istance running:
 
 ```bash
-bash easydock reset
+easydock reset
 ```
 
 - Everytime you change PHP version into `.env.easydock` file you have to run:
 
 ```bash
-bash easydock reset && bash easydock build
+easydock reset && easydock build
 ```
 
 _*NB: Database data will be removed*_

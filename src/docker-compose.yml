@@ -1,7 +1,7 @@
 version: '3'
 services:
 
-  #APP
+  # Application
   app:
     build:
       context: .
@@ -20,7 +20,7 @@ services:
       - ${APP_DIR}/.easydock/config/php/php.ini:/usr/local/etc/php/conf.d/local.ini
       - ${APP_DIR}/.easydock/config/php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
 
-  #NGINX
+  # Nginx
   nginx:
     image: nginx:alpine
     container_name: ${APP_SID}-nginx
@@ -32,9 +32,10 @@ services:
       - ${APP_DIR}/:/var/www/
       - ${APP_DIR}/.easydock/config/nginx/:/etc/nginx/conf.d/
 
-  #MYSQL MARIADB
+  # MySQL (MariaDB)
   mysql:
-    image: mariadb:latest
+    #image: mariadb:latest
+    image: yobasystems/alpine-mariadb:latest
     container_name: ${APP_SID}-mysql
     restart: always
     tty: true
@@ -47,7 +48,7 @@ services:
     volumes:
       - ${APP_DIR}/.easydock/data:/var/lib/mysql/
 
-  #REDIS
+  # Redis
   redis:
     image: redis:latest
     container_name: ${APP_SID}-redis
@@ -57,7 +58,7 @@ services:
     ports:
       - ${RDS_PORT}:6379
 
-  #PHPMYADMIN
+  # PHPMyAdmin
   #phpmyadmin:
   #  image: phpmyadmin/phpmyadmin:latest
   #  container_name: ${APP_SID}-pma
@@ -68,10 +69,10 @@ services:
   #  ports:
   #    - ${PMA_PORT}:80
 
-  #ADMINER (PMA ALTERNATIVE)
+  # Adminer (PHPMyAdmin Alternative)
   adminer:
     image: adminer:latest
-    container_name: ${APP_SID}-pma
+    container_name: ${APP_SID}-adminer
     restart: always
     environment:
       ADMINER_DEFAULT_SERVER: mysql
@@ -79,7 +80,7 @@ services:
     ports:
       - ${PMA_PORT}:8080
 
-  #MAILHOG
+  # MailHog
   mailhog:
     image: mailhog/mailhog:latest
     container_name: ${APP_SID}-mailhog

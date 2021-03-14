@@ -19,8 +19,8 @@ Easydock comes with:
 - Redis
 - ~~phpmyadmin~~ Adminer (Lightweight MySQL admin)
 - MailHog
-- node.js
-- npm
+- ~~node.js~~
+- ~~npm~~
 - Git
 - Composer
 
@@ -36,7 +36,7 @@ Docker and Docker Compose on Linux Distro (Debian, Ubuntu)
 ```bash
 cd /path/to/your-php-application
 composer global require joglomedia/easydock-linux
-easydock export
+easydock init && easydock export
 ```
 
 - Configure your application path into `.env.easydock` file.
@@ -46,7 +46,7 @@ easydock export
 - After installation, if you need, configure your `.env.easydock` file and run:
 
 ```bash
-bash easydock setup
+bash easydock build
 ```
 
 - Config your app DB connection (default)
@@ -73,16 +73,28 @@ port: 1025
 bash easydock up
 ```
 
+- To stop your Docker istance:
+
+```bash
+bash easydock stop
+```
+
+- To restart your Docker istance:
+
+```bash
+bash easydock restart
+```
+
+- To stop and delete your Docker istance:
+
+```bash
+bash easydock down
+```
+
 - To "SSH" into your Docker istance:
 
 ```bash
 bash easydock shell
-```
-
-- To stop your Docker istance:
-
-```bash
-bash easydock down
 ```
 
 - You can get application info using:
@@ -100,8 +112,7 @@ bash easydock reset
 - Everytime you change PHP version into `.env.easydock` file you have to run:
 
 ```bash
-bash easydock reset
-bash easydock setup
+bash easydock reset && bash easydock build
 ```
 
 _*NB: Database data will be removed*_

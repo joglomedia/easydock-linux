@@ -528,6 +528,12 @@ function ed_bootstrap() {
     # Check ed command which requires sudo.
     ed_requires_sudo "$@"
 
+    # Show usage help
+    if [ "${menu}" == "help" ]; then
+        ed_help
+        exit
+    fi
+ 
     # Export env config.
     if [ "${menu}" == "init" ]; then
         # Check dependencies when ed initialized.

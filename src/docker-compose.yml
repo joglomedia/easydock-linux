@@ -1,14 +1,14 @@
 version: '3'
 services:
 
-  #APP
+  # Application
   app:
     build:
       context: .
-      dockerfile: ${ED_DIR}/src/Dockerfile
+      dockerfile: ${APP_DIR}/.easydock/Dockerfile
       args:
-        - PHP_V=${PHP_V}
-        - LARAVEL_WORKER=${LARAVEL_WORKER}
+        - PHP_VERSION=${PHP_VERSION}
+        - APP_WORKER=${APP_WORKER}
     container_name: ${APP_SID}-app
     restart: always
     tty: true
@@ -16,11 +16,11 @@ services:
       SERVICE_NAME: app
     working_dir: /var/www
     volumes:
-      - ./:/var/www/:cached
-      - ${ED_DIR}/config/php/php.ini:/usr/local/etc/php/conf.d/local.ini
-      - ${ED_DIR}/config/php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
+      - ${APP_DIR}/:/var/www/:cached
+      - ${APP_DIR}/.easydock/config/php/php.ini:/usr/local/etc/php/conf.d/local.ini
+      - ${APP_DIR}/.easydock/config/php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
 
-  #NGINX
+  # Nginx
   nginx:
     image: nginx:alpine
     container_name: ${APP_SID}-nginx
@@ -29,12 +29,13 @@ services:
     ports:
       - ${APP_PORT}:80
     volumes:
-      - ./:/var/www/
-      - ${ED_DIR}/config/nginx/:/etc/nginx/conf.d/
+      - ${APP_DIR}/:/var/www/
+      - ${APP_DIR}/.easydock/config/nginx/:/etc/nginx/conf.d/
 
-  #MYSQL
+  # MySQL (MariaDB)
   mysql:
-    image: mariadb:latest
+    #image: mariadb:latest
+    image: yobasystems/alpine-mariadb:latest
     container_name: ${APP_SID}-mysql
     restart: always
     tty: true
@@ -45,9 +46,9 @@ services:
       MYSQL_ROOT_PASSWORD: ${DB_PASS}
     command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci','--default-authentication-plugin=mysql_native_password']
     volumes:
-      - ${ED_DIR}/data:/var/lib/mysql/
+      - ${APP_DIR}/.easydock/data:/var/lib/mysql/
 
-  #REDIS
+  # Redis
   redis:
     image: redis:latest
     container_name: ${APP_SID}-redis
@@ -57,18 +58,29 @@ services:
     ports:
       - ${RDS_PORT}:6379
 
-  #PHPMYADMIN
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
-    container_name: ${APP_SID}-pma
+  # PHPMyAdmin
+  #phpmyadmin:
+  #  image: phpmyadmin/phpmyadmin:latest
+  #  container_name: ${APP_SID}-pma
+  #  restart: always
+  #  environment:
+  #    PMA_HOST: mysql
+  #    MYSQL_ROOT_PASSWORD: ${DB_PASS}
+  #  ports:
+  #    - ${PMA_PORT}:80
+
+  # Adminer (PHPMyAdmin Alternative)
+  adminer:
+    image: adminer:latest
+    container_name: ${APP_SID}-adminer
     restart: always
     environment:
-      PMA_HOST: mysql
+      ADMINER_DEFAULT_SERVER: mysql
       MYSQL_ROOT_PASSWORD: ${DB_PASS}
     ports:
-      - ${PMA_PORT}:80
+      - ${PMA_PORT}:8080
 
-  #MAILHOG
+  # MailHog
   mailhog:
     image: mailhog/mailhog:latest
     container_name: ${APP_SID}-mailhog

@@ -36,7 +36,7 @@ Docker and Docker Compose on Linux Distro (Debian, Ubuntu)
 ```bash
 cd /path/to/your-php-application
 composer global require joglomedia/easydock-linux
-easydock init && easydock export
+easydock init && easydock import
 ```
 
 - Configure your application path into `.env.easydock` file.

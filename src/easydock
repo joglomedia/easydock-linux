@@ -7,8 +7,8 @@
 # | Authors           : Edi Septriyanto <me@masedi.net>                     |
 # |                     Andrea Pollastri <andrea@pollastri.dev>             |
 # | Min. requirement  : GNU/Linux Debian 8, Ubuntu 16.04 or Linux Mint 17   |
-# | Version           : 1.0.0                                               |
-# | Last Update       : 08/03/2021                                          |
+# | Version           : 1.0.1                                               |
+# | Last Update       : 26/03/2021                                          |
 # +-------------------------------------------------------------------------+
 # | EasyDock-Linux Copyright (c) 2021 MasEDI.Net                            |
 # | EasyDock's Logo & Name Copyright (c) Andrea Pollastri                   |
@@ -68,10 +68,10 @@ black=$(tput setaf 0)
 white=$(tput setaf 7)
 red=$(tput setaf 1)
 green=$(tput setaf 2)
-yellow=$(tput setaf 3)
+#yellow=$(tput setaf 3)
 blue=$(tput setaf 4)
-purple=$(tput setaf 5)
-bgblack=$(tput setab 0)
+#purple=$(tput setaf 5)
+#bgblack=$(tput setab 0)
 bgwhite=$(tput setab 7)
 bgred=$(tput setab 1)
 bggreen=$(tput setab 2)
@@ -125,7 +125,7 @@ function ed_requires_sudo() {
 
     if [[ -n ${CMD} && ${SUDO_CMDS} =~ ${CMD} ]]; then
         if [[ "${EUID}" -ne 0 ]]; then
-            sudo env "HOME=${HOME_PATH}" env "USER=${ED_USER}" ${SOURCE} "$@"
+            sudo env "HOME=${HOME_PATH}" env "USER=${ED_USER}" "${SOURCE}" "$@"
             exit 0
         fi
     fi
@@ -146,7 +146,7 @@ function ed_init() {
         # Generate random easydock's app id.
         sed -i 's/APP_SID=easydock/APP_SID=easydock'$(((RANDOM%1000000000)+1))'/g' ./.env.easydock
         # Update application image name.
-        sed -i "s|COMPOSE_PROJECT_NAME=easydock|COMPOSE_PROJECT_NAME=${PWD##*/}|g" ./.env.easydock
+        sed -i "s|COMPOSE_PROJECT_NAME=easydock|COMPOSE_PROJECT_NAME=${APP_DIR##*/}|g" ./.env.easydock
         # Update application directory path.
         sed -i "s|APP_DIR=./|APP_DIR=${APP_DIR}|g" ./.env.easydock
         # Update easydock directory path.
@@ -172,7 +172,7 @@ function ed_env() {
 
 function ed_import() {
     echo -e "${bgyellow}${black}${bold} >>> WARNING! ${reset} This command will overwrite existing config data.${br}"
-    read -r -p "Are you sure to import easydock config? (Y/n): " -n 1 -r
+    read -r -p "Are you sure to import easydock's app config? (Y/n): " -n 1 -r
 
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo -e "${br}${br}${blue}Wait...${reset}${br}"
@@ -192,13 +192,13 @@ function ed_import() {
         # Update application directory path.
         sed -i "s|APP_DIR=./|APP_DIR=${APP_DIR}|g" ./.env.easydock
         # Update application image name.
-        sed -i "s|COMPOSE_PROJECT_NAME=easydock|COMPOSE_PROJECT_NAME=${PWD##*/}|g" ./.env.easydock
+        sed -i "s|COMPOSE_PROJECT_NAME=easydock|COMPOSE_PROJECT_NAME=${APP_DIR##*/}|g" ./.env.easydock
         # Update easydock directory path.
         sed -i "s|ED_DIR=./vendor/joglomedia/easydock-linux|ED_DIR=${ED_DIR}|g" ./.env.easydock
  
-        chown -hR ${USER}:${USER} ./.easydock ./.env.easydock
+        chown -hR "${USER}":"${USER}" ./.easydock ./.env.easydock
 
-        echo -e "${bgpurple}${white} easydock is ready! Customize your ${bold}.env.easydock${reset}${bgpurple}${white} file and run ${bold}${ED_CMD} build${reset}${bgpurple}${white} ${br}${reset}"
+        echo -e "${green}easydock is ready! ${reset}${br}${br}${bgpurple}${white} Customize your ${bold}.env.easydock${reset}${bgpurple}${white} file and run ${bold}${ED_CMD} build${reset}${bgpurple}${white} ${br}${reset}"
     else
         echo -e "${br}${br}${bgpurple}${white} easydock command cancelled! ${reset}"
     fi
@@ -338,7 +338,7 @@ function ed_build() {
     sleep 1s    
     clear
     ed_logo
-    echo -e "${bgpurple}${white} easydock is ready! ${reset}${br}
+    echo -e "${bggreen}${white} easydock is ready! ${reset}${br}
 Now, run ${bgwhite}${black} ${ED_CMD} up ${reset} to kick start your app."
 }
 
@@ -348,7 +348,7 @@ function ed_setup() {
 
 function ed_reset() {
     echo -e "${bgyellow}${black}${bold} >>> WARNING! ${reset} This command will reset container and database.${br}"
-    read -r -p "Are you sure to reset easydock? (Y/n): " -n 1 -r
+    read -r -p "Are you sure to reset easydock application? (Y/n): " -n 1 -r
 
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo -e "${br}${br}${blue}Wait...${reset}${br}"
@@ -356,7 +356,7 @@ function ed_reset() {
         docker-compose -f ./.easydock/docker-compose.yml --env-file=./.env.easydock rm
         rm -fr ./.easydock/data/*
         cp "${ED_DIR}/src/.gitignore.dist" ./.easydock/data/.gitignore
-        echo -e "${br}${bgpurple}${white} easydock has been reset! ${reset}"
+        echo -e "${br}${bggreen}${white} easydock has been reset! ${reset}"
     else
         echo -e "${br}${br}${bgpurple}${white} easydock command cancelled! ${reset}"
     fi
@@ -371,9 +371,9 @@ function ed_up() {
     docker-compose -f ./.easydock/docker-compose.yml --env-file=./.env.easydock up -d --force-recreate
 
     if [ "${ed_portapp}" == "80" ]; then
-        echo -e "${br}${bgpurple}${white} easydock has been started... visit ${bold}${underline}http://localhost${reset}${bgpurple}${white} ${reset}${br}"
+        echo -e "${br}${bgpurple}${white} easydock app has been started... visit ${bold}${underline}http://localhost${reset}${bgpurple}${white} ${reset}${br}"
     else
-        echo -e "${br}${bgpurple}${white} easydock has been started... visit ${bold}${underline}http://localhost:${ed_portapp}${reset}${bgpurple}${white} ${reset}${br}"
+        echo -e "${br}${bgpurple}${white} easydock app has been started... visit ${bold}${underline}http://localhost:${ed_portapp}${reset}${bgpurple}${white} ${reset}${br}"
     fi
 }
 
@@ -382,7 +382,7 @@ function ed_down() {
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo -e "${br}${br}${blue}Wait...${reset}${br}"
         docker-compose -f ./.easydock/docker-compose.yml --env-file=./.env.easydock down
-        echo -e "${br}${bgpurple}${white} easydock has been stopped and containers removed! ${reset}"
+        echo -e "${br}${bgpurple}${white} easydock app has been stopped and containers removed! ${reset}"
     else
         echo -e ${br}
     fi
@@ -392,18 +392,18 @@ function ed_start() {
     echo -e "${blue}Wait...${reset}${br}"
     echo -e "${bgblue}${white} Checking required ports ${reset}"
     ed_portscheck
-    echo -e "${br}${bgblue}${white} Starting easydock containers ${reset}${br}"
+    echo -e "${br}${bgblue}${white} Starting easydock app ${reset}${br}"
     docker-compose -f ./.easydock/docker-compose.yml --env-file=./.env.easydock start
 
     if [ "${ed_portapp}" == "80" ]; then
-        echo -e "${br}${bgpurple}${white} easydock has been started... visit ${bold}${underline}http://localhost${reset}${bgpurple}${white} ${reset}${br}"
+        echo -e "${br}${bgpurple}${white} easydock app has been started... visit ${bold}${underline}http://localhost${reset}${bgpurple}${white} ${reset}${br}"
     else
-        echo -e "${br}${bgpurple}${white} easydock has been started... visit ${bold}${underline}http://localhost:${ed_portapp}${reset}${bgpurple}${white} ${reset}${br}"
+        echo -e "${br}${bgpurple}${white} easydock app has been started... visit ${bold}${underline}http://localhost:${ed_portapp}${reset}${bgpurple}${white} ${reset}${br}"
     fi
 }
 
 function ed_stop() {
-    read -r -p "Are you sure to stop easydock containers? (Y/n): " -n 1 -r
+    read -r -p "Are you sure to stop easydock app? (Y/n): " -n 1 -r
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo -e "${br}${br}${blue}Wait...${reset}${br}"
         docker-compose -f ./.easydock/docker-compose.yml --env-file=./.env.easydock stop
@@ -414,7 +414,7 @@ function ed_stop() {
 }
 
 function ed_restart() {
-    read -r -p "Are you sure to restart easydock containers? (Y/n): " -n 1 -r
+    read -r -p "Are you sure to restart easydock app? (Y/n): " -n 1 -r
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo -e "${br}${br}${blue}Wait...${reset}${br}"
         docker-compose -f ./.easydock/docker-compose.yml --env-file=./.env.easydock restart
@@ -427,7 +427,7 @@ function ed_restart() {
 function ed_status() {
     echo -e "${blue}Wait... ${reset}${br}"
     sleep 1s
-    echo -e "${bgblue}${white} Checking easydock containers status ${reset}${br}"
+    echo -e "${bgblue}${white} Checking easydock app status ${reset}${br}"
     docker-compose -f ./.easydock/docker-compose.yml --env-file=./.env.easydock ps
 }
 
@@ -555,10 +555,10 @@ function ed_bootstrap() {
         ed_appsid=$(grep APP_SID .env.easydock | cut -d '=' -f2)
         ed_appsrc=$(grep APP_DIR .env.easydock | cut -d '=' -f2)
         ed_phpver=$(grep PHP_V .env.easydock | cut -d '=' -f2)
-        ed_dbver=$(grep DB_VERS .env.easydock | cut -d '=' -f2)
+        #ed_dbver=$(grep DB_VERS .env.easydock | cut -d '=' -f2)
         ed_dbname=$(grep DB_NAME .env.easydock | cut -d '=' -f2)
         ed_dbpass=$(grep DB_PASS .env.easydock | cut -d '=' -f2)
-        ed_nginx=$(grep NGINX_MODE .env.easydock | cut -d '=' -f2)
+        #ed_nginx=$(grep NGINX_MODE .env.easydock | cut -d '=' -f2)
 
         # Execute CLI command.
         ed_cli_menu "$@"

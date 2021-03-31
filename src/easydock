@@ -347,7 +347,7 @@ function ed_setup() {
 }
 
 function ed_reset() {
-    echo -e "${bgyellow}${black}${bold} >>> WARNING! ${reset} This command will reset container and database.${br}"
+    echo -e "${bgyellow}${black}${bold} >>> WARNING! ${reset} This command will delete containers and database.${br}"
     read -r -p "Are you sure to reset easydock application? (Y/n): " -n 1 -r
 
     if [[ $REPLY =~ ^[Yy]$ ]]; then
@@ -360,6 +360,10 @@ function ed_reset() {
     else
         echo -e "${br}${br}${bgpurple}${white} easydock command cancelled! ${reset}"
     fi
+}
+
+function ed_remove() {
+    ed_reset
 }
 
 function ed_up() {
@@ -487,6 +491,11 @@ function ed_cli_menu() {
             ed_down
             exit
             ;;
+        remove)
+            shift
+            ed_remove
+            exit
+            ;;
         start)
             shift
             ed_start
@@ -497,7 +506,7 @@ function ed_cli_menu() {
             ed_stop
             exit
             ;;
-         restart)
+        restart)
             shift
             ed_restart
             exit

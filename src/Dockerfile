@@ -48,6 +48,7 @@ RUN apk update && apk upgrade \
     gnupg \
     igbinary \
     imagick \
+    imap \
     intl \
     ldap \
     memcached \

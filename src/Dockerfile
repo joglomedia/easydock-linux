@@ -65,7 +65,7 @@ RUN apk update && apk upgrade \
 # Install composer
 &&  curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
 # Install node & npm (not yet required for php application)
-#&&  apk add --update nodejs npm \
+&&  apk add --no-cache nodejs npm yarn \
 # Add user
 &&  set -eux; \
     addgroup -g 1000 -S www; \

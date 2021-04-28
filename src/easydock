@@ -7,8 +7,8 @@
 # | Authors           : Edi Septriyanto <me@masedi.net>                     |
 # |                     Andrea Pollastri <andrea@pollastri.dev>             |
 # | Min. requirement  : GNU/Linux Debian 8, Ubuntu 16.04 or Linux Mint 17   |
-# | Version           : 1.0.1                                               |
-# | Last Update       : 26/03/2021                                          |
+# | Version           : 1.0.3                                               |
+# | Last Update       : 14/04/2021                                          |
 # +-------------------------------------------------------------------------+
 # | EasyDock-Linux Copyright (c) 2021 MasEDI.Net                            |
 # | EasyDock's Logo & Name Copyright (c) Andrea Pollastri                   |
@@ -34,7 +34,7 @@ ED_USER=${USER:-$(id -u -n)}
 ED_CMD="bash easydock"
 
 # Sudo required commands.
-SUDO_CMDS="import reset"
+SUDO_CMDS="import remove reset"
 
 # EasyDock CLI source directory.
 SOURCE="${BASH_SOURCE[0]}"
@@ -214,7 +214,7 @@ function ed_notfound() {
 }
 
 function ed_isthisportfree() {
-    port="$1"
+    port="${1}"
     check=$(lsof -i "tcp:${port}")
     if [ -z "$check" ]; then
         return 0
@@ -224,18 +224,18 @@ function ed_isthisportfree() {
 }
 
 function ed_unavailableport() {
-    port=$1
+    port="${1}"
     echo -e "${bgwhite}${red}${bold} >>> ERROR! ${reset} Port: ${bgred}${white}${bold} ${port} ${reset} is used. Try another port. ${reset}${br}"
     exit
 }
 
 function ed_availableport() {
-    port=$1
+    port="${1}"
     echo "${green}${port} is available!${reset}"
 }
 
 function ed_checkingport() {
-    port=$1
+    port="${1}"
     echo -e "${br}${blue}Checking port ${port}...${reset}"
 }
 
@@ -558,9 +558,9 @@ function ed_bootstrap() {
 
         ed_portapp=$(grep APP_PORT .env.easydock | cut -d '=' -f2)
         ed_portdb=$(grep DB_PORT .env.easydock | cut -d '=' -f2)
+        ed_portrds=$(grep REDIS_PORT .env.easydock | cut -d '=' -f2)
         ed_portpma=$(grep PMA_PORT .env.easydock | cut -d '=' -f2)
         ed_portmh=$(grep MH_PORT .env.easydock | cut -d '=' -f2)
-        ed_portrds=$(grep RDS_PORT .env.easydock | cut -d '=' -f2)
         ed_appsid=$(grep APP_SID .env.easydock | cut -d '=' -f2)
         ed_appsrc=$(grep APP_DIR .env.easydock | cut -d '=' -f2)
         ed_phpver=$(grep PHP_V .env.easydock | cut -d '=' -f2)

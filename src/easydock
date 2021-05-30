@@ -7,8 +7,8 @@
 # | Authors           : Edi Septriyanto <me@masedi.net>                     |
 # |                     Andrea Pollastri <andrea@pollastri.dev>             |
 # | Min. requirement  : GNU/Linux Debian 8, Ubuntu 16.04 or Linux Mint 17   |
-# | Version           : 1.0.3                                               |
-# | Last Update       : 14/04/2021                                          |
+# | Version           : 1.0.4                                               |
+# | Last Update       : 31/05/2021                                          |
 # +-------------------------------------------------------------------------+
 # | EasyDock-Linux Copyright (c) 2021 MasEDI.Net                            |
 # | EasyDock's Logo & Name Copyright (c) Andrea Pollastri                   |
@@ -451,6 +451,14 @@ function ed_conn() {
     ed_shell
 }
 
+function ed_sql_shell() {
+    echo -e "${blue}Wait... ${reset}${br}"
+    sleep 1s
+    echo -e "${bgblue}${white} Database Shell ${reset}${br}"
+    echo -e "Run ${bgwhite}${black} exit ${reset} to return on your Linux shell.${br}"
+    docker-compose -f ./.easydock/docker-compose.yml --env-file=./.env.easydock exec mysql /bin/bash
+}
+
 ############################################################ CLI MENU
 
 function ed_cli_menu() {
@@ -519,6 +527,11 @@ function ed_cli_menu() {
         conn|shell)
             shift
             ed_shell
+            exit
+            ;;
+        sql_shell)
+            shift
+            ed_sql_shell
             exit
             ;;
         *)

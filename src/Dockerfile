@@ -1,5 +1,6 @@
 # Dockerfile Args
 ARG PHP_VERSION
+ARG NODE_VERSION
 
 # Use PHP image
 FROM php:${PHP_VERSION}-fpm-alpine
@@ -65,7 +66,7 @@ RUN apk update && apk upgrade \
 # Install composer
 &&  curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
 # Install node & npm (not yet required for php application)
-&&  apk add --no-cache nodejs npm yarn \
+&&  apk add --update nodejs=${NODE_VERSION} npm yarn \
 # Add user
 &&  set -eux; \
     addgroup -g 1000 -S www; \

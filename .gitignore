@@ -1,0 +1,5 @@
+.env
+composer.lock
+vendor
+src/docker-compose.yml~
+src/Dockerfile~

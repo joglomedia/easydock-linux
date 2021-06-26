@@ -7,8 +7,8 @@
 # | Authors           : Edi Septriyanto <me@masedi.net>                     |
 # |                     Andrea Pollastri <andrea@pollastri.dev>             |
 # | Min. requirement  : GNU/Linux Debian 8, Ubuntu 16.04 or Linux Mint 17   |
-# | Version           : 1.0.4                                               |
-# | Last Update       : 31/05/2021                                          |
+# | Version           : 1.1.0-beta                                          |
+# | Last Update       : 25/06/2021                                          |
 # +-------------------------------------------------------------------------+
 # | EasyDock-Linux Copyright (c) 2021 MasEDI.Net                            |
 # | EasyDock's Logo & Name Copyright (c) Andrea Pollastri                   |
@@ -24,11 +24,8 @@
 # Work even if somebody does "bash easydock".
 set -e
 
-# Application absolute directory path.
-APP_DIR=${PWD}
-
-# Current active user.
-ED_USER=${USER:-$(id -u -n)}
+# EasyDock version.
+ED_VERSION="1.1.0-beta"
 
 # EasyDock command (to pretify the instruction message).
 ED_CMD="bash easydock"
@@ -52,10 +49,16 @@ fi
 # If we are in the global Composer "bin" directory, we need to bump our
 # current directory up two, so that we will correctly proxy into the
 # EasyDock src which is written in bash. Will use PHP to do it.
-if [[ ! -f "${ED_DIR}/src/.easydock" ]]; then
+if [[ ! -f "${ED_DIR}/src/easydock" ]]; then
     ED_DIR=$(php -r "echo realpath('${ED_DIR}/../');")
     ED_CMD="easydock"
 fi
+
+# Current active user.
+ED_USER=${USER:-$(id -u -n)}
+
+# Application absolute directory path.
+APP_DIR=${PWD}
 
 ############################################################ COMMON VARS
 menu=$1
@@ -153,13 +156,14 @@ function ed_init() {
         sed -i "s|ED_DIR=./vendor/joglomedia/easydock-linux|ED_DIR=${ED_DIR}|g" ./.env.easydock
 
         # Create .easydock directory to store application data (such as MySQL database, LEMP config, etc).
-        mkdir -p ./.easydock
+        mkdir -p ./.easydock/log
         cp -fr "${ED_DIR}/config" ./.easydock/
         cp -fr "${ED_DIR}/data" ./.easydock/
         cp "${ED_DIR}/src/Dockerfile" ./.easydock/
         cp "${ED_DIR}/src/docker-compose.yml" ./.easydock/
 
-        echo -e "${bgpurple}${white} Your ${bold}.env.easydock${reset}${bgpurple}${white} has been created ${br}${reset}"
+        echo -e "${bgpurple}${white} Your ${bold}.env.easydock${reset}${bgpurple}${white} has been created.${br}${reset} \
+Customize your your file and run ${bold}${ED_CMD} build${reset}."
     fi
 }
 
@@ -181,7 +185,7 @@ function ed_import() {
         cp "${ED_DIR}/config/.env.easydock" ./.env.easydock
 
         [ -d ./.easydock ] && rm -fr ./.easydock
-        mkdir -p ./.easydock
+        mkdir -p ./.easydock/log
         cp -fr "${ED_DIR}/config" ./.easydock/
         cp -fr "${ED_DIR}/data" ./.easydock/
         cp "${ED_DIR}/src/Dockerfile" ./.easydock/
@@ -444,11 +448,11 @@ function ed_shell() {
     sleep 1s
     echo -e "${bgblue}${white} Application Shell ${reset}${br}"
     echo -e "Run ${bgwhite}${black} exit ${reset} to return on your Linux shell.${br}"
-    docker-compose -f ./.easydock/docker-compose.yml --env-file=./.env.easydock exec app /bin/bash
+    docker-compose -f ./.easydock/docker-compose.yml --env-file=./.env.easydock exec webapp /bin/bash
 }
 
 function ed_conn() {
-    ed_shell
+    ed_shell "$@"
 }
 
 function ed_sql_shell() {
@@ -553,6 +557,12 @@ function ed_bootstrap() {
     # Show usage help
     if [ "${menu}" == "help" ]; then
         ed_help
+        exit
+    fi
+
+    # Show usage help
+    if [ "${menu}" == "version" ]; then
+        echo "EasyDock Linux version ${ED_VERSION}"
         exit
     fi
  

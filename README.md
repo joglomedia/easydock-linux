@@ -14,8 +14,9 @@ Dockerize your PHP apps ;)
 Easydock comes with:
 
 - Nginx
-- PHP (PHP-FPM 5.x, 7.x and 8.x)
-- MySQL (latest version of MariaDB)
+- PHP (7.4 and 8.0)
+- MariaDB (Drop-in replacement for MySQL)
+- PostgreSQL
 - Redis
 - ~~phpmyadmin~~ Adminer (Lightweight MySQL admin)
 - MailHog
@@ -25,7 +26,7 @@ Easydock comes with:
 
 ## Requirements
 
-Docker and Docker Compose installed on Linux Distro (Debian, Ubuntu)
+Docker and Docker Compose installed on Linux Distro (Debian or Ubuntu).
 
 ## Installation
 
@@ -40,58 +41,96 @@ easydock init && easydock import
 
 - Configure your application path into `.env.easydock` file.
 
-## Getting started
+## Getting Started
 
-- After installation, if you need, configure your `.env.easydock` file and run:
+After installation completed, if required, you could configure your `.env.easydock` file and then run this build command:
 
 ```bash
 easydock build
 ```
 
-### Config your app DB connection (default)
+### Configure Nginx and PHP-FPM
+
+- The default Nginx server configuration (app.conf) will expose your project `/public` folder.
+- If your project uses different directory structure, you should adjust the configuration and update the file accordingly.
+- Your application by default accessible through localhost on port 8008 (`http://localhost:8008`)
+- Supported PHP version: 7.4 & 8.0
 
 ```bash
-user: root
-pass: secret
-db: dockerdb
-host: mysql ( or redis for Redis )
+# APP PORT
+APP_PORT=8008
+
+# PHP VERSION 
+PHP_VERSION=7.4
 ```
 
-### Config your app SMTP conn (default - no user or pass are required)
+### Configure database connection
+
+The default database connection for MySQL and PostgreSQL.
+
+```bash
+Username: easydock
+Password: secret
+Database: easydockdb
+Host: mysql ( or postgres for PostgreSQL )
+```
+
+For security reason, you should change the default database username and password configured in `.env.easydock` file.
+
+```bash
+# MYSQL / POSTGRESQL DB NAME
+DB_NAME=easydockdb
+
+# MYSQL / POSTGRESQL USER
+DB_USER=easydock
+
+# MYSQL / POSTGRESQL USER PASSWORD
+DB_PASS=secret
+
+# MYSQL ROOT PASSWORD
+DB_ROOT_PASS=rootsecret
+
+# MYSQL PORT
+MYSQL_PORT=3306
+
+# POSTGRESQL PORT
+POSTGRES_PORT=5432
+```
+
+### Configure SMTP connection
+
+By default, SMTP connection through MailHog doesn't require any username or password.
 
 ```bash
 host: mailhog
 port: 1025
 ```
 
-- The default Nginx config (app.conf) will expose your project `/public` folder.
-- If your project is using different directory structure, you should adjust the configurations and update the file accordingly.
-
-### To start your Docker istance
+### To start your app instance
 
 ```bash
 easydock up
 ```
 
-### To stop your Docker istance
+### To stop your app instance
 
 ```bash
 easydock stop
 ```
 
-### To restart your Docker istance
+### To restart your app instance
 
 ```bash
 easydock restart
 ```
 
-### To stop and delete your Docker istance
+### To stop and delete your app instance
 
 ```bash
 easydock down
 ```
 
-### To "SSH" into your Docker istance
+### To "SSH" into your app instance
 
 ```bash
 easydock shell
@@ -103,7 +142,7 @@ easydock shell
 easydock info
 ```
 
-### You can reset your Docker istance running
+### You can reset your running instance
 
 ```bash
 easydock reset
@@ -115,7 +154,7 @@ easydock reset
 easydock reset && easydock build
 ```
 
-_*NB: Database data will be removed*_
+_*PS: Resetting your EasyDock instance will delete the database data*_
 
 ## Security Vulnerabilities and Bugs
 

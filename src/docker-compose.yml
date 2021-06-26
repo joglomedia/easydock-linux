@@ -1,45 +1,52 @@
 version: '3.7'
-
 services:
   # Application
-  app:
-    build:
-      context: .
-      dockerfile: ${APP_DIR}/.easydock/Dockerfile
-      args:
-        - PHP_VERSION=${PHP_VERSION}
-        - NODE_VERSION=${NODE_VERSION}
-        - APP_WORKER=${APP_WORKER}
-    container_name: ${APP_SID}-app
+  webapp:
+    image: joglomedia/easydock-php:${PHP_VERSION}-fpm
+    #build:
+    #  context: .
+    #  dockerfile: ${APP_DIR}/.easydock/Dockerfile
+    #  args:
+    #    - PHP_VERSION=${PHP_VERSION}
+    #    - NODE_VERSION=${NODE_VERSION}
+    #    - APP_WORKER=${APP_WORKER}
+    container_name: ${APP_SID}_webapp
     restart: always
     tty: true
     environment:
-      SERVICE_NAME: app
+      SERVICE_NAME: webapp
     working_dir: /var/www
     volumes:
       - ${APP_DIR}/:/var/www/:cached
       - ${APP_DIR}/.easydock/config/php/php.ini:/usr/local/etc/php/conf.d/local.ini
       - ${APP_DIR}/.easydock/config/php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
-
+      - ${APP_DIR}/.easydock/config/php/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf
+      - ${APP_DIR}/.easydock/log/php/:/var/log/php/
+#      - phpsocket:/var/run/
+    networks:
+      - easydocknet
   # Nginx
   nginx:
     image: nginx:alpine
-    container_name: ${APP_SID}-nginx
+    container_name: ${APP_SID}_nginx
     restart: always
-    tty: true
     ports:
       - ${APP_PORT}:80
+      - 443:443
+    depends_on:
+      - webapp
     volumes:
-      - ${APP_DIR}/:/var/www/
+      - ${APP_DIR}/:/var/www/:cached
       - ${APP_DIR}/.easydock/config/nginx/:/etc/nginx/conf.d/
-
+      - ${APP_DIR}/.easydock/log/nginx/:/var/log/nginx/
+#      - phpsocket:/var/run/
+    networks:
+      - easydocknet
   # MySQL (MariaDB)
   mysql:
-    #image: mariadb:latest
     image: yobasystems/alpine-mariadb:latest
-    container_name: ${APP_SID}-mysql
+    container_name: ${APP_SID}_mysql
     restart: always
-    tty: true
     environment:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USER}
@@ -47,47 +54,63 @@ services:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
     ports:
       - ${DB_PORT}:3306
-    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci','--default-authentication-plugin=mysql_native_password']
+    command: ['--character-set-server=utf8mb4','--collation-server=utf8mb4_unicode_ci','--default-authentication-plugin=mysql_native_password']
     volumes:
       - ${APP_DIR}/.easydock/data:/var/lib/mysql/
-
+      - ${APP_DIR}/.easydock/log/mysql/:/var/log/mysql/
+    networks:
+      - easydocknet
   # Redis
   redis:
     image: redis:alpine
-    container_name: ${APP_SID}-redis
+    container_name: ${APP_SID}_redis
     restart: always
-    tty: true
     environment:
       REDIS_PASSWORD: ${REDIS_PASS}
     ports:
       - ${REDIS_PORT}:6379
-
+    networks:
+      - easydocknet
   # PHPMyAdmin
   #phpmyadmin:
   #  image: phpmyadmin/phpmyadmin:latest
-  #  container_name: ${APP_SID}-pma
+  #  container_name: ${APP_SID}_pma
   #  restart: always
   #  environment:
   #    PMA_HOST: mysql
   #    MYSQL_ROOT_PASSWORD: ${DB_PASS}
   #  ports:
   #    - ${PMA_PORT}:80
-
   # Adminer (PHPMyAdmin Alternative)
   adminer:
     image: adminer:latest
-    container_name: ${APP_SID}-adminer
+    container_name: ${APP_SID}_adminer
     restart: always
     environment:
       ADMINER_DEFAULT_SERVER: mysql
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
     ports:
       - ${PMA_PORT}:8080
-
+    networks:
+      - easydocknet
   # MailHog
   mailhog:
     image: mailhog/mailhog:latest
-    container_name: ${APP_SID}-mailhog
+    container_name: ${APP_SID}_mailhog
     restart: always
     ports:
       - ${MH_PORT}:8025
+    networks:
+      - easydocknet
+# Networks
+networks:
+  easydocknet:
+    driver: bridge
+    #external: true
+    name: ${APP_SID}_defnet
+# Volumes
+#volumes:
+#  phpsocket:
+    #external: true
+#    driver: local
+#    name: ${APP_SID}_phpsocket

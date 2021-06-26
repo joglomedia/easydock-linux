@@ -2,9 +2,9 @@
 
 ![EasyDock for Linux](ed_275px.png)
 
-A fork of EasyDock to work in Linux. Dockerize your PHP apps ;)
+A fork of EasyDock for Linux. Docker LEMP stack easy integration.
 
-Docker LEMP easy integration
+Dockerize your PHP apps ;)
 
 ![GitHub stars](https://img.shields.io/github/stars/joglomedia/easydock-linux?style=social)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/joglomedia/easydock-linux?label=version)
@@ -19,14 +19,13 @@ Easydock comes with:
 - Redis
 - ~~phpmyadmin~~ Adminer (Lightweight MySQL admin)
 - MailHog
-- ~~node.js~~
-- ~~npm~~
+- Node.js, NPM & Yarn
 - Git
 - Composer
 
 ## Requirements
 
-Docker and Docker Compose on Linux Distro (Debian, Ubuntu)
+Docker and Docker Compose installed on Linux Distro (Debian, Ubuntu)
 
 ## Installation
 
@@ -49,7 +48,7 @@ easydock init && easydock import
 easydock build
 ```
 
-- Config your app DB connection (default)
+### Config your app DB connection (default)
 
 ```bash
 user: root
@@ -58,58 +57,59 @@ db: dockerdb
 host: mysql ( or redis for Redis )
 ```
 
-- Config your app SMTP conn (default - no user or pass are required)
+### Config your app SMTP conn (default - no user or pass are required)
 
 ```bash
 host: mailhog
 port: 1025
 ```
 
-- Nginx config will expose your project `/public` folder
+- The default Nginx config (app.conf) will expose your project `/public` folder.
+- If your project is using different directory structure, you should adjust the configurations and update the file accordingly.
 
-- To start your Docker istance:
+### To start your Docker istance
 
 ```bash
 easydock up
 ```
 
-- To stop your Docker istance:
+### To stop your Docker istance
 
 ```bash
 easydock stop
 ```
 
-- To restart your Docker istance:
+### To restart your Docker istance
 
 ```bash
 easydock restart
 ```
 
-- To stop and delete your Docker istance:
+### To stop and delete your Docker istance
 
 ```bash
 easydock down
 ```
 
-- To "SSH" into your Docker istance:
+### To "SSH" into your Docker istance
 
 ```bash
 easydock shell
 ```
 
-- You can get application info using:
+### You can get application info using
 
 ```bash
 easydock info
 ```
 
-- You can reset your Docker istance running:
+### You can reset your Docker istance running
 
 ```bash
 easydock reset
 ```
 
-- Everytime you change PHP version into `.env.easydock` file you have to run:
+### Everytime you change PHP version into `.env.easydock` file you have to run:
 
 ```bash
 easydock reset && easydock build

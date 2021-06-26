@@ -1,7 +1,7 @@
 {
     "name": "joglomedia/easydock-linux",
     "type": "project",
-    "description": "A fork of EasyDock to work in Linux. Docker LEMP easy integration.",
+    "description": "A fork of EasyDock for Linux. Docker LEMP stack easy integration.",
     "keywords": ["docker", "container", "lemp", "lnmp", "nginx", "php", "ubuntu", "debian"],
     "license": "MIT",
     "authors": [

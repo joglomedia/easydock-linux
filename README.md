@@ -109,7 +109,7 @@ easydock info
 easydock reset
 ```
 
-### Everytime you change PHP version into `.env.easydock` file you have to run:
+### Everytime you change PHP version into `.env.easydock` file you have to run
 
 ```bash
 easydock reset && easydock build

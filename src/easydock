@@ -250,29 +250,41 @@ function ed_portscheck() {
     else
         ed_unavailableport "${ed_portapp}"
     fi
-    ed_checkingport "${ed_portdb}"
-    if ed_isthisportfree "${ed_portdb}"; then
-        ed_availableport "${ed_portdb}"
+
+    ed_checkingport "${ed_portmysql}"
+    if ed_isthisportfree "${ed_portmysql}"; then
+        ed_availableport "${ed_portmysql}"
     else
-        ed_unavailableport "${ed_portdb}"
+        ed_unavailableport "${ed_portmysql}"
     fi
+
+    ed_checkingport "${ed_portpgsql}"
+    if ed_isthisportfree "${ed_portpgsql}"; then
+        ed_availableport "${ed_portpgsql}"
+    else
+        ed_unavailableport "${ed_portpgsql}"
+    fi
+
+
+    ed_checkingport "${ed_portrds}"
+    if ed_isthisportfree "${ed_portrds}"; then
+        ed_availableport "${ed_portrds}"
+    else
+        ed_unavailableport "${ed_portrds}"
+    fi
+
     ed_checkingport "${ed_portpma}"
     if ed_isthisportfree "${ed_portpma}"; then
         ed_availableport "${ed_portpma}"
     else
         ed_unavailableport "${ed_portpma}"
     fi
+
     ed_checkingport "${ed_portmh}"
     if ed_isthisportfree "${ed_portmh}"; then
         ed_availableport "${ed_portmh}"
     else
         ed_unavailableport "${ed_portmh}"
-    fi
-    ed_checkingport "${ed_portrds}"
-    if ed_isthisportfree "${ed_portrds}"; then
-        ed_availableport "${ed_portrds}"
-    else
-        ed_unavailableport "${ed_portrds}"
     fi
 }
 
@@ -334,9 +346,9 @@ function ed_info() {
 
 function ed_build() {
     echo -e "${blue}Wait... ${reset}${br}"
-    echo -e "${bgblue}${white} Checking required ports ${reset}"
-    ed_portscheck
-    echo -e "${br}${bgblue}${white} Pulling Docker images ${reset}${br}"
+    #echo -e "${bgblue}${white} Checking required ports ${reset}${br}"
+    #ed_portscheck
+    echo -e "${bgblue}${white} Pulling Docker images ${reset}${br}"
     #docker-compose -f ./.easydock/docker-compose.yml --env-file=./.env.easydock build --no-cache --pull
     docker-compose -f ./.easydock/docker-compose.yml --env-file=./.env.easydock build --pull
     sleep 1s    
@@ -372,8 +384,8 @@ function ed_remove() {
 
 function ed_up() {
     echo -e "${blue}Wait...${reset}${br}"
-    docker-compose -f ./.easydock/docker-compose.yml --env-file=./.env.easydock down
-    echo -e "${br}${bgblue}${white} Checking required ports ${reset}"
+    #docker-compose -f ./.easydock/docker-compose.yml --env-file=./.env.easydock down
+    echo -e "${bgblue}${white} Checking required ports ${reset}${br}"
     ed_portscheck
     echo -e "${br}${bgblue}${white} Create and start easydock system ${reset}${br}"
     docker-compose -f ./.easydock/docker-compose.yml --env-file=./.env.easydock up -d --force-recreate
@@ -580,7 +592,8 @@ function ed_bootstrap() {
         ed_logo
 
         ed_portapp=$(grep APP_PORT .env.easydock | cut -d '=' -f2)
-        ed_portdb=$(grep DB_PORT .env.easydock | cut -d '=' -f2)
+        ed_portmysql=$(grep MYSQL_PORT .env.easydock | cut -d '=' -f2)
+        ed_portpgsql=$(grep POSTGRES_PORT .env.easydock | cut -d '=' -f2)
         ed_portrds=$(grep REDIS_PORT .env.easydock | cut -d '=' -f2)
         ed_portpma=$(grep PMA_PORT .env.easydock | cut -d '=' -f2)
         ed_portmh=$(grep MH_PORT .env.easydock | cut -d '=' -f2)

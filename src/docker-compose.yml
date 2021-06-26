@@ -17,12 +17,12 @@ services:
       SERVICE_NAME: webapp
     working_dir: /var/www
     volumes:
-      - ${APP_DIR}/:/var/www/:cached
+      - ${APP_DIR}:/var/www:cached
       - ${APP_DIR}/.easydock/config/php/php.ini:/usr/local/etc/php/conf.d/local.ini
       - ${APP_DIR}/.easydock/config/php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
       - ${APP_DIR}/.easydock/config/php/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf
-      - ${APP_DIR}/.easydock/log/php/:/var/log/php/
-#      - phpsocket:/var/run/
+      - ${APP_DIR}/.easydock/log/php:/var/log/php
+#      - phpsocket:/var/run
     networks:
       - easydocknet
   # Nginx
@@ -36,10 +36,10 @@ services:
     depends_on:
       - webapp
     volumes:
-      - ${APP_DIR}/:/var/www/:cached
-      - ${APP_DIR}/.easydock/config/nginx/:/etc/nginx/conf.d/
-      - ${APP_DIR}/.easydock/log/nginx/:/var/log/nginx/
-#      - phpsocket:/var/run/
+      - ${APP_DIR}:/var/www:cached
+      - ${APP_DIR}/.easydock/config/nginx:/etc/nginx/conf.d
+      - ${APP_DIR}/.easydock/log/nginx:/var/log/nginx
+#      - phpsocket:/var/run
     networks:
       - easydocknet
   # MySQL (MariaDB)
@@ -53,11 +53,27 @@ services:
       MYSQL_PASSWORD: ${DB_PASS}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
     ports:
-      - ${DB_PORT}:3306
+      - ${MYSQL_PORT}:3306
     command: ['--character-set-server=utf8mb4','--collation-server=utf8mb4_unicode_ci','--default-authentication-plugin=mysql_native_password']
     volumes:
-      - ${APP_DIR}/.easydock/data:/var/lib/mysql/
-      - ${APP_DIR}/.easydock/log/mysql/:/var/log/mysql/
+      - ${APP_DIR}/.easydock/data/mysql:/var/lib/mysql
+      - ${APP_DIR}/.easydock/log/mysql:/var/log/mysql
+    networks:
+      - easydocknet
+  # PostgreSQL
+  postgres:
+    image: postgres:alpine
+    container_name: ${APP_SID}_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - ${POSTGRES_PORT}:5432
+    volumes:
+      - ${APP_DIR}/.easydock/data/postgres:/var/lib/postgresql/data
     networks:
       - easydocknet
   # Redis

@@ -17,10 +17,10 @@ testEqualityEasyDockInit()
     ENV_FILE=""
     ED_DIR=""
 
-    ${ED} init
+    bash "${ED}" init
 
-    [ -f .env.easydock ] && ENV_FILE="./.env.easydock"
-    assertEquals "./.env.easydock" "${ENV_FILE}"
+    [ -f .env.easydock ] && ENV_FILE=".env.easydock"
+    assertEquals ".env.easydock" "${ENV_FILE}"
 
     [ -d .easydock ] && ED_DIR=".easydock"
     assertEquals ".easydock" "${ED_DIR}"

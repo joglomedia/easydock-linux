@@ -40,15 +40,14 @@ jobs:
       # Install test dependencies
       - name: Run install testing dependencies
         run: | 
-          sudo apt-get update -q -y
-          sudo apt-get install -q -y bash certutil shellcheck
-          sudo curl -s -o /usr/local/bin/shunit2 https://raw.githubusercontent.com/kward/shunit2/master/shunit2
-          sudo chmod a+x /usr/local/bin/shunit2
+          sudo apt-get update -qq -y
+          sudo apt-get install -qq -y bash certutil shellcheck
+      #    sudo curl -s -o /usr/local/bin/shunit2 https://raw.githubusercontent.com/kward/shunit2/master/shunit2
+      #    sudo chmod a+x /usr/local/bin/shunit2
       
       # Shellcheck
       - name: Run shellcheck testing
-        run: |
-          shellcheck -s bash -x ./src/easydock
+        run: shellcheck -s bash -x ./src/easydock
 
       # Shunit2 Testing
       #- name: Run shunit2 testing

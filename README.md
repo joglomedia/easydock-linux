@@ -1,13 +1,20 @@
 # EasyDock for Linux ;)
 
-![EasyDock for Linux](ed_275px.png)
+<p align="center">
+    ![EasyDock for Linux](ed_275px.png)
+</p>
 
-A fork of EasyDock for Linux. Docker LEMP stack easy integration.
-
-Dockerize your PHP apps ;)
-
+<p align="center">
+[![Software License][ico-license]](LICENSE.md)
 ![GitHub stars](https://img.shields.io/github/stars/joglomedia/easydock-linux?style=social)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/joglomedia/easydock-linux?label=version)
+![GitHub workflow](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
+</p>
+
+<p align="center">
+A fork of EasyDock for Linux. Docker LEMP stack easy integration.
+Dockerize your PHP apps ;)
+</p>
 
 ## Features
 
@@ -185,12 +192,40 @@ easydock reset
 
 If you discover any security vulnerability or any bug within easydock, please open an issue.
 
-## Contributing
+## Awesome People
+
+EasyDock Linux is an open-source project licensed under the MIT license with its ongoing development made possible entirely by the support of all these smart and generous people, from code contributors to financial contributors. :purple_heart:
 
 Thank you for considering contributing to this project!
 
+### Project Maintainers
+
+<table>
+  <tbody>
+    <tr>
+        <td align="center" valign="top">
+            <img width="125" height="125" src="https://github.com/joglomedia.png?s=150">
+            <br>
+            <strong>Edi Septriyanto</strong>
+            <br>
+            <a href="https://github.com/joglomedia">@joglomedia</a>
+        </td>
+     </tr>
+  </tbody>
+</table>
+
+### Code Contributors
+
+[![Laradock Contributors][contributors-src]][contributors-href]
+
+### Financial Contributors
+
+You can support us using any of the methods below:
+
+<b>1:</b> [Paypal](https://paypal.me/masedi)
+
 ## Licence
 
-EasyDock is open-source software licensed under the MIT license.
+EasyDock is open-source project licensed under the MIT license.
 
 ### Enjoy easydock ;)

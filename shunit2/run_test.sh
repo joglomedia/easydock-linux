@@ -6,7 +6,7 @@ script_under_test=$(basename "$0")
 
 # Check EasyDock executable script
 if [ -x ../src/easydock ]; then
-    ED=../src/easydock
+    ED="../src/easydock"
 else
     echo "EasyDock executable file (src/easydock) not found."
     exit 1
@@ -14,8 +14,8 @@ fi
 
 testEqualityEasyDockInit()
 {
-    ENV_FILE=""
-    ED_DIR=""
+    local ENV_FILE
+    local ED_DIR
 
     bash "${ED}" init
 

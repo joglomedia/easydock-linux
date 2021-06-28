@@ -61,6 +61,7 @@ RUN apk update && apk upgrade \
     pgsql \
     redis \
     soap \
+    swoole \
     xsl \
     zip \
 # Install composer

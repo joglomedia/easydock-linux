@@ -20,7 +20,7 @@ Dockerize your PHP apps ;)
 
 ## Features
 
-EasyDock comes with:
+EasyDock Linux comes with:
 
 - Nginx
 - PHP (7.4 and 8.0)
@@ -69,7 +69,7 @@ easydock up
 - The default Nginx server configuration `app.conf` will expose your project `/public` directory.
 - If your project uses different directory structure, you should adjust the configuration in `app.conf` file accordingly.
 - Your application by default accessible through localhost on port 8008 (`http://localhost:8008`)
-- Currently EasyDock only support stable PHP version; 7.4 & 8.0 from `joglomedia/easydock-php` image.
+- Currently EasyDock-Linux only support stable PHP version; 7.4 & 8.0 from `joglomedia/easydock-php` image.
 
 The Nginx public port and PHP version could be configured inside `.env.easydock` file.
 
@@ -192,11 +192,11 @@ easydock reset
 
 ## Security Vulnerabilities and Bugs
 
-If you discover any security vulnerability or any bug within easydock, please open an issue.
+If you discover any security vulnerability or any bug within _EasyDock Linux_, please open an issue.
 
 ## Awesome People
 
-EasyDock Linux is an open-source project licensed under the MIT license with its ongoing development made possible entirely by the support of all these smart and generous people, from code contributors to financial contributors. :purple_heart:
+**EasyDock Linux** is an open-source project licensed under the MIT license with its ongoing development made possible entirely by the support of all these smart and generous people, from code contributors to financial contributors. :purple_heart:
 
 Thank you for considering contributing to this project!
 
@@ -232,6 +232,6 @@ You can support us using any of the methods below:
 
 ## Licence
 
-EasyDock is open-source project licensed under the MIT license.
+EasyDock Linux is open-source project licensed under the MIT license.
 
 ### Enjoy easydock ;)

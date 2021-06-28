@@ -25,3 +25,6 @@ testEqualityEasyDockInit()
     [ -d .easydock ] && ED_DIR=".easydock"
     assertEquals ".easydock" "${ED_DIR}"
 }
+
+# load shunit2
+. /usr/local/bin/shunit2

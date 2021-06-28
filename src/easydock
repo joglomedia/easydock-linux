@@ -554,7 +554,7 @@ function ed_cli_menu() {
         *)
             shift
             ed_notfound "${menu}"
-            exit -1
+            exit 0
             ;;
         esac
         shift

@@ -103,7 +103,7 @@ function ed_logo() {
 function ed_check_dependencies() {
     local PCKGS=''
 
-    for cmd in "certutil" "docker" "docker-compose"; do
+    for cmd in "docker" "docker-compose"; do
         local str=''
 
         if ! [[ -x "$(command -v ${cmd})" ]]; then

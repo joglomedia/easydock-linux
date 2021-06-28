@@ -47,24 +47,10 @@ jobs:
       
       # Shellcheck
       - name: Run shellcheck testing
-        run: |
-          shellcheck -s bash -x ./src/easydock
+        run: shellcheck -s bash -x ./src/easydock
 
       # Shunit2 Testing
-      #- name: Run shunit2 testing
-      #  run: |
-      #    bash ./shunit2/run_test.sh
-
-      # Shunit2 Testing
-      - name: Run unit testing
-        run: |
-          cd test-app
-          bash ../src/easydock init
-          if [ -f .env.easydock ]; then
-            echo "Init EasyDock success"
-          else
-            echo "Init EasyDock fail"
-            exit 1
-          fi
-          bash ../src/easydock build
-          bash ../src/easydock up
+      - name: Run shunit2 testing
+        run: bash ./shunit2/run_test.sh
+        env:
+          TERM: xterm

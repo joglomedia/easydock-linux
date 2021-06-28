@@ -4,6 +4,10 @@
 
 script_under_test=$(basename "$0")
 
+# Set $TERM
+TERM=xterm
+
+# CD to test app directory
 cd test-app
 
 # Check EasyDock executable script
@@ -19,7 +23,7 @@ testEqualityEasyDockInit()
     local ENV_FILE
     local ED_DIR
 
-    bash ../src/easydock init
+    bash "${ED}" init
 
     [ -f .env.easydock ] && ENV_FILE=".env.easydock"
     assertEquals ".env.easydock" "${ENV_FILE}"

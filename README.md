@@ -1,14 +1,16 @@
 # EasyDock for Linux ;)
 
 <p align="center">
-    ![EasyDock for Linux](ed_275px.png)
+    <img src="/.github/assets/ed_275px.png?raw=true" alt="EasyDock Logo © @andreapollastri"/>
 </p>
 
 <p align="center">
-![![Software License][ico-license]](LICENSE.md)
-![GitHub stars](https://img.shields.io/github/stars/joglomedia/easydock-linux?style=social)
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/joglomedia/easydock-linux?label=version)
-![GitHub workflow](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
+<a href="https://github.com/joglomedia/easydock-linux/releases"><img src="https://img.shields.io/github/v/tag/joglomedia/easydock-linux?label=version" alt="EasyDock Linux version"></a>
+<a href="https://github.com/joglomedia/easydock-linux/network"><img src="https://img.shields.io/github/forks/joglomedia/easydock-linux.svg" alt="GitHub forks"></a>
+<a href="https://github.com/joglomedia/easydock-linux/issues"><img src="https://img.shields.io/github/issues/joglomedia/easydock-linux.svg" alt="GitHub issues"></a>
+<a href="https://github.com/joglomedia/easydock-linux/stargazers"><img src="https://img.shields.io/github/stars/joglomedia/easydock-linux.svg" alt="GitHub stars"></a>
+<a href="https://github.com/joglomedia/easydock-linux/actions/workflows/main.yml"><img src="https://github.com/joglomedia/easydock-linux/actions/workflows/main.yml/badge.svg" alt="GitHub CI"></a>
+<a href="https://raw.githubusercontent.com/joglomedia/easydock-linux/master/LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="GitHub license"></a>
 </p>
 
 <p align="center">
@@ -216,7 +218,11 @@ Thank you for considering contributing to this project!
 
 ### Code Contributors
 
-![![EasyDock Contributors][contributors-src]][contributors-href]
+<a href="https://github.com/joglomedia/easydock-linux/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=joglomedia/easydock-linux" />
+</a>
+
+Made with [contributors-img](https://contrib.rocks).
 
 ### Financial Contributors
 

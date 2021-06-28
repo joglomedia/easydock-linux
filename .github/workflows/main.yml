@@ -48,4 +48,4 @@ jobs:
         run: |
           cd example-app
           shellcheck -s bash -x ../src/easydock
-          bash shunit2/run_test.sh
+          bash ../shunit2/run_test.sh

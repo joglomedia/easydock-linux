@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-[![Software License][ico-license]](LICENSE.md)
+![![Software License][ico-license]](LICENSE.md)
 ![GitHub stars](https://img.shields.io/github/stars/joglomedia/easydock-linux?style=social)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/joglomedia/easydock-linux?label=version)
 ![GitHub workflow](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
@@ -216,13 +216,13 @@ Thank you for considering contributing to this project!
 
 ### Code Contributors
 
-[![Laradock Contributors][contributors-src]][contributors-href]
+![![EasyDock Contributors][contributors-src]][contributors-href]
 
 ### Financial Contributors
 
 You can support us using any of the methods below:
 
-<b>1:</b> [Paypal](https://paypal.me/masedi)
+**[Buy Me a Bottle of Milk or a Cup of Coffee](https://paypal.me/masedi) !!**
 
 ## Licence
 

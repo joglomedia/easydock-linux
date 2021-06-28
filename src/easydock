@@ -103,7 +103,7 @@ function ed_logo() {
 function ed_check_dependencies() {
     local PCKGS=''
 
-    for cmd in "certutil" "docker" "docker-compose"; do
+    for cmd in "docker" "docker-compose"; do
         local str=''
 
         if ! [[ -x "$(command -v ${cmd})" ]]; then
@@ -317,11 +317,11 @@ function ed_help() {
 }
 
 function ed_info() {
-    echo -e "${bgpurple}${white}${bold} easydock System Information ${reset}${br}"
+    echo -e "${bgpurple}${white}${bold} EasyDock System Information ${reset}${br}"
     echo "${bold}Application${reset}"
     echo "Name: ${ed_appsid}"
     echo "Path: ${ed_appsrc}"
-    echo "Document Root: /var/www/public"
+    echo "Document Root: /var/www"
     echo "Index File: index.php"
     if [ "${ed_portapp}" == "80" ]; then
         echo "Host: http://localhost"
@@ -329,11 +329,12 @@ function ed_info() {
         echo "Host: http://localhost:${ed_portapp}"
     fi
     echo -e "Stack: php:${ed_phpver} + mariadb:latest + nginx:latest ${br}"
-    echo "${bold}MySQL${reset}"
-    echo "Host: mysql:${ed_portdb} (int) / 127.0.0.1:${ed_portdb} (ext)"
-    echo "Name: ${ed_dbname}"
-    echo "User: root"
-    echo -e "Pass: ${ed_dbpass} ${br}"
+    echo "${bold}MySQL / PostgreSQL${reset}"
+    echo "MySQL Host: mysql:${ed_portmysql} (int) / 127.0.0.1:${ed_portmysql} (ext)"
+    echo "PostgreSQL Host: postgres:${ed_portpgsql} (int) / 127.0.0.1:${ed_portpgsql} (ext)"
+    echo "DB Name: ${ed_dbname}"
+    echo "Username: ${ed_dbuser}"
+    echo -e "Password: ${ed_dbpass} ${br}"
     echo "${bold}SMTP${reset}"
     echo "Host: mailhog"
     echo "Port: 1025"
@@ -553,7 +554,7 @@ function ed_cli_menu() {
         *)
             shift
             ed_notfound "${menu}"
-            exit -1
+            exit 1
             ;;
         esac
         shift
@@ -602,7 +603,9 @@ function ed_bootstrap() {
         ed_phpver=$(grep PHP_V .env.easydock | cut -d '=' -f2)
         #ed_dbver=$(grep DB_VERS .env.easydock | cut -d '=' -f2)
         ed_dbname=$(grep DB_NAME .env.easydock | cut -d '=' -f2)
+        ed_dbuser=$(grep DB_USER .env.easydock | cut -d '=' -f2)
         ed_dbpass=$(grep DB_PASS .env.easydock | cut -d '=' -f2)
+        #ed_dbrootpass=$(grep DB_ROOT_PASS .env.easydock | cut -d '=' -f2)
         #ed_nginx=$(grep NGINX_MODE .env.easydock | cut -d '=' -f2)
 
         # Execute CLI command.

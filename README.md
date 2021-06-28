@@ -125,11 +125,9 @@ port: 1025
 
 ## EasyDock Commands
 
-EasyDock comes with handy command line interface to manage your Docker containers.
+EasyDock comes with handy command line interface to manage your Docker containers. Execute the following commands inside your application directory.
 
-- Initialize EasyDock project
-
-Execute the following command inside your application directory.
+- Initialize EasyDock project.
 
 ```bash
 easydock init

@@ -37,15 +37,21 @@ jobs:
       #    cd example-app
       #    php artisan key:generate
 
-      # Install Shunit2
-      - name: Install Shunit2
+      # Install test dependencies
+      - name: Run install testing dependencies
         run: | 
+          sudo apt-get update -qq -y
+          sudo apt-get install -qq -y shellcheck
           sudo curl -s -o /usr/local/bin/shunit2 https://raw.githubusercontent.com/kward/shunit2/master/shunit2
           sudo chmod a+x /usr/local/bin/shunit2
       
+      # Shellcheck
+      - name: Run shellcheck testing
+        run: |
+          shellcheck -s bash -x ./src/easydock
+
       # Shunit2 Testing
-      - name: Shunit2 Testing
+      - name: Run shunit2 testing
         run: |
           cd example-app
-          shellcheck -s bash -x ../src/easydock
           bash ../shunit2/run_test.sh

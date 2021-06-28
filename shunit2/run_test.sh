@@ -17,7 +17,7 @@ testEqualityEasyDockInit()
     local ENV_FILE
     local ED_DIR
 
-    bash "${ED}" init
+    bash ../src/easydock init
 
     [ -f .env.easydock ] && ENV_FILE=".env.easydock"
     assertEquals ".env.easydock" "${ENV_FILE}"

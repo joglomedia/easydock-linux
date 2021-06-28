@@ -6,9 +6,12 @@ name: easydock-linux
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ linux ]
+    branches:
+      - linux
+      - master
   pull_request:
-    branches: [ master ]
+    branches: 
+      - master
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -42,32 +45,23 @@ jobs:
         run: | 
           sudo apt-get update -qq -y
           sudo apt-get install -qq -y bash shellcheck
-      #    sudo curl -s -o /usr/local/bin/shunit2 https://raw.githubusercontent.com/kward/shunit2/master/shunit2
-      #    sudo chmod a+x /usr/local/bin/shunit2
       
       # Shellcheck
       - name: Run shellcheck testing
         run: shellcheck -s bash -x ./src/easydock
 
-      # Shunit2 Testing
-      #- name: Run shunit2 testing
-      #  run: |
-      #    bash ./shunit2/run_test.sh
-      #  env:
-      #    TERM: xterm
-
-      # Shunit2 Testing
+      # Simple unit testing
       - name: Run unit testing
         run: |
           cd test-app
           bash ../src/easydock init
           if [ -f .env.easydock ]; then
             echo "Init EasyDock success"
+            bash ../src/easydock build
+            bash ../src/easydock up
           else
             echo "Init EasyDock fail"
             exit 1
           fi
-          bash ../src/easydock build
-          bash ../src/easydock up
         env:
-          TERM: xterm
+          TERM: xterm-256color

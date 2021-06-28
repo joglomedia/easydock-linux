@@ -11,7 +11,7 @@ Dockerize your PHP apps ;)
 
 ## Features
 
-Easydock comes with:
+EasyDock comes with:
 
 - Nginx
 - PHP (7.4 and 8.0)
@@ -49,12 +49,20 @@ After installation completed, if required, you could configure your `.env.easydo
 easydock build
 ```
 
+During the build process EasyDock will download required Docker images. Once the build completes, you could _kick-up_ your EasyDock application by executing:
+
+```bash
+easydock up
+```
+
 ### Configure Nginx and PHP-FPM
 
-- The default Nginx server configuration (app.conf) will expose your project `/public` folder.
-- If your project uses different directory structure, you should adjust the configuration and update the file accordingly.
+- The default Nginx server configuration `app.conf` will expose your project `/public` directory.
+- If your project uses different directory structure, you should adjust the configuration in `app.conf` file accordingly.
 - Your application by default accessible through localhost on port 8008 (`http://localhost:8008`)
-- Supported PHP version: 7.4 & 8.0
+- Currently EasyDock only support stable PHP version; 7.4 & 8.0 from `joglomedia/easydock-php` image.
+
+The Nginx public port and PHP version could be configured inside `.env.easydock` file.
 
 ```bash
 # APP PORT
@@ -64,15 +72,24 @@ APP_PORT=8008
 PHP_VERSION=7.4
 ```
 
+Everytime you change PHP version into `.env.easydock` file you have to run:
+
+```bash
+easydock reset && easydock build
+```
+
+_*PS: Resetting your EasyDock instance will delete the database data. You should backup your database before!*_
+
 ### Configure database connection
 
 The default database connection for MySQL and PostgreSQL.
 
 ```bash
+Database: easydockdb
 Username: easydock
 Password: secret
-Database: easydockdb
-Host: mysql ( or postgres for PostgreSQL )
+Root password: rootsecret
+Host name: mysql ( or postgres for PostgreSQL )
 ```
 
 For security reason, you should change the default database username and password configured in `.env.easydock` file.
@@ -106,55 +123,65 @@ host: mailhog
 port: 1025
 ```
 
-### To start your app instance
+## EasyDock Commands
+
+EasyDock comes with handy command line interface to manage your Docker containers.
+
+- Initialize EasyDock project
+
+Execute the following command inside your application directory.
+
+```bash
+easydock init
+```
+
+- Build EasyDock images
+
+```bash
+easydock build
+```
+
+- Start EasyDock application instance
 
 ```bash
 easydock up
 ```
 
-### To stop your app instance
+- Stop EasyDock application instance
 
 ```bash
 easydock stop
 ```
 
-### To restart your app instance
+- Restart EasyDock application instance
 
 ```bash
 easydock restart
 ```
 
-### To stop and delete your app instance
+- Take down (stop and delete) EasyDock instance
 
 ```bash
 easydock down
 ```
 
-### To "SSH" into your app instance
+- Access `ssh` into EasyDock application instance
 
 ```bash
 easydock shell
 ```
 
-### You can get application info using
+- Get EasyDock application details
 
 ```bash
 easydock info
 ```
 
-### You can reset your running instance
+- Hard reset running EasyDock instance
 
 ```bash
 easydock reset
 ```
-
-### Everytime you change PHP version into `.env.easydock` file you have to run
-
-```bash
-easydock reset && easydock build
-```
-
-_*PS: Resetting your EasyDock instance will delete the database data*_
 
 ## Security Vulnerabilities and Bugs
 
@@ -166,6 +193,6 @@ Thank you for considering contributing to this project!
 
 ## Licence
 
-Easydock is open-source software licensed under the MIT license.
+EasyDock is open-source software licensed under the MIT license.
 
 ### Enjoy easydock ;)

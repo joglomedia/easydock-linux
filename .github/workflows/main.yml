@@ -29,12 +29,12 @@ jobs:
 
       # Runs composer install Laravel for testing
       - name: Run composer install Laravel
-        run: composer create-project laravel/laravel example-app
+        run: composer create-project laravel/laravel test-app
       
       # Prepare Laravel sample application
       #- name: Prepare Laravel application
       #  run: |
-      #    cd example-app
+      #    cd test-app
       #    php artisan key:generate
 
       # Install test dependencies
@@ -53,5 +53,4 @@ jobs:
       # Shunit2 Testing
       - name: Run shunit2 testing
         run: |
-          cd example-app
-          bash ../shunit2/run_test.sh
+          bash ./shunit2/run_test.sh

@@ -1,5 +1,5 @@
 .env
-composer.lock
+Makefile
 vendor
 src/docker-compose.yml~
 src/Dockerfile~

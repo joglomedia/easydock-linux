@@ -602,7 +602,7 @@ function ed_bootstrap() {
 
         ed_portapp=$(grep APP_PORT .env.easydock | cut -d '=' -f2)
         ed_portmysql=$(grep MYSQL_PORT .env.easydock | cut -d '=' -f2)
-        ed_portpgsql=$(grep POSTGRES_PORT .env.easydock | cut -d '=' -f2)
+        ed_portpgsql=$(grep PGSQL_PORT .env.easydock | cut -d '=' -f2)
         ed_portrds=$(grep REDIS_PORT .env.easydock | cut -d '=' -f2)
         ed_portpma=$(grep PMA_PORT .env.easydock | cut -d '=' -f2)
         ed_portmh=$(grep MH_PORT .env.easydock | cut -d '=' -f2)

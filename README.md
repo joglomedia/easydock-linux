@@ -6,15 +6,15 @@
 
 <p align="center">
 <a href="https://github.com/joglomedia/easydock-linux/releases"><img src="https://img.shields.io/github/v/tag/joglomedia/easydock-linux?label=version" alt="EasyDock Linux version"></a>
+<a href="https://github.com/joglomedia/easydock-linux/stargazers"><img src="https://img.shields.io/github/stars/joglomedia/easydock-linux.svg" alt="GitHub stars"></a>
 <a href="https://github.com/joglomedia/easydock-linux/network"><img src="https://img.shields.io/github/forks/joglomedia/easydock-linux.svg" alt="GitHub forks"></a>
 <a href="https://github.com/joglomedia/easydock-linux/issues"><img src="https://img.shields.io/github/issues/joglomedia/easydock-linux.svg" alt="GitHub issues"></a>
-<a href="https://github.com/joglomedia/easydock-linux/stargazers"><img src="https://img.shields.io/github/stars/joglomedia/easydock-linux.svg" alt="GitHub stars"></a>
 <a href="https://github.com/joglomedia/easydock-linux/actions/workflows/main.yml"><img src="https://github.com/joglomedia/easydock-linux/actions/workflows/main.yml/badge.svg" alt="GitHub CI"></a>
 <a href="https://raw.githubusercontent.com/joglomedia/easydock-linux/master/LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="GitHub license"></a>
 </p>
 
 <p align="center">
-A fork of EasyDock for Linux. Docker LEMP stack easy integration.
+A fork of EasyDock to work in Linux. Docker LEMP stack easy integration.
 Dockerize your PHP apps ;)
 </p>
 
@@ -22,24 +22,24 @@ Dockerize your PHP apps ;)
 
 EasyDock Linux comes with:
 
-- Nginx
+- Nginx (Latest stable)
 - PHP (7.4 and 8.0)
 - MariaDB (Drop-in replacement for MySQL)
-- PostgreSQL
-- Redis
+- PostgreSQL (Alternative SQL database)
+- Redis (In-memory key-value data store)
 - ~~phpmyadmin~~ Adminer (Lightweight MySQL admin)
-- MailHog
-- Node.js, NPM & Yarn
-- Git
-- Composer
+- MailHog (An email testing tool)
+- Node.js, NPM & Yarn (Front-end development tool)
+- Git (Version control system)
+- Composer (PHP application package manager)
 
 ## Requirements
 
-Docker and Docker Compose installed on Linux Distro (Debian or Ubuntu).
+Docker and Docker Compose installed on Linux Distro (Tested on Debian, Ubuntu, and LinuxMint).
 
 ## Installation
 
-- Integrate easydock in your PHP app via Composer.
+- Integrate EasyDock Linux in your PHP application via Composer.
 - You should add your Composer's vendor bin directory to your environment path.
 
 ```bash
@@ -52,13 +52,13 @@ easydock init && easydock import
 
 ## Getting Started
 
-After installation completed, if required, you could configure your `.env.easydock` file and then run this build command:
+Once you have installed EasyDock Linux successfully, if required, you could configure your `.env.easydock` file and then run this build command:
 
 ```bash
 easydock build
 ```
 
-During the build process EasyDock will download required Docker images. Once the build completes, you could _kick-up_ your EasyDock application by executing:
+During the build process, EasyDock Linux will download required Docker images. After the build completes, you could _kick-up_ your EasyDock Linux application by executing:
 
 ```bash
 easydock up
@@ -69,7 +69,7 @@ easydock up
 - The default Nginx server configuration `app.conf` will expose your project `/public` directory.
 - If your project uses different directory structure, you should adjust the configuration in `app.conf` file accordingly.
 - Your application by default accessible through localhost on port 8008 (`http://localhost:8008`)
-- Currently EasyDock-Linux only support stable PHP version; 7.4 & 8.0 from `joglomedia/easydock-php` image.
+- Currently, EasyDock Linux only supports stable PHP version: 7.4 & 8.0 from `joglomedia/easydock-php` image.
 
 The Nginx public port and PHP version could be configured inside `.env.easydock` file.
 
@@ -98,7 +98,7 @@ Database: easydockdb
 Username: easydock
 Password: secret
 Root password: rootsecret
-Host name: mysql ( or postgres for PostgreSQL )
+Host name: mysql ( or pgsql for PostgreSQL )
 ```
 
 For security reason, you should change the default database username and password configured in `.env.easydock` file.
@@ -120,7 +120,7 @@ DB_ROOT_PASS=rootsecret
 MYSQL_PORT=3306
 
 # POSTGRESQL PORT
-POSTGRES_PORT=5432
+PGSQL_PORT=5432
 ```
 
 ### Configure SMTP connection
@@ -234,4 +234,4 @@ You can support us using any of the methods below:
 
 EasyDock Linux is open-source project licensed under the MIT license.
 
-### Enjoy easydock ;)
+## Enjoy EasyDock for Linux ;)

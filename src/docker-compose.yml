@@ -11,7 +11,7 @@ services:
     #    - NODE_VERSION=${NODE_VERSION}
     #    - APP_WORKER=${APP_WORKER}
     container_name: ${APP_SID}_webapp
-    restart: always
+    restart: unless-stopped
     tty: true
     environment:
       SERVICE_NAME: webapp
@@ -29,7 +29,7 @@ services:
   nginx:
     image: nginx:alpine
     container_name: ${APP_SID}_nginx
-    restart: always
+    restart: unless-stopped
     ports:
       - ${APP_PORT}:80
       - 443:443
@@ -46,7 +46,7 @@ services:
   mysql:
     image: yobasystems/alpine-mariadb:latest
     container_name: ${APP_SID}_mysql
-    restart: always
+    restart: unless-stopped
     environment:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USER}
@@ -61,26 +61,26 @@ services:
     networks:
       - easydocknet
   # PostgreSQL
-  postgres:
+  pgsql:
     image: postgres:alpine
     container_name: ${APP_SID}_postgres
-    restart: always
+    restart: unless-stopped
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASS}
       POSTGRES_DB: ${DB_NAME}
       PGDATA: /var/lib/postgresql/data/pgdata
     ports:
-      - ${POSTGRES_PORT}:5432
+      - ${PGSQL_PORT}:5432
     volumes:
-      - ${APP_DIR}/.easydock/data/postgres:/var/lib/postgresql/data
+      - ${APP_DIR}/.easydock/data/pgsql:/var/lib/postgresql/data
     networks:
       - easydocknet
   # Redis
   redis:
     image: redis:alpine
     container_name: ${APP_SID}_redis
-    restart: always
+    restart: unless-stopped
     environment:
       REDIS_PASSWORD: ${REDIS_PASS}
     ports:
@@ -91,7 +91,7 @@ services:
   #phpmyadmin:
   #  image: phpmyadmin/phpmyadmin:latest
   #  container_name: ${APP_SID}_pma
-  #  restart: always
+  #  restart: unless-stopped
   #  environment:
   #    PMA_HOST: mysql
   #    MYSQL_ROOT_PASSWORD: ${DB_PASS}
@@ -101,7 +101,7 @@ services:
   adminer:
     image: adminer:latest
     container_name: ${APP_SID}_adminer
-    restart: always
+    restart: unless-stopped
     environment:
       ADMINER_DEFAULT_SERVER: mysql
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
@@ -113,7 +113,7 @@ services:
   mailhog:
     image: mailhog/mailhog:latest
     container_name: ${APP_SID}_mailhog
-    restart: always
+    restart: unless-stopped
     ports:
       - ${MH_PORT}:8025
     networks:
@@ -123,7 +123,7 @@ networks:
   easydocknet:
     driver: bridge
     #external: true
-    name: ${APP_SID}_defnet
+    name: ${APP_SID}_net
 # Volumes
 #volumes:
 #  phpsocket:

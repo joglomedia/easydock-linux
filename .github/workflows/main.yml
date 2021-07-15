@@ -1,10 +1,5 @@
-# This is a basic workflow to help you get started with Actions
-
 name: easydock-linux
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches:
       - linux
@@ -12,53 +7,38 @@ on:
   pull_request:
     branches: 
       - master
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
       - uses: php-actions/composer@v5
-
       # Runs composer install Laravel for testing
-      - name: Run composer install Laravel
+      - name: Composer install Laravel
         run: composer create-project laravel/laravel test-app
-      
       # Prepare Laravel sample application
-      #- name: Prepare Laravel application
+      #- name: Prepare Laravel Application
       #  run: |
       #    cd test-app
       #    php artisan key:generate
-
-      # Install test dependencies
-      - name: Run install testing dependencies
+      # Install testing dependencies
+      - name: Install Testing Dependencies
         run: | 
           sudo apt-get update -qq -y
           sudo apt-get install -qq -y bash shellcheck
-      
-      # Shellcheck
-      - name: Run shellcheck testing
-        run: shellcheck -s bash -x ./src/easydock
-
+      # Shellcheck Tests
+      - name: Run Shellcheck Testing
+        run: shellcheck -s bash -x ./bin/easydock
       # Simple unit testing
-      - name: Run unit testing
+      - name: Run Unit Testing
         run: |
           cd test-app
-          bash ../src/easydock init
+          bash ../bin/easydock init
           if [ -f .env.easydock ]; then
             echo "Init EasyDock success"
-            bash ../src/easydock build
-            bash ../src/easydock up
+            bash ../bin/easydock build
+            bash ../bin/easydock up
           else
             echo "Init EasyDock fail"
             exit 1

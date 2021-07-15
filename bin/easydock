@@ -7,8 +7,8 @@
 # | Authors           : Edi Septriyanto <me@masedi.net>                     |
 # |                     Andrea Pollastri <andrea@pollastri.dev>             |
 # | Min. requirement  : GNU/Linux Debian 8, Ubuntu 16.04 or Linux Mint 17   |
-# | Version           : 1.1.0-beta                                          |
-# | Last Update       : 25/06/2021                                          |
+# | Version           : 2.x.x                                               |
+# | Last Update       : 15/07/2021                                          |
 # +-------------------------------------------------------------------------+
 # | EasyDock-Linux Copyright (c) 2021 MasEDI.Net                            |
 # | EasyDock's Logo & Name Copyright (c) Andrea Pollastri                   |
@@ -25,13 +25,13 @@
 set -e
 
 # EasyDock version.
-ED_VERSION="1.1.0-beta"
+ED_VERSION="2.1.0"
 
 # EasyDock command (to pretify the instruction message).
 ED_CMD="bash easydock"
 
 # Sudo required commands.
-SUDO_CMDS="import remove reset"
+SUDO_CMDS="build import rebuild remove reset"
 
 # EasyDock CLI source directory.
 SOURCE="${BASH_SOURCE[0]}"
@@ -293,11 +293,13 @@ function ed_portscheck() {
 function ed_help() {
     echo -e "${bgpurple}${white}${bold} easydock Options List ${reset}${br}${br}"
     echo "${bgwhite}${black} ${ED_CMD} init ${reset}"
-    echo -e "Initialize easydock system for the first time.${br}"
+    echo -e "Initialize easydock system for new project.${br}"
     echo "${bgwhite}${black} ${ED_CMD} import ${reset}"
     echo -e "Import default easydock config (overwrite existing).${br}"
     echo "${bgwhite}${black} ${ED_CMD} build ${reset}"
-    echo -e "Build app container for easydock system.${br}"
+    echo -e "Build application image for easydock system.${br}"
+    echo "${bgwhite}${black} ${ED_CMD} rebuild ${reset}"
+    echo -e "Rebuild application image for easydock system.${br}"
     echo "${bgwhite}${black} ${ED_CMD} up ${reset}"
     echo -e "Power up easydock system.${br}"
     echo "${bgwhite}${black} ${ED_CMD} down ${reset}"
@@ -331,7 +333,7 @@ function ed_info() {
     echo -e "Stack: php:${ed_phpver} + mariadb:latest + nginx:latest ${br}"
     echo "${bold}MySQL / PostgreSQL${reset}"
     echo "MySQL Host: mysql:${ed_portmysql} (int) / 127.0.0.1:${ed_portmysql} (ext)"
-    echo "PostgreSQL Host: postgres:${ed_portpgsql} (int) / 127.0.0.1:${ed_portpgsql} (ext)"
+    echo "PostgreSQL Host: pgsql:${ed_portpgsql} (int) / 127.0.0.1:${ed_portpgsql} (ext)"
     echo "DB Name: ${ed_dbname}"
     echo "Username: ${ed_dbuser}"
     echo -e "Password: ${ed_dbpass} ${br}"
@@ -485,77 +487,83 @@ function ed_cli_menu() {
             shift
             ed_help
             exit
-            ;;
+        ;;
         info)
             shift
             ed_info
             exit
-            ;;
+        ;;
         import)
             shift
             ed_import
             exit
-            ;;
+        ;;
         build|setup)
             shift
             ed_setup
             exit
-            ;;
+        ;;
+        rebuild)
+            shift
+            ed_reset
+            ed_setup
+            exit
+        ;;
         reset)
             shift
             ed_reset "${action}"
             exit
-            ;;
+        ;;
         up)
             shift
             ed_up
             exit
-            ;;
+        ;;
         down)
             shift
             ed_down
             exit
-            ;;
+        ;;
         remove)
             shift
             ed_remove
             exit
-            ;;
+        ;;
         start)
             shift
             ed_start
             exit
-            ;;
+        ;;
         stop)
             shift
             ed_stop
             exit
-            ;;
+        ;;
         restart)
             shift
             ed_restart
             exit
-            ;;
+        ;;
         ps|status)
             shift
             ed_status
             exit
-            ;;
+        ;;
         conn|shell)
             shift
             ed_shell
             exit
-            ;;
+        ;;
         sql_shell)
             shift
             ed_sql_shell
             exit
-            ;;
+        ;;
         *)
             shift
             ed_notfound "${menu}"
             exit 1
-            ;;
+        ;;
         esac
         shift
     done
@@ -594,7 +602,7 @@ function ed_bootstrap() {
 
         ed_portapp=$(grep APP_PORT .env.easydock | cut -d '=' -f2)
         ed_portmysql=$(grep MYSQL_PORT .env.easydock | cut -d '=' -f2)
-        ed_portpgsql=$(grep POSTGRES_PORT .env.easydock | cut -d '=' -f2)
+        ed_portpgsql=$(grep PGSQL_PORT .env.easydock | cut -d '=' -f2)
         ed_portrds=$(grep REDIS_PORT .env.easydock | cut -d '=' -f2)
         ed_portpma=$(grep PMA_PORT .env.easydock | cut -d '=' -f2)
         ed_portmh=$(grep MH_PORT .env.easydock | cut -d '=' -f2)

@@ -15,6 +15,6 @@
         }
     ],
     "bin": [
-        "src/easydock"
+        "bin/easydock"
     ]
 }

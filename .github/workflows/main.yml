@@ -29,16 +29,16 @@ jobs:
           sudo apt-get install -qq -y bash shellcheck
       # Shellcheck Tests
       - name: Run Shellcheck Testing
-        run: shellcheck -s bash -x ./src/easydock
+        run: shellcheck -s bash -x ./bin/easydock
       # Simple unit testing
       - name: Run Unit Testing
         run: |
           cd test-app
-          bash ../src/easydock init
+          bash ../bin/easydock init
           if [ -f .env.easydock ]; then
             echo "Init EasyDock success"
-            bash ../src/easydock build
-            bash ../src/easydock up
+            bash ../bin/easydock build
+            bash ../bin/easydock up
           else
             echo "Init EasyDock fail"
             exit 1
